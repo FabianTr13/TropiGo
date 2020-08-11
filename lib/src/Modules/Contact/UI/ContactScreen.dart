@@ -17,10 +17,7 @@ class _ContactScreen extends State<ContactScreen> {
   }
 
   gotoBack() {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => HomeMenu()),
-    );
+    Navigator.pop(context);
   }
 
   Widget ContactScreenPage() {

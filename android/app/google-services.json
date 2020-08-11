@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "39081046256",
+    "firebase_url": "https://fabifire-d3678.firebaseio.com",
+    "project_id": "fabifire-d3678",
+    "storage_bucket": "fabifire-d3678.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:39081046256:android:e4e5bfb322c4f5c6aed235",
+        "android_client_info": {
+          "package_name": "com.topigashn.tropigoApp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "39081046256-7beff1ui7dm08q2g99jbqlpmknjihrrp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAR1r94jfRk2DEx1lPQluXtD_O3GO0y9Ew"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "39081046256-7beff1ui7dm08q2g99jbqlpmknjihrrp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

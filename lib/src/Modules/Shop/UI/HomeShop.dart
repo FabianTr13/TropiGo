@@ -1,4 +1,7 @@
-import 'package:TropiGo/src/Modules/Home/Widget.dart/CardMenuItem.dart';
+import 'package:TropiGo/src/Modules/Shop/UI/GasStoresScreen.dart';
+import 'package:TropiGo/src/Modules/Shop/UI/GranelScreen.dart';
+import 'package:TropiGo/src/Modules/Shop/UI/ShopCilinderScreen.dart';
+import 'package:TropiGo/src/Modules/Shop/Widget/CardMenuItem.dart';
 import "package:flutter/material.dart";
 import 'dart:math';
 
@@ -15,6 +18,15 @@ class HomeShop extends StatefulWidget {
 }
 
 class _HomeShop extends State<HomeShop> {
+  gotoMenu(Widget option) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => option,
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,9 +63,11 @@ class _HomeShop extends State<HomeShop> {
                   children: [
                     CardMenuItem(
                       imagen: Image.asset('assets/logo/logo.png'),
+                      callback: () => gotoMenu(ShopCilinderScreen()),
                     ),
                     CardMenuItem(
                       imagen: Image.asset('assets/logo/logo.png'),
+                      callback: () => gotoMenu(GranelScreen()),
                     )
                   ],
                 ),
@@ -61,16 +75,15 @@ class _HomeShop extends State<HomeShop> {
                   children: [
                     CardMenuItem(
                       imagen: Image.asset('assets/logo/logo.png'),
+                      callback: () => gotoMenu(GasStoresScreen()),
                     ),
                     Column(
                       children: [
                         CardMenuItem(
                           imagen: Image.asset('assets/logo/logo.png'),
-                          size: 55,
                         ),
                         CardMenuItem(
                           imagen: Image.asset('assets/logo/logo.png'),
-                          size: 55,
                         )
                       ],
                     )

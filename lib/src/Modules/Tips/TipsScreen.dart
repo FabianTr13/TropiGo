@@ -15,10 +15,7 @@ class _TipsScreen extends State<TipsScreen> {
   }
 
   gotoBack() {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => HomeMenu()),
-    );
+    Navigator.pop(context);
   }
 
   Widget TipsScreen() {

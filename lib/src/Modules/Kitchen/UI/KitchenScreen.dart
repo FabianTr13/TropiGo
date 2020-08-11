@@ -15,10 +15,7 @@ class _KitchenScreen extends State<KitchenScreen> {
   }
 
   gotoBack() {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => HomeMenu()),
-    );
+    Navigator.pop(context);
   }
 
   Widget KitchenPage() {

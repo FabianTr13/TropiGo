@@ -9,6 +9,11 @@
         android:name="io.flutter.app.FlutterApplication"
         android:label="tropi_go"
         android:icon="@mipmap/launcher_icon">
+
+         <meta-data android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyBKnhn6qo30IsTfcRBNRh_k-kyM83Wd890"
+            />
+
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"

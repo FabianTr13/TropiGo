@@ -4,16 +4,18 @@ import 'package:flutter/material.dart';
 
 class GranelScreen extends StatefulWidget {
   @override
-  _GranelScreen createState() => new _GranelScreen();
+  _GranelState createState() => new _GranelState();
 }
 
-class _GranelScreen extends State<GranelScreen> {
+class _GranelState extends State<GranelScreen> {
   bool isSwitched = false;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-        height: MediaQuery.of(context).size.height, child: Granel());
+      height: MediaQuery.of(context).size.height,
+      child: Granel(),
+    );
   }
 
   registerUser() {}
@@ -26,7 +28,7 @@ class _GranelScreen extends State<GranelScreen> {
           color: Colors.white,
         ),
         child: new Column(
-          children: <Widget>[
+          children: [
             Divider(height: 30),
             Container(
               child: Center(
@@ -39,14 +41,16 @@ class _GranelScreen extends State<GranelScreen> {
             Container(
               child: Row(
                 children: [
-                  Text("No tengo contrato"),
+                  Container(
+                    margin: EdgeInsets.only(left: 20),
+                    child: Text("No tengo contrato"),
+                  ),
                   Switch(
                     value: isSwitched,
                     activeColor: Colors.orange,
                     onChanged: (value) => {
                       setState(() {
                         isSwitched = value;
-                        print(isSwitched);
                       })
                     },
                   )
@@ -54,39 +58,41 @@ class _GranelScreen extends State<GranelScreen> {
               ),
             ),
             Visibility(
-                visible: !isSwitched,
-                child: InputTextbox(
-                  title: "Numero de contrato",
-                  hintText: '',
-                  keyboardType: TextInputType.number,
-                )),
+              visible: !isSwitched,
+              child: InputTextbox(
+                title: "Numero de contrato",
+                hintText: '',
+                keyboardType: TextInputType.number,
+              ),
+            ),
             InputTextbox(
               title: "Cantidad de galones",
               hintText: '',
               keyboardType: TextInputType.number,
             ),
             Visibility(
-                visible: isSwitched,
-                child: Column(
-                  children: [
-                    InputTextbox(
-                      title: "Nombre de la empresa",
-                      hintText: '',
-                    ),
-                    InputTextbox(
-                      title: "Correo",
-                      hintText: 'Correo@correo.com',
-                    ),
-                    InputTextbox(
-                      title: "Teléfono",
-                      hintText: '99999999',
-                    ),
-                    InputTextbox(title: "Nombre del contacto", hintText: ''),
-                    Divider(
-                      height: 15.0,
-                    ),
-                  ],
-                )),
+              visible: isSwitched,
+              child: Column(
+                children: [
+                  InputTextbox(
+                    title: "Nombre de la empresa",
+                    hintText: '',
+                  ),
+                  InputTextbox(
+                    title: "Correo",
+                    hintText: 'Correo@correo.com',
+                  ),
+                  InputTextbox(
+                    title: "Teléfono",
+                    hintText: '99999999',
+                  ),
+                  InputTextbox(title: "Nombre del contacto", hintText: ''),
+                  Divider(
+                    height: 15.0,
+                  ),
+                ],
+              ),
+            ),
             ButtonLarge(
               text: "ENVIAR",
               callback: registerUser,

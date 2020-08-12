@@ -1,5 +1,7 @@
 import 'dart:ffi';
 
+import 'package:TropiGo/src/Modules/Auth/Bloc/AuthBloc.dart';
+import 'package:TropiGo/src/Modules/Auth/Models/AuthRequest.dart';
 import 'package:TropiGo/src/Modules/Home/UI/HomeMenu.dart';
 import 'package:TropiGo/src/Services/AuthService.dart';
 import 'package:TropiGo/src/Widgets/InputTextbox.dart';
@@ -22,12 +24,12 @@ class _SignupState extends State<SignupScreen> {
   }
 
   Future<void> registerUser() async {
-    var user = await AuthService().createUser(
+    AuthRequest authRequest = await AuthService().createUser(
       email: _emailController.text,
       password: _passwordController.text,
     );
-    print(user);
-    if (user != null) {
+
+    if (authRequest.success) {
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => HomeMenu()),
@@ -65,27 +67,35 @@ class _SignupState extends State<SignupScreen> {
                 title: "Correo",
                 hintText: 'Correo@correo.com',
                 keyboardType: TextInputType.emailAddress,
-                controller: _emailController,
+                stream: authBlocInstance.email,
+                onChange: authBlocInstance.changeEmail,
               ),
               InputTextbox(
                 title: "Nombre",
                 hintText: 'John Smith',
+                stream: authBlocInstance.name,
+                onChange: authBlocInstance.changeName,
               ),
               InputTextbox(
                 title: "Teléfono",
                 hintText: '99999999',
                 keyboardType: TextInputType.number,
+                stream: authBlocInstance.phoneNumber,
+                onChange: authBlocInstance.changePhoneNumber,
               ),
               InputTextbox(
                 title: "Contraseña",
                 hintText: '**********',
                 obscureText: true,
-                controller: _passwordController,
+                stream: authBlocInstance.passwordSignup,
+                onChange: authBlocInstance.changePasswordSignup,
               ),
               InputTextbox(
                 title: "Confirmar Contraseña",
                 hintText: '**********',
                 obscureText: true,
+                stream: authBlocInstance.rePasswordSignup,
+                onChange: authBlocInstance.changeRePasswordSignup,
               ),
               Divider(
                 height: 15.0,

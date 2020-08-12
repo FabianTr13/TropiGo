@@ -41,17 +41,12 @@ class GasStoreState extends State<GasStoresScreen> {
         },
       ),
       floatingActionButton: FloatingActionButton.extended(
-        onPressed: _gotoBack,
+        onPressed: () => Navigator.pop(context),
         label: Text('Back Inicio'),
-        icon: Icon(Icons.directions_boat),
+        icon: Icon(Icons.arrow_back),
+        backgroundColor: Colors.orange,
       ),
-    );
-  }
-
-  Future<void> _gotoBack() async {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => HomeShop()),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 }

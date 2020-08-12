@@ -24,12 +24,15 @@ class ButtonLarge extends StatelessWidget {
           new Expanded(
             child: new FlatButton(
               color: this.backgroundColor,
+              disabledColor: this.backgroundColor,
               onPressed: this.callback,
               child: Text(
                 this.text,
                 textAlign: TextAlign.center,
-                style:
-                    TextStyle(color: this.color, fontWeight: FontWeight.bold),
+                style: TextStyle(
+                  color: this.color,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
           ),

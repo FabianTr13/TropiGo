@@ -15,11 +15,13 @@ class _SplashState extends State<Splash> {
   void initState() {
     super.initState();
 
-    AuthService().resignApp().then((value) => {
-          setState(() {
-            isLogin = value == "OK" ? true : false;
-          })
-        });
+    AuthService().resignApp().then(
+          (value) => {
+            setState(() {
+              isLogin = value.success;
+            })
+          },
+        );
   }
 
   @override

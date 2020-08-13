@@ -1,8 +1,11 @@
 import 'dart:async';
 import 'dart:collection';
-import 'package:TropiGo/src/Modules/Shop/UI/HomeShop.dart';
+import 'package:TropiGo/src/Modules/Shop/Widget/GoogleMap.dart';
+import 'package:TropiGo/src/Modules/Shop/Widget/PanelBottonShop.dart';
+import 'package:TropiGo/src/Modules/Shop/Widget/PopupMenuShop.dart';
+import 'package:TropiGo/src/Modules/Shop/Widget/SideMenu.dart';
+import 'package:TropiGo/src/Modules/Shop/Widget/SideMenuItem.dart';
 import 'package:flutter/material.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class ShopCilinderScreen extends StatefulWidget {
   @override
@@ -10,44 +13,25 @@ class ShopCilinderScreen extends StatefulWidget {
 }
 
 class ShopCilinderState extends State<ShopCilinderScreen> {
-  Completer<GoogleMapController> _controller = Completer();
-  Set<Marker> _markers = HashSet<Marker>();
-
-  static final CameraPosition _kGooglePlex = CameraPosition(
-    target: LatLng(15.506150, -88.026935),
-    zoom: 14.4746,
-  );
-
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      body: GoogleMap(
-        mapType: MapType.hybrid,
-        initialCameraPosition: _kGooglePlex,
-        markers: _markers,
-        onMapCreated: (GoogleMapController controller) {
-          _controller.complete(controller);
-          setState(() {
-            _markers.add(Marker(
-              markerId: MarkerId("0"),
-              position: LatLng(15.506150, -88.026935),
-              infoWindow: InfoWindow(
-                title: "San Francsico",
-                snippet: "An Interesting city",
-              ),
-            ));
-          });
-        },
-      ),
-      persistentFooterButtons: [
-        Container(
-          height: 200,
-          decoration: BoxDecoration(
-            color: Colors.blue,
-            borderRadius: BorderRadius.circular(25),
-          ),
-        ),
-      ],
+      appBar: AppBar(
+          iconTheme: new IconThemeData(color: Colors.grey),
+          actions: <Widget>[
+            PopupMenuShop(),
+          ],
+          backgroundColor: Colors.white,
+          title: Center(
+            child: Image.asset(
+              'assets/logo/logo.png',
+              height: 50,
+              width: 50,
+            ),
+          )),
+      body: GoogleMapView(),
+      drawer: Drawer(child: SideMenu()),
+      persistentFooterButtons: [PanelButtonShop()],
     );
   }
 }

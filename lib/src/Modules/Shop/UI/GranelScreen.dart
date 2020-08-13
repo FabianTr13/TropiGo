@@ -1,5 +1,7 @@
+import 'package:TropiGo/src/Modules/Shop/Bloc/GranelBloc.dart';
+import 'package:TropiGo/src/Widgets/ButtonLargeSubmit.dart';
+import 'package:TropiGo/src/Widgets/ImageHeader.dart';
 import 'package:TropiGo/src/Widgets/InputTextbox.dart';
-import 'package:TropiGo/src/Widgets/buttonLarge.dart';
 import 'package:flutter/material.dart';
 
 class GranelScreen extends StatefulWidget {
@@ -29,15 +31,7 @@ class _GranelState extends State<GranelScreen> {
         ),
         child: new Column(
           children: [
-            Divider(height: 30),
-            Container(
-              child: Center(
-                  child: Image.asset(
-                'assets/logo/logo.png',
-                width: 200,
-                height: 200,
-              )),
-            ),
+            ImageHeader(),
             Container(
               child: Row(
                 children: [
@@ -50,6 +44,8 @@ class _GranelState extends State<GranelScreen> {
                     activeColor: Colors.orange,
                     onChanged: (value) => {
                       setState(() {
+                        granelBlocInstance.changeIsContract(value);
+                        granelBlocInstance.resetBloc();
                         isSwitched = value;
                       })
                     },
@@ -58,44 +54,64 @@ class _GranelState extends State<GranelScreen> {
               ),
             ),
             Visibility(
+              maintainState: true,
               visible: !isSwitched,
               child: InputTextbox(
                 title: "Numero de contrato",
                 hintText: '',
                 keyboardType: TextInputType.number,
+                onChange: granelBlocInstance.changeContract,
+                stream: granelBlocInstance.contract,
               ),
             ),
             InputTextbox(
               title: "Cantidad de galones",
               hintText: '',
               keyboardType: TextInputType.number,
+              onChange: granelBlocInstance.changeCount,
+              stream: granelBlocInstance.count,
             ),
             Visibility(
+              maintainState: true,
               visible: isSwitched,
               child: Column(
                 children: [
                   InputTextbox(
                     title: "Nombre de la empresa",
                     hintText: '',
+                    onChange: granelBlocInstance.changeNameBusiness,
+                    stream: granelBlocInstance.nameBusiness,
                   ),
                   InputTextbox(
                     title: "Correo",
                     hintText: 'Correo@correo.com',
+                    keyboardType: TextInputType.emailAddress,
+                    onChange: granelBlocInstance.changeEmail,
+                    stream: granelBlocInstance.email,
                   ),
                   InputTextbox(
                     title: "Teléfono",
                     hintText: '99999999',
+                    keyboardType: TextInputType.number,
+                    onChange: granelBlocInstance.changePhoneNumber,
+                    stream: granelBlocInstance.phoneNumber,
                   ),
-                  InputTextbox(title: "Nombre del contacto", hintText: ''),
+                  InputTextbox(
+                    title: "Nombre del contacto",
+                    hintText: '',
+                    onChange: granelBlocInstance.changeContact,
+                    stream: granelBlocInstance.nameContact,
+                  ),
                   Divider(
                     height: 15.0,
                   ),
                 ],
               ),
             ),
-            ButtonLarge(
+            ButtonLargeSubmit(
               text: "ENVIAR",
               callback: registerUser,
+              stream: granelBlocInstance.submitValidGranel,
             )
           ],
         ),

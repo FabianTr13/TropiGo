@@ -32,9 +32,10 @@ class InputTextbox extends StatelessWidget {
           decoration: BoxDecoration(
             border: Border(
               bottom: BorderSide(
-                  color: Colors.redAccent,
-                  width: 0.5,
-                  style: BorderStyle.solid),
+                color: Colors.redAccent,
+                width: 0.5,
+                style: BorderStyle.solid,
+              ),
             ),
           ),
           padding: const EdgeInsets.only(left: 0.0, right: 10.0),
@@ -48,7 +49,7 @@ class InputTextbox extends StatelessWidget {
                   controller: controller,
                   focusNode: focusNode,
                   keyboardType: keyboardType,
-                  style: TextStyle(fontSize: 20),
+                  style: TextStyle(fontSize: 18),
                   obscureText: obscureText,
                   textAlign: TextAlign.left,
                   decoration: InputDecoration(
@@ -61,11 +62,11 @@ class InputTextbox extends StatelessWidget {
                     hintText: hintText,
                     hintStyle: TextStyle(
                       color: Colors.grey,
-                      fontSize: 20,
+                      fontSize: 18,
                     ),
                     labelStyle: TextStyle(
                       color: Colors.grey,
-                      fontSize: 20,
+                      fontSize: 18,
                     ),
                   ),
                 ),

@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:TropiGo/src/Modules/Auth/Bloc/SignupBloc.dart';
+
 class AuthValidator {
   final validaEmail =
       StreamTransformer<String, String>.fromHandlers(handleData: (email, sink) {
@@ -19,6 +21,16 @@ class AuthValidator {
       sink.add(password);
     } else {
       sink.addError("Contraseña invalida");
+    }
+  });
+
+  final validaRePassword = StreamTransformer<String, String>.fromHandlers(
+      handleData: (rePassword, sink) {
+    if (rePassword == signupBlocInstance.getRePassword() &&
+        rePassword.length > 5) {
+      sink.add(rePassword);
+    } else {
+      sink.addError("Las Contraseñas no coinciden");
     }
   });
 

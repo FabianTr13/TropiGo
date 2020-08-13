@@ -10,25 +10,16 @@ class Splash extends StatefulWidget {
 }
 
 class _SplashState extends State<Splash> {
-  bool isLogin = false;
   @override
   void initState() {
     super.initState();
-
-    AuthService().resignApp().then(
-          (value) => {
-            setState(() {
-              isLogin = value.success;
-            })
-          },
-        );
   }
 
   @override
   Widget build(BuildContext context) {
     return new SplashScreen(
       seconds: 2,
-      navigateAfterSeconds: isLogin ? HomeMenu() : LoginScreen(),
+      navigateAfterSeconds: LoginScreen(),
       title: new Text(
         'La llama que rinde mas!',
         style: new TextStyle(

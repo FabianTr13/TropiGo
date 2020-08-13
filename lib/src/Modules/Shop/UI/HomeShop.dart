@@ -66,7 +66,7 @@ class _HomeShop extends State<HomeShop> {
                       callback: () => gotoMenu(ShopCilinderScreen()),
                     ),
                     CardMenuItem(
-                      imagen: Image.asset('assets/logo/logo.png'),
+                      imagen: Image.asset('assets/logo/stores.jpg'),
                       callback: () => gotoMenu(GasStoresScreen()),
                     )
                   ],
@@ -74,16 +74,18 @@ class _HomeShop extends State<HomeShop> {
                 Row(
                   children: [
                     CardMenuItem(
-                      imagen: Image.asset('assets/logo/logo.png'),
+                      imagen: Image.asset('assets/logo/ganel.png'),
                       callback: () => gotoMenu(GranelScreen()),
                     ),
                     Column(
                       children: [
                         CardMenuItem(
-                          imagen: Image.asset('assets/logo/logo.png'),
+                          imagen: Image.asset('assets/logo/face.png'),
+                          height: 55,
                         ),
                         CardMenuItem(
-                          imagen: Image.asset('assets/logo/logo.png'),
+                          imagen: Image.asset('assets/logo/insta.png'),
+                          height: 55,
                         )
                       ],
                     )

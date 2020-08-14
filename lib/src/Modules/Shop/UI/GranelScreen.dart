@@ -45,7 +45,6 @@ class _GranelState extends State<GranelScreen> {
                     onChanged: (value) => {
                       setState(() {
                         granelBlocInstance.changeIsContract(value);
-                        granelBlocInstance.resetBloc();
                         isSwitched = value;
                       })
                     },

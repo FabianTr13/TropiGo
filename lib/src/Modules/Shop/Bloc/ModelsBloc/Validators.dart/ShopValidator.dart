@@ -1,6 +1,5 @@
 import 'dart:async';
-
-import 'package:TropiGo/src/Modules/Auth/Bloc/SignupBloc.dart';
+import 'package:TropiGo/src/Modules/Shop/Bloc/ModelsBloc/Product.dart';
 
 class ShopValidator {
   final validaContract = StreamTransformer<String, String>.fromHandlers(
@@ -36,8 +35,6 @@ class ShopValidator {
   final validaCount =
       StreamTransformer<String, String>.fromHandlers(handleData: (count, sink) {
     int counter = int.tryParse(count) == null ? 0 : int.parse(count);
-    print(counter);
-    print(int.tryParse(count));
     if (counter >= 1) {
       sink.add(counter.toString());
     } else {
@@ -48,6 +45,25 @@ class ShopValidator {
   final validaType =
       StreamTransformer<bool, bool>.fromHandlers(handleData: (type, sink) {
     sink.add(type);
+  });
+
+  final validaProduct =
+      StreamTransformer<List<Product>, List<Product>>.fromHandlers(
+          handleData: (product, sink) {
+    sink.add(product);
+  });
+
+  final validaProductSelect = StreamTransformer<Product, Product>.fromHandlers(
+      handleData: (product, sink) {
+    if (product != null) {
+      if (product.isSelect != null && product.isSelect) {
+        sink.add(product);
+      } else {
+        sink.addError("No product");
+      }
+    } else {
+      sink.addError("No product");
+    }
   });
 
   final validaPhoneNumber =

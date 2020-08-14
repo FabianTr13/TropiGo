@@ -2,7 +2,6 @@ import 'dart:async';
 import 'package:TropiGo/src/Modules/Shop/Bloc/ModelsBloc/Granel.dart';
 import 'package:TropiGo/src/Modules/Shop/Bloc/ModelsBloc/Validators.dart/ShopValidator.dart';
 import 'package:rxdart/rxdart.dart';
-import 'package:TropiGo/src/Modules/Auth/Bloc/Validators.dart/AuthValidator.dart';
 
 class GranelBloc with ShopValidator {
   final _contractController = BehaviorSubject<String>();
@@ -54,15 +53,6 @@ class GranelBloc with ShopValidator {
       contact: _nameContactController.value,
       isContract: _isNotContractController.value,
     );
-  }
-
-  resetBloc() {
-    // _contractController.value = null;
-    // _countGalonsController.value = null;
-    // _nameBusinessController.value = null;
-    // _emailController.value = null;
-    // _phoneNumberController.value = null;
-    // _nameContactController.value = null;
   }
 
   dispose() {

@@ -20,9 +20,7 @@ class SideMenuItem extends StatelessWidget {
           child: Row(
             children: [
               Icon(icon),
-              Container(
-                width: 30,
-              ),
+              Container(width: 30),
               Text(title),
             ],
           ),

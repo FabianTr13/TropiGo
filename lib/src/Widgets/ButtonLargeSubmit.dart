@@ -29,7 +29,7 @@ class ButtonLargeSubmit extends StatelessWidget {
               new Expanded(
                 child: new FlatButton(
                   color: this.backgroundColor,
-                  disabledColor: Colors.black,
+                  disabledColor: this.backgroundColor,
                   onPressed: snapshot.hasData ? this.callback : null,
                   child: Text(
                     this.text,

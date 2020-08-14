@@ -1,7 +1,4 @@
-import 'package:TropiGo/src/Modules/Shop/UI/GasStoresScreen.dart';
-import 'package:TropiGo/src/Modules/Shop/UI/GranelScreen.dart';
-import 'package:TropiGo/src/Modules/Shop/UI/ShopCilinderScreen.dart';
-import 'package:TropiGo/src/Modules/Shop/Widget/CardMenuItem.dart';
+import 'package:TropiGo/src/Modules/Shop/Widget/MenuStores.dart';
 import "package:flutter/material.dart";
 import 'dart:math';
 
@@ -9,24 +6,16 @@ const CURVE_HEIGHT = 300.0;
 const AVATAR_RADIUS = CURVE_HEIGHT * 0.28;
 const AVATAR_DIAMETER = AVATAR_RADIUS * 2;
 
+//All here is the screen and contain the curve header shape and
+//the MenuPart is apart in other widget
 class HomeShop extends StatefulWidget {
-  HomeShop({Key key, this.title}) : super(key: key);
-  final String title;
+  HomeShop({Key key}) : super(key: key);
 
   @override
   _HomeShop createState() => new _HomeShop();
 }
 
 class _HomeShop extends State<HomeShop> {
-  gotoMenu(Widget option) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => option,
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,17 +24,18 @@ class _HomeShop extends State<HomeShop> {
           _buildContent(),
           CurvedShape(),
           Container(
-              margin: EdgeInsets.only(top: CURVE_HEIGHT - AVATAR_DIAMETER),
-              width: double.infinity,
-              height: AVATAR_DIAMETER,
-              padding: EdgeInsets.all(8),
-              child: Container(
-                decoration: new BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: Colors.deepOrangeAccent[400],
-                ),
-                child: Image.asset('assets/logo/logo.png'),
-              ))
+            margin: EdgeInsets.only(top: CURVE_HEIGHT - AVATAR_DIAMETER),
+            width: double.infinity,
+            height: AVATAR_DIAMETER,
+            padding: EdgeInsets.all(8),
+            child: Container(
+              decoration: new BoxDecoration(
+                shape: BoxShape.circle,
+                color: Colors.deepOrangeAccent[400],
+              ),
+              child: Image.asset('assets/logo/logo.png'),
+            ),
+          )
         ],
       ),
     );
@@ -54,46 +44,9 @@ class _HomeShop extends State<HomeShop> {
   Widget _buildContent() {
     return Container(
       child: SingleChildScrollView(
-          padding: EdgeInsets.fromLTRB(16, CURVE_HEIGHT, 16, 16),
-          child: Container(
-            margin: EdgeInsets.only(left: 5, right: 5),
-            child: new Column(
-              children: [
-                Row(
-                  children: [
-                    CardMenuItem(
-                      imagen: Image.asset('assets/logo/logo.png'),
-                      callback: () => gotoMenu(ShopCilinderScreen()),
-                    ),
-                    CardMenuItem(
-                      imagen: Image.asset('assets/logo/stores.jpg'),
-                      callback: () => gotoMenu(GasStoresScreen()),
-                    )
-                  ],
-                ),
-                Row(
-                  children: [
-                    CardMenuItem(
-                      imagen: Image.asset('assets/logo/ganel.png'),
-                      callback: () => gotoMenu(GranelScreen()),
-                    ),
-                    Column(
-                      children: [
-                        CardMenuItem(
-                          imagen: Image.asset('assets/logo/face.png'),
-                          height: 55,
-                        ),
-                        CardMenuItem(
-                          imagen: Image.asset('assets/logo/insta.png'),
-                          height: 55,
-                        )
-                      ],
-                    )
-                  ],
-                )
-              ],
-            ),
-          )),
+        padding: EdgeInsets.fromLTRB(16, CURVE_HEIGHT, 16, 16),
+        child: MenuStores(context: context),
+      ),
     );
   }
 }

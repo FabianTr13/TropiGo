@@ -1,30 +1,15 @@
 import 'package:TropiGo/src/Modules/Auth/Bloc/AuthBloc.dart';
 import 'package:TropiGo/src/Modules/Shop/UI/GasStoresScreen.dart';
 import 'package:TropiGo/src/Modules/Shop/UI/HomeShop.dart';
-import 'package:TropiGo/src/Modules/Shop/Widget/SideMenuItem.dart';
+import 'package:TropiGo/src/Modules/Shop/Widget/AppBar/SideMenuItem.dart';
 import 'package:flutter/material.dart';
 
-class SideMenu extends StatelessWidget {
-  SideMenu({Key key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return ListView(
-      padding: EdgeInsets.zero,
+Drawer SideMenu() {
+  return Drawer(
+    child: ListView(
       children: <Widget>[
         DrawerHeader(
-          child: Container(
-            child: Column(
-              children: [
-                Image.asset(
-                  'assets/logo/logo.png',
-                  height: 120,
-                  width: 120,
-                ),
-                Text(authBlocInstance.getLogin().email)
-              ],
-            ),
-          ),
+          child: _HeaderSide(),
           decoration: BoxDecoration(
             color: Colors.grey,
           ),
@@ -45,6 +30,24 @@ class SideMenu extends StatelessWidget {
           routerPage: GasStoresScreen(),
         ),
       ],
-    );
-  }
+    ),
+  );
+}
+
+Widget _HeaderSide() {
+  return Container(
+    child: Column(
+      children: [
+        Image.asset(
+          'assets/logo/logo.png',
+          height: 120,
+          width: 120,
+        ),
+        StreamBuilder(
+          stream: authBlocInstance.email,
+          builder: (context, snapshot) => Text(snapshot.data),
+        )
+      ],
+    ),
+  );
 }

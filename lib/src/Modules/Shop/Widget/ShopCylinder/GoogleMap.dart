@@ -23,6 +23,8 @@ class _GoogleMapViewState extends State<GoogleMapView> {
   Widget build(BuildContext context) {
     return Container(
       child: GoogleMap(
+        myLocationButtonEnabled: true,
+        myLocationEnabled: true,
         mapType: MapType.hybrid,
         initialCameraPosition: _kGooglePlex,
         markers: _markers,

@@ -1,7 +1,7 @@
 import 'dart:async';
-import 'package:TropiGo/src/Modules/Auth/Bloc/ModelsBloc.dart/Signup.dart';
+import 'package:TropiGo/src/Modules/Auth/Models/Signup.dart';
 import 'package:rxdart/rxdart.dart';
-import 'package:TropiGo/src/Modules/Auth/Bloc/Validators.dart/AuthValidator.dart';
+import 'package:TropiGo/src/Modules/Auth/Bloc/Validators/AuthValidator.dart';
 
 class SignupBloc with AuthValidator {
   final _emailController = BehaviorSubject<String>();

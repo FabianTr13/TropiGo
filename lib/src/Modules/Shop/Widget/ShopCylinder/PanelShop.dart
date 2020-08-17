@@ -11,8 +11,9 @@ import 'package:sliding_up_panel/sliding_up_panel.dart';
 
 SlidingUpPanel PanelShop() {
   PanelController _pc = new PanelController();
+
   return SlidingUpPanel(
-    maxHeight: 350,
+    maxHeight: 335,
     minHeight: 60,
     controller: _pc,
     renderPanelSheet: false,
@@ -25,7 +26,7 @@ SlidingUpPanel PanelShop() {
 }
 
 Widget PanelProducts() {
-  _agregar() {
+  _getData() {
     List<Product> items = [
       Product(
         id: 1,
@@ -66,6 +67,8 @@ Widget PanelProducts() {
     print("comprando");
   }
 
+  _getData();
+
   return Container(
     decoration: BoxDecoration(
       color: Colors.white,
@@ -74,6 +77,9 @@ Widget PanelProducts() {
     ),
     child: Column(
       children: [
+        Container(
+          height: 20,
+        ),
         InputTextbox(
           title: "Direccion",
           stream: shopCylinderBlocInstance.address,
@@ -86,10 +92,6 @@ Widget PanelProducts() {
           callback: _doBuy,
           stream: shopCylinderBlocInstance.submitValidShop,
         ),
-        ButtonLarge(
-          text: "agg",
-          callback: _agregar,
-        )
       ],
     ),
   );

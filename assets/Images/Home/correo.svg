@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   inkscape:version="1.0 (4035a4fb49, 2020-05-01)"
+   sodipodi:docname="correo.svg"
+   height="512px"
+   width="512px"
+   xml:space="preserve"
+   style="enable-background:new 0 0 512 512;"
+   viewBox="0 0 512 512"
+   y="0px"
+   x="0px"
+   id="Capa_1"
+   version="1.1"><metadata
+   id="metadata33"><rdf:RDF><cc:Work
+       rdf:about=""><dc:format>image/svg+xml</dc:format><dc:type
+         rdf:resource="http://purl.org/dc/dcmitype/StillImage" /></cc:Work></rdf:RDF></metadata><defs
+   id="defs31" /><sodipodi:namedview
+   inkscape:current-layer="Capa_1"
+   inkscape:window-maximized="1"
+   inkscape:window-y="-9"
+   inkscape:window-x="-9"
+   inkscape:cy="343.29351"
+   inkscape:cx="224.68773"
+   inkscape:zoom="0.859375"
+   showgrid="false"
+   id="namedview29"
+   inkscape:window-height="1051"
+   inkscape:window-width="1920"
+   inkscape:pageshadow="2"
+   inkscape:pageopacity="0"
+   guidetolerance="10"
+   gridtolerance="10"
+   objecttolerance="10"
+   borderopacity="1"
+   bordercolor="#666666"
+   pagecolor="#ffffff" /><g
+   style="stroke:#000000;fill:#000000"
+   id="g26"><g
+     style="stroke:#000000;fill:#000000"
+     id="g6">
+	<g
+   style="stroke:#000000;fill:#000000"
+   id="g4">
+		<path
+   class="active-path"
+   d="M 339.392,258.624 512,367.744 V 144.896 Z"
+   style="fill:#000000;stroke:#000000"
+   id="polygon2" />
+	</g>
+</g><g
+     style="stroke:#000000;fill:#000000"
+     id="g12">
+	<g
+   style="stroke:#000000;fill:#000000"
+   id="g10">
+		<path
+   class="active-path"
+   d="M 0,144.896 V 367.744 L 172.608,258.624 Z"
+   style="fill:#000000;stroke:#000000"
+   id="polygon8" />
+	</g>
+</g><g
+     style="stroke:#000000;fill:#000000"
+     id="g18">
+	<g
+   style="stroke:#000000;fill:#000000"
+   id="g16">
+		<path
+   style="stroke:#000000;fill:#000000"
+   id="path14"
+   fill="#FFFFFF"
+   data-old_color="#000000"
+   class="active-path"
+   data-original="#000000"
+   d="M480,80H32C16.032,80,3.36,91.904,0.96,107.232L256,275.264l255.04-168.032C508.64,91.904,495.968,80,480,80z" />
+	</g>
+</g><g
+     style="stroke:#000000;fill:#000000"
+     id="g24">
+	<g
+   style="stroke:#000000;fill:#000000"
+   id="g22">
+		<path
+   style="stroke:#000000;fill:#000000"
+   id="path20"
+   fill="#FFFFFF"
+   data-old_color="#000000"
+   class="active-path"
+   data-original="#000000"
+   d="M310.08,277.952l-45.28,29.824c-2.688,1.76-5.728,2.624-8.8,2.624c-3.072,0-6.112-0.864-8.8-2.624l-45.28-29.856    L1.024,404.992C3.488,420.192,16.096,432,32,432h448c15.904,0,28.512-11.808,30.976-27.008L310.08,277.952z" />
+	</g>
+</g></g> </svg>

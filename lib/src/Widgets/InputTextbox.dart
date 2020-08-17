@@ -4,6 +4,7 @@ class InputTextbox extends StatelessWidget {
   final String hintText;
   final String title;
   final bool obscureText;
+  final bool autofocus;
   final TextInputType keyboardType;
   final TextEditingController controller;
   final FocusNode focusNode;
@@ -15,6 +16,7 @@ class InputTextbox extends StatelessWidget {
     @required this.title,
     this.hintText,
     this.obscureText = false,
+    this.autofocus = false,
     this.keyboardType = TextInputType.text,
     this.controller,
     this.focusNode,
@@ -48,6 +50,7 @@ class InputTextbox extends StatelessWidget {
                   onChanged: onChange,
                   controller: controller,
                   focusNode: focusNode,
+                  autofocus: autofocus,
                   keyboardType: keyboardType,
                   style: TextStyle(fontSize: 18),
                   obscureText: obscureText,

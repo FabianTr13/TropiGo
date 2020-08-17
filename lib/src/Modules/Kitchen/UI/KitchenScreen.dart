@@ -1,4 +1,8 @@
+import 'package:TropiGo/src/Modules/Kitchen/Bloc/KitchenBloc.dart';
+import 'package:TropiGo/src/Modules/Kitchen/Models/KitchenRecipe.dart';
+import 'package:TropiGo/src/Services/KitchenService.dart';
 import 'package:TropiGo/src/Widgets/ButtonRoundBorder.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 class KitchenScreen extends StatelessWidget {
@@ -6,8 +10,8 @@ class KitchenScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    KitchenServise().getRecipes();
     return Container(
-      height: MediaQuery.of(context).size.height,
       margin: EdgeInsets.zero,
       decoration: BoxDecoration(
         gradient: new LinearGradient(
@@ -18,37 +22,54 @@ class KitchenScreen extends StatelessWidget {
           tileMode: TileMode.clamp,
         ),
       ),
-      child: new Column(
-        children: <Widget>[
-          Container(
-            width: MediaQuery.of(context).size.width,
-            height: 325,
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                fit: BoxFit.fill,
-                image: AssetImage('assets/logo/kitchen.png'),
+      child: SingleChildScrollView(
+        child: StreamBuilder(
+          stream: kitchenBlocInstance.recipe,
+          builder: (context, snapshot) => Column(
+            children: [
+              ImageRecipe((snapshot.data as KitchenRecipe).image),
+              TextLabel((snapshot.data as KitchenRecipe).title, 18),
+              TextLabel((snapshot.data as KitchenRecipe).recipe, 18),
+              ButtonRoundBorder(
+                text: "Back Inicio",
+                icon: Icons.arrow_back,
+                callback: () => Navigator.pop(context),
               ),
-            ),
+              Container(
+                height: 20,
+              )
+            ],
           ),
-          Container(
-            margin: EdgeInsets.all(10),
-            child: Text(
-              "La historia de Honduras, país ubicado en el centro de América Central, se remonta a unos 14 000 años (conforme al consenso de Clovis), en que se estima ocurrieron los primeros asentamientos de pobladores sedentarios. Resalta en la historia geológica de Honduras el hecho de poseer el único reporte de fósiles de dinosaurios de América Central. Antes de la conquista por los españoles en el siglo XVI",
-              textAlign: TextAlign.justify,
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 16,
-                decoration: TextDecoration.none,
-              ),
-            ),
-          ),
-          ButtonRoundBorder(
-            text: "Back Inicio",
-            icon: Icons.arrow_back,
-            callback: () => Navigator.pop(context),
-          ),
-        ],
+        ),
       ),
     );
   }
+}
+
+Widget ImageRecipe(String image) {
+  return StreamBuilder(
+    stream: kitchenBlocInstance.recipe,
+    builder: (context, snapshot) => CachedNetworkImage(
+      imageUrl: image,
+      fit: BoxFit.fitWidth,
+      height: 300,
+    ),
+  );
+}
+
+Widget TextLabel(String text, double size) {
+  return Container(
+    margin: EdgeInsets.only(
+      top: 25,
+    ),
+    child: Text(
+      text,
+      textAlign: TextAlign.justify,
+      style: TextStyle(
+        color: Colors.white,
+        fontSize: size,
+        decoration: TextDecoration.none,
+      ),
+    ),
+  );
 }

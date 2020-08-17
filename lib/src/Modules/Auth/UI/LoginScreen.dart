@@ -9,6 +9,7 @@ import 'package:TropiGo/src/Widgets/ImageHeader.dart';
 import 'package:TropiGo/src/Widgets/InputTextbox.dart';
 import 'package:TropiGo/src/Widgets/buttonLarge.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_styled_toast/flutter_styled_toast.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -20,7 +21,6 @@ class _LoginState extends State<LoginScreen> {
   bool showErrorMessage = false;
   bool isLoading = false;
   FocusNode _focusNode;
-  AuthRequest authRequest = AuthRequest();
 
   @override
   Widget build(BuildContext context) {
@@ -72,23 +72,18 @@ class _LoginState extends State<LoginScreen> {
     var request = await AuthService().loginUser();
 
     setState(() {
-      authRequest = request;
       isLoading = false;
     });
 
-    if (authRequest.success) {
+    if (request.success) {
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => HomeMenu()),
       );
     } else {
-      Future.delayed(
-        const Duration(milliseconds: 5000),
-        () => {
-          setState(() {
-            authRequest.showErrorMessage = false;
-          })
-        },
+      showToast(
+        request.errorMessage,
+        backgroundColor: Colors.red,
       );
     }
   }
@@ -109,17 +104,6 @@ class _LoginState extends State<LoginScreen> {
         color: Colors.orangeAccent,
         child: SingleChildScrollView(
           child: Container(
-            decoration: BoxDecoration(
-              color: Colors.white,
-              image: DecorationImage(
-                colorFilter: new ColorFilter.mode(
-                  Colors.black.withOpacity(0.05),
-                  BlendMode.dstATop,
-                ),
-                image: AssetImage('assets/logo/logo.png'),
-                fit: BoxFit.cover,
-              ),
-            ),
             child: Form(
               child: new Column(
                 children: [
@@ -139,20 +123,15 @@ class _LoginState extends State<LoginScreen> {
                     onChange: authBlocInstance.changePassword,
                     stream: authBlocInstance.password,
                   ),
-                  ErrorMessage(
-                      errorMessage: authRequest.errorMessage,
-                      visible: authRequest.showErrorMessage),
-                  Divider(
-                    height: 15.0,
-                  ),
                   ButtonLarge(
                     text: "Aun no tienes cuenta?",
                     callback: _gotoSignup,
-                    color: Colors.redAccent,
+                    color: Colors.grey,
                     backgroundColor: Colors.transparent,
                   ),
                   ButtonLargeSubmit(
                     text: "INGRESAR",
+                    nullText: "Rellena los campos",
                     callback: _doLogin,
                     stream: authBlocInstance.submitValidLogin,
                   )

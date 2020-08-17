@@ -6,8 +6,8 @@ import 'package:TropiGo/src/Widgets/ButtonLargeSubmit.dart';
 import 'package:TropiGo/src/Widgets/ErrorMessage.dart';
 import 'package:TropiGo/src/Widgets/ImageHeader.dart';
 import 'package:TropiGo/src/Widgets/InputTextbox.dart';
-import 'package:TropiGo/src/Widgets/buttonLarge.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_styled_toast/flutter_styled_toast.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 
 class SignupScreen extends StatefulWidget {
@@ -17,7 +17,6 @@ class SignupScreen extends StatefulWidget {
 
 class _SignupState extends State<SignupScreen> {
   bool isLoading = false;
-  AuthRequest authRequest = AuthRequest();
 
   @override
   Widget build(BuildContext context) {
@@ -34,14 +33,15 @@ class _SignupState extends State<SignupScreen> {
 
     setState(() {
       isLoading = false;
-      authRequest = authRequestDo;
     });
 
-    if (authRequest.success) {
+    if (authRequestDo.success) {
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => HomeMenu()),
       );
+    } else {
+      showToast(authRequestDo.errorMessage, backgroundColor: Colors.red);
     }
   }
 
@@ -51,17 +51,6 @@ class _SignupState extends State<SignupScreen> {
         inAsyncCall: isLoading,
         child: SingleChildScrollView(
           child: Container(
-            decoration: BoxDecoration(
-              color: Colors.white,
-              image: DecorationImage(
-                colorFilter: new ColorFilter.mode(
-                  Colors.black.withOpacity(0.05),
-                  BlendMode.dstATop,
-                ),
-                image: AssetImage('assets/logo/logo.png'),
-                fit: BoxFit.cover,
-              ),
-            ),
             child: new Column(
               children: [
                 ImageHeader(),
@@ -99,15 +88,9 @@ class _SignupState extends State<SignupScreen> {
                   stream: signupBlocInstance.rePassword,
                   onChange: signupBlocInstance.changeRePassword,
                 ),
-                Divider(
-                  height: 15.0,
-                ),
-                ErrorMessage(
-                  visible: authRequest.showErrorMessage,
-                  errorMessage: authRequest.errorMessage,
-                ),
                 ButtonLargeSubmit(
                   text: "REGISTRARSE",
+                  nullText: "Rellene todos los campos",
                   callback: registerUser,
                   stream: signupBlocInstance.submitValidSignup,
                 )

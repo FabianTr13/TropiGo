@@ -1,13 +1,15 @@
 import 'package:TropiGo/src/Modules/Auth/Bloc/AuthBloc.dart';
-import 'package:TropiGo/src/Modules/Auth/Bloc/ModelsBloc.dart/Login.dart';
-import 'package:TropiGo/src/Modules/Auth/Bloc/ModelsBloc.dart/Signup.dart';
 import 'package:TropiGo/src/Modules/Auth/Bloc/SignupBloc.dart';
 import 'package:TropiGo/src/Modules/Auth/Models/AuthRequest.dart';
+import 'package:TropiGo/src/Modules/Auth/Models/Login.dart';
+import 'package:TropiGo/src/Modules/Auth/Models/Signup.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthService {
   final _auth = FirebaseAuth.instance;
+  final databaseReference = FirebaseDatabase.instance.reference();
 
   Future<AuthRequest> createUser() async {
     AuthRequest authRequest = AuthRequest();
@@ -15,16 +17,20 @@ class AuthService {
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
     try {
-      var user = await _auth
-          .createUserWithEmailAndPassword(
-            email: signupData.email,
-            password: signupData.password,
-          )
-          .then((value) => value.user);
+      var user = await _auth.createUserWithEmailAndPassword(
+        email: signupData.email,
+        password: signupData.password,
+      );
 
-      authRequest.success = user != null;
-      await prefs.setString('email', signupData.email);
-      await prefs.setString('password', signupData.password);
+      if (user.user != null) {
+        databaseReference
+            .child("Users")
+            .child(user.user.uid)
+            .set(signupData.toJson());
+        await prefs.setString('email', signupData.email);
+        await prefs.setString('password', signupData.password);
+        authRequest.success = true;
+      }
     } catch (e) {
       _mapErrorMessage(authRequest, e.code);
     }

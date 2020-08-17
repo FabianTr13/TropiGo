@@ -2,7 +2,9 @@ import 'package:TropiGo/src/Modules/Contact/UI/ContactScreen.dart';
 import 'package:TropiGo/src/Modules/Shop/UI/HomeShop.dart';
 import 'package:TropiGo/src/Modules/Kitchen/UI/KitchenScreen.dart';
 import 'package:TropiGo/src/Modules/Tips/TipsScreen.dart';
+import 'package:TropiGo/src/Multimedia/tropi_icons_icons.dart';
 import 'package:TropiGo/src/Widgets/ButtonRoundBorder.dart';
+import 'package:TropiGo/src/Widgets/ImageHeader.dart';
 import 'package:flutter/material.dart';
 
 class HomeMenu extends StatelessWidget {
@@ -19,41 +21,36 @@ class HomeMenu extends StatelessWidget {
 
     return Container(
       decoration: BoxDecoration(
-          gradient: new LinearGradient(
-              colors: [Colors.yellow, Colors.deepOrange],
-              begin: const FractionalOffset(0, 0.9),
-              end: const FractionalOffset(0, 0),
-              stops: [0.0, 1.0],
-              tileMode: TileMode.clamp)),
+        gradient: new LinearGradient(
+            colors: [Colors.yellow, Colors.deepOrange],
+            begin: const FractionalOffset(0, 0.9),
+            end: const FractionalOffset(0, 0),
+            stops: [0.0, 1.0],
+            tileMode: TileMode.clamp),
+      ),
       child: new Column(
-        children: <Widget>[
-          Divider(height: 30),
+        children: [
           Container(
-            child: Center(
-                child: Image.asset(
-              'assets/logo/logo.png',
-              width: 250,
-              height: 250,
-            )),
+            child: ImageHeader(),
           ),
           ButtonRoundBorder(
             text: "Pide tu cilindro de GAS",
-            icon: Icons.favorite,
+            icon: TropiIcons.corazon,
             callback: () => gotoMenu(HomeShop()),
           ),
           ButtonRoundBorder(
             text: "Cocina con tropi",
-            icon: Icons.fastfood,
+            icon: TropiIcons.cocina,
             callback: () => gotoMenu(KitchenScreen()),
           ),
           ButtonRoundBorder(
             text: "Tropi Tips",
-            icon: Icons.lightbulb_outline,
+            icon: TropiIcons.idea,
             callback: () => gotoMenu(TipsScreen()),
           ),
           ButtonRoundBorder(
             text: "Sugerencias Tropigas",
-            icon: Icons.email,
+            icon: TropiIcons.correo,
             callback: () => gotoMenu(ContactScreen()),
           )
         ],

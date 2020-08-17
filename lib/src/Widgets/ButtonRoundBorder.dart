@@ -27,7 +27,7 @@ class ButtonRoundBorder extends StatelessWidget {
             child: new FlatButton(
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(35.0),
-                  side: BorderSide(color: Colors.white)),
+                  side: BorderSide(color: Colors.grey)),
               color: this.backgroundColor,
               onPressed: () => {this.callback()},
               child: Row(

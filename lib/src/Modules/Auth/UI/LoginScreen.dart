@@ -102,6 +102,9 @@ class _LoginState extends State<LoginScreen> {
         inAsyncCall: isLoading,
         opacity: 0.5,
         color: Colors.orangeAccent,
+        progressIndicator: CircularProgressIndicator(
+          valueColor: new AlwaysStoppedAnimation<Color>(Colors.orange),
+        ),
         child: SingleChildScrollView(
           child: Container(
             child: Form(

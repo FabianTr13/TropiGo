@@ -15,7 +15,13 @@ class TipsServise {
       (value) {
         try {
           tips = Tips(
-            description: value.data['descripcion'],
+            description: value.data['descripcion'] +
+                value.data['descripcion'] +
+                value.data['descripcion'] +
+                value.data['descripcion'] +
+                value.data['descripcion'] +
+                value.data['descripcion'] +
+                value.data['descripcion'],
             title: value.data['titulo'],
           );
           tipsBlocInstance.changeTips(tips);

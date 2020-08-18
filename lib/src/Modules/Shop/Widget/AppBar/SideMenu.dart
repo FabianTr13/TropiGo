@@ -2,6 +2,7 @@ import 'package:TropiGo/src/Modules/Auth/Bloc/AuthBloc.dart';
 import 'package:TropiGo/src/Modules/Shop/UI/GasStoresScreen.dart';
 import 'package:TropiGo/src/Modules/Shop/UI/HomeShop.dart';
 import 'package:TropiGo/src/Modules/Shop/Widget/AppBar/SideMenuItem.dart';
+import 'package:TropiGo/src/Multimedia/Images.dart';
 import 'package:flutter/material.dart';
 
 Drawer SideMenu() {
@@ -39,7 +40,7 @@ Widget _HeaderSide() {
     child: Column(
       children: [
         Image.asset(
-          'assets/logo/logo.png',
+          LogoImg,
           height: 120,
           width: 120,
         ),

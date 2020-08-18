@@ -22,8 +22,8 @@ class HomeMenu extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         gradient: new LinearGradient(
-            colors: [Colors.yellow, Colors.deepOrange],
-            begin: const FractionalOffset(0, 0.9),
+            colors: [Colors.yellowAccent, Colors.deepOrange],
+            begin: const FractionalOffset(0, 1.3),
             end: const FractionalOffset(0, 0),
             stops: [0.0, 1.0],
             tileMode: TileMode.clamp),

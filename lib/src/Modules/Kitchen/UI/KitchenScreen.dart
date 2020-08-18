@@ -1,42 +1,85 @@
 import 'package:TropiGo/src/Modules/Kitchen/Bloc/KitchenBloc.dart';
 import 'package:TropiGo/src/Modules/Kitchen/Models/KitchenRecipe.dart';
+import 'package:TropiGo/src/Multimedia/Images.dart';
 import 'package:TropiGo/src/Services/KitchenService.dart';
 import 'package:TropiGo/src/Widgets/ButtonRoundBorder.dart';
-import 'package:cached_network_image/cached_network_image.dart';
+import 'package:TropiGo/src/Widgets/Paragraph.dart';
 import 'package:flutter/material.dart';
+import 'package:modal_progress_hud/modal_progress_hud.dart';
 
-class KitchenScreen extends StatelessWidget {
-  const KitchenScreen({Key key}) : super(key: key);
+class KitchenScreen extends StatefulWidget {
+  KitchenScreen({Key key}) : super(key: key);
+
+  @override
+  _KitchenScreenState createState() => _KitchenScreenState();
+}
+
+class _KitchenScreenState extends State<KitchenScreen> {
+  bool _isLoading = true;
+  @override
+  void initState() {
+    super.initState();
+    KitchenServise().getRecipes().then((value) {
+      setState(() {
+        _isLoading = false;
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    KitchenServise().getRecipes();
-    return Container(
-      margin: EdgeInsets.zero,
-      decoration: BoxDecoration(
-        gradient: new LinearGradient(
-          colors: [Colors.yellow, Colors.deepOrange],
-          begin: const FractionalOffset(0, 0.9),
-          end: const FractionalOffset(0, 0),
-          stops: [0.0, 1.0],
-          tileMode: TileMode.clamp,
-        ),
+    return ModalProgressHUD(
+      inAsyncCall: _isLoading,
+      progressIndicator: CircularProgressIndicator(
+        valueColor: new AlwaysStoppedAnimation<Color>(Colors.orange),
       ),
-      child: SingleChildScrollView(
-        child: StreamBuilder(
-          stream: kitchenBlocInstance.recipe,
-          builder: (context, snapshot) => Column(
-            children: [
-              ImageRecipe((snapshot.data as KitchenRecipe).image),
-              TextLabel((snapshot.data as KitchenRecipe).title, 18),
-              TextLabel((snapshot.data as KitchenRecipe).recipe, 18),
-              ButtonRoundBorder(
-                text: "Back Inicio",
-                icon: Icons.arrow_back,
-                callback: () => Navigator.pop(context),
+      child: Container(
+        margin: EdgeInsets.zero,
+        decoration: BoxDecoration(
+          gradient: new LinearGradient(
+            colors: [Colors.yellow, Colors.deepOrange],
+            begin: const FractionalOffset(0, 0.9),
+            end: const FractionalOffset(0, 0),
+            stops: [0.0, 1.0],
+            tileMode: TileMode.clamp,
+          ),
+        ),
+        child: SafeArea(
+          child: CustomScrollView(
+            slivers: <Widget>[
+              SliverToBoxAdapter(
+                child: StreamBuilder(
+                  stream: kitchenBlocInstance.recipe,
+                  builder: (context, snapshot) => Column(
+                    children: [
+                      Image.asset(
+                        (snapshot.data as KitchenRecipe)?.image ?? LogoImg,
+                        height: 300,
+                      ),
+                      Paragraph(
+                        (snapshot.data as KitchenRecipe)?.title ?? "",
+                        18,
+                      ),
+                      Paragraph(
+                        (snapshot.data as KitchenRecipe)?.recipe ?? "",
+                        16,
+                      ),
+                    ],
+                  ),
+                ),
               ),
-              Container(
-                height: 20,
+              SliverFillRemaining(
+                hasScrollBody: false,
+                child: Container(
+                  alignment: Alignment.bottomCenter,
+                  margin: EdgeInsets.only(bottom: 15),
+                  child: ButtonRoundBorder(
+                    text: "Back Inicio",
+                    icon: Icons.arrow_back,
+                    callback: () => Navigator.pop(context),
+                    marginRound: 0.2,
+                  ),
+                ),
               )
             ],
           ),
@@ -44,32 +87,4 @@ class KitchenScreen extends StatelessWidget {
       ),
     );
   }
-}
-
-Widget ImageRecipe(String image) {
-  return StreamBuilder(
-    stream: kitchenBlocInstance.recipe,
-    builder: (context, snapshot) => CachedNetworkImage(
-      imageUrl: image,
-      fit: BoxFit.fitWidth,
-      height: 300,
-    ),
-  );
-}
-
-Widget TextLabel(String text, double size) {
-  return Container(
-    margin: EdgeInsets.only(
-      top: 25,
-    ),
-    child: Text(
-      text,
-      textAlign: TextAlign.justify,
-      style: TextStyle(
-        color: Colors.white,
-        fontSize: size,
-        decoration: TextDecoration.none,
-      ),
-    ),
-  );
 }

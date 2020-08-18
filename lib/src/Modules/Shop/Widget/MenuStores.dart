@@ -2,10 +2,12 @@ import 'package:TropiGo/src/Modules/Shop/UI/GasStoresScreen.dart';
 import 'package:TropiGo/src/Modules/Shop/UI/GranelScreen.dart';
 import 'package:TropiGo/src/Modules/Shop/UI/ShopCylinderScreen.dart';
 import 'package:TropiGo/src/Modules/Shop/Widget/CardMenuItem.dart';
+import 'package:TropiGo/src/Multimedia/Images.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_styled_toast/flutter_styled_toast.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 Widget MenuStores({BuildContext context}) {
-  //Unique function to redirec all page with dynamic widget
   gotoMenu(Widget option) {
     Navigator.push(
       context,
@@ -15,18 +17,30 @@ Widget MenuStores({BuildContext context}) {
     );
   }
 
+  _launchURL(String url) async {
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      showToast("No se pudo contactar al proveedor");
+    }
+  }
+
   return Container(
-    margin: EdgeInsets.only(left: 5, right: 5),
+    margin: EdgeInsets.only(left: 20, right: 20),
+    alignment: Alignment.center,
+    decoration: BoxDecoration(
+      color: Colors.white,
+    ),
     child: new Column(
       children: [
         Row(
           children: [
             CardMenuItem(
-              imagen: Image.asset('assets/logo/logo.png'),
+              imagen: Image.asset(LogoImg),
               callback: () => gotoMenu(ShopCylinderScreen()),
             ),
             CardMenuItem(
-              imagen: Image.asset('assets/logo/stores.jpg'),
+              imagen: Image.asset(GasVehicularImg),
               callback: () => gotoMenu(GasStoresScreen()),
             )
           ],
@@ -34,18 +48,22 @@ Widget MenuStores({BuildContext context}) {
         Row(
           children: [
             CardMenuItem(
-              imagen: Image.asset('assets/logo/ganel.png'),
+              imagen: Image.asset(GranelImg),
               callback: () => gotoMenu(GranelScreen()),
             ),
             Column(
               children: [
                 CardMenuItem(
-                  imagen: Image.asset('assets/logo/face.png'),
-                  height: 55,
+                  imagen: Image.asset(FacebookImg),
+                  height: 44,
+                  callback: () =>
+                      _launchURL('https://www.facebook.com/TropigasHND/'),
                 ),
                 CardMenuItem(
-                  imagen: Image.asset('assets/logo/insta.png'),
-                  height: 55,
+                  imagen: Image.asset(InstagranImg),
+                  height: 44,
+                  callback: () => _launchURL(
+                      'https://www.instagram.com/tropigashn/?hl=es-la'),
                 )
               ],
             )

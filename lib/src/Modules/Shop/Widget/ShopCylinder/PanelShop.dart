@@ -2,7 +2,9 @@ import 'package:TropiGo/src/Modules/Shop/Bloc/ModelsBloc/Product.dart';
 import 'package:TropiGo/src/Modules/Shop/Bloc/ShopCylinderBloc.dart';
 import 'package:TropiGo/src/Modules/Shop/Widget/ShopCylinder/CarouselShop.dart';
 import 'package:TropiGo/src/Modules/Shop/Widget/ShopCylinder/Counter.dart';
-import 'package:TropiGo/src/Modules/Shop/Widget/ShopCylinder/GoogleMap.dart';
+import 'package:TropiGo/src/Modules/Shop/Widget/Granel/GoogleMap.dart';
+import 'package:TropiGo/src/Modules/Shop/Widget/ShopCylinder/ViewMapShop.dart';
+import 'package:TropiGo/src/Multimedia/Images.dart';
 import 'package:TropiGo/src/Widgets/ButtonLarge.dart';
 import 'package:TropiGo/src/Widgets/ButtonLargeSubmit.dart';
 import 'package:TropiGo/src/Widgets/InputTextbox.dart';
@@ -13,7 +15,7 @@ SlidingUpPanel PanelShop() {
   PanelController _pc = new PanelController();
 
   return SlidingUpPanel(
-    maxHeight: 335,
+    maxHeight: 315,
     minHeight: 60,
     controller: _pc,
     renderPanelSheet: false,
@@ -21,7 +23,7 @@ SlidingUpPanel PanelShop() {
     collapsed: FloatingCollapsedPanel(
       panelController: _pc,
     ),
-    body: GoogleMapView(),
+    body: ViewMapShop(),
   );
 }
 
@@ -32,31 +34,31 @@ Widget PanelProducts() {
         id: 1,
         price: "100",
         description: "Gas 10L",
-        urlImage: "assets/logo/cilynder.png",
+        urlImage: CilinderImg,
       ),
       Product(
         id: 2,
         price: "154",
         description: "Gas 10L",
-        urlImage: "assets/logo/cilynder.png",
+        urlImage: CilinderImg,
       ),
       Product(
         id: 3,
         price: "151",
         description: "Gas 10L",
-        urlImage: "assets/logo/cilynder.png",
+        urlImage: CilinderImg,
       ),
       Product(
         id: 4,
         price: "111",
         description: "Gas 10L",
-        urlImage: "assets/logo/cilynder.png",
+        urlImage: CilinderImg,
       ),
       Product(
         id: 5,
         price: "155",
         description: "Gas 10L",
-        urlImage: "assets/logo/cilynder.png",
+        urlImage: CilinderImg,
       ),
     ];
 
@@ -78,7 +80,7 @@ Widget PanelProducts() {
     child: Column(
       children: [
         Container(
-          height: 20,
+          height: 25,
         ),
         InputTextbox(
           title: "Direccion",

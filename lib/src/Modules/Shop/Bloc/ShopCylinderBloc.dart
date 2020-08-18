@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:TropiGo/src/Modules/Shop/Bloc/ModelsBloc/Product.dart';
-import 'package:TropiGo/src/Modules/Shop/Bloc/ModelsBloc/Validators.dart/ShopValidator.dart';
+import 'package:TropiGo/src/Modules/Shop/Bloc/Validators.dart/ShopValidator.dart';
 import 'package:rxdart/rxdart.dart';
 
 class ShopCylinderBloc with ShopValidator {

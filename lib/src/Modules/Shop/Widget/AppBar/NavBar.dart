@@ -1,3 +1,4 @@
+import 'package:TropiGo/src/Multimedia/Images.dart';
 import 'package:TropiGo/src/Services/AuthService.dart';
 import 'package:flutter/material.dart';
 
@@ -15,7 +16,7 @@ AppBar NavBar() {
     backgroundColor: Colors.white,
     title: Center(
       child: Image.asset(
-        'assets/logo/logo.png',
+        LogoImg,
         height: 50,
         width: 50,
       ),

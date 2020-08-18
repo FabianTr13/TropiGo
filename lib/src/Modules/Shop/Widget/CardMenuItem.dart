@@ -7,7 +7,7 @@ class CardMenuItem extends StatelessWidget {
 
   const CardMenuItem({
     Key key,
-    this.height = 120,
+    this.height = 100,
     @required this.imagen,
     this.callback,
   }) : super(key: key);

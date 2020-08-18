@@ -15,8 +15,8 @@ class ImageHeader extends StatelessWidget {
           Center(
             child: Image.asset(
               LogoImg,
-              width: 200,
-              height: 200,
+              width: 250,
+              height: 250,
             ),
           ),
           Center(

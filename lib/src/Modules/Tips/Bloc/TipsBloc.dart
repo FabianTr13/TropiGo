@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'package:TropiGo/src/Modules/Kitchen/Models/KitchenRecipe.dart';
 import 'package:TropiGo/src/Modules/Tips/Bloc/TipsValidations.dart';
 import 'package:TropiGo/src/Modules/Tips/Models/Tips.dart';
 import 'package:rxdart/rxdart.dart';

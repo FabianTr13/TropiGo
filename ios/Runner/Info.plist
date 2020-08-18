@@ -42,8 +42,8 @@
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Esta aplicacion necesita accesso a gps<string>
+	<string>Esta aplicacion necesita accesso a gps</string>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>Esta aplicacion necesita accesso a gps<string>
+	<string>Esta aplicacion necesita accesso a gps</string>
 </dict>
 </plist>

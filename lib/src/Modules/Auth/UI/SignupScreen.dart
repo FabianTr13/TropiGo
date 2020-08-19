@@ -1,9 +1,13 @@
 import 'package:TropiGo/src/Modules/Auth/Bloc/SignupBloc.dart';
 import 'package:TropiGo/src/Modules/Auth/Models/AuthRequest.dart';
 import 'package:TropiGo/src/Modules/Home/UI/HomeMenu.dart';
+import 'package:TropiGo/src/Multimedia/Images.dart';
 import 'package:TropiGo/src/Services/AuthService.dart';
+import 'package:TropiGo/src/Utils/BoxGradient.dart';
+import 'package:TropiGo/src/Widgets/ButtonIconCircleSubmit.dart';
 import 'package:TropiGo/src/Widgets/ButtonLargeSubmit.dart';
 import 'package:TropiGo/src/Widgets/ErrorMessage.dart';
+import 'package:TropiGo/src/Widgets/HeaderIcon.dart';
 import 'package:TropiGo/src/Widgets/ImageHeader.dart';
 import 'package:TropiGo/src/Widgets/InputTextbox.dart';
 import 'package:flutter/material.dart';
@@ -17,6 +21,22 @@ class SignupScreen extends StatefulWidget {
 
 class _SignupState extends State<SignupScreen> {
   bool isLoading = false;
+  final FocusNode _emailFocusNode = new FocusNode();
+  final FocusNode _nameFocusNode = new FocusNode();
+  final FocusNode _phoneFocusNode = new FocusNode();
+  final FocusNode _passwordFocusNode = new FocusNode();
+  final FocusNode _repasswordFocusNode = new FocusNode();
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    _emailFocusNode.dispose();
+    _nameFocusNode.dispose();
+    _phoneFocusNode.dispose();
+    _passwordFocusNode.dispose();
+    _repasswordFocusNode.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -51,45 +71,61 @@ class _SignupState extends State<SignupScreen> {
         inAsyncCall: isLoading,
         child: SingleChildScrollView(
           child: Container(
+            decoration: BoxGradient(),
+            height: MediaQuery.of(context).size.height,
             child: new Column(
               children: [
-                ImageHeader(),
+                HeaderIcon(
+                  imagen: ProfileImg,
+                  title: "Crear cuenta",
+                ),
                 InputTextbox(
                   title: "Correo",
-                  hintText: 'Correo@correo.com',
+                  hintText: '',
                   keyboardType: TextInputType.emailAddress,
                   stream: signupBlocInstance.email,
                   onChange: signupBlocInstance.changeEmail,
+                  focusNode: _emailFocusNode,
+                  nextFocus: _nameFocusNode,
                 ),
                 InputTextbox(
                   title: "Nombre",
-                  hintText: 'John Smith',
+                  hintText: '',
                   stream: signupBlocInstance.name,
                   onChange: signupBlocInstance.changeName,
+                  focusNode: _nameFocusNode,
+                  nextFocus: _phoneFocusNode,
                 ),
                 InputTextbox(
                   title: "Teléfono",
-                  hintText: '99999999',
+                  hintText: '',
                   keyboardType: TextInputType.number,
                   stream: signupBlocInstance.phoneNumber,
                   onChange: signupBlocInstance.changePhoneNumber,
+                  focusNode: _phoneFocusNode,
+                  nextFocus: _passwordFocusNode,
                 ),
                 InputTextbox(
                   title: "Contraseña",
-                  hintText: '**********',
+                  hintText: '',
                   obscureText: true,
                   stream: signupBlocInstance.password,
                   onChange: signupBlocInstance.changePassword,
+                  focusNode: _passwordFocusNode,
+                  nextFocus: _repasswordFocusNode,
                 ),
                 InputTextbox(
                   title: "Confirmar Contraseña",
-                  hintText: '**********',
+                  hintText: '',
                   obscureText: true,
                   stream: signupBlocInstance.rePassword,
                   onChange: signupBlocInstance.changeRePassword,
+                  focusNode: _repasswordFocusNode,
                 ),
-                ButtonLargeSubmit(
-                  text: "REGISTRARSE",
+                Container(
+                  height: 25,
+                ),
+                ButtonIconCircleSubmit(
                   nullText: "Rellene todos los campos",
                   callback: registerUser,
                   stream: signupBlocInstance.submitValidSignup,

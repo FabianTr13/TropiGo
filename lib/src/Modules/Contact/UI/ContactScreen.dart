@@ -1,5 +1,6 @@
 import 'package:TropiGo/src/Modules/Contact/Models/Contact.dart';
 import 'package:TropiGo/src/Multimedia/Images.dart';
+import 'package:TropiGo/src/Multimedia/tropi_icons_icons.dart';
 import 'package:TropiGo/src/Services/ContactService.dart';
 import 'package:TropiGo/src/Widgets/ButtonRoundBorder.dart';
 import 'package:flutter/material.dart';
@@ -56,27 +57,30 @@ class _ContactScreenState extends State<ContactScreen> {
           ),
           ButtonRoundBorder(
             text: "Llama *Tropi",
-            icon: Icons.call,
+            icon: TropiIcons.phone,
             callback: () => _launchURL(contact.tel),
-            marginRound: 0.2,
+            width: 3,
+            radius: 100,
           ),
           ButtonRoundBorder(
             text: "Email",
-            icon: Icons.email,
+            icon: TropiIcons.correo,
             callback: () => _launchURL(contact.email),
-            marginRound: 0.2,
+            width: 3,
+            radius: 100,
           ),
           ButtonRoundBorder(
             text: "Chat",
-            icon: Icons.chat_bubble,
+            icon: TropiIcons.chat,
             callback: () => _launchURL(contact.chat),
-            marginRound: 0.2,
+            width: 3,
+            radius: 100,
           ),
           ButtonRoundBorder(
             text: "Back Inicio",
-            icon: Icons.arrow_back,
             callback: () => Navigator.pop(context),
-            marginRound: 0.2,
+            backgroundColor: Colors.red,
+            width: 3,
           )
         ],
       ),

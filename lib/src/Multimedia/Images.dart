@@ -10,3 +10,4 @@ const InstagranImg = 'assets/Images/boton_instagram.png';
 const GpsImg = 'assets/Images/tropi_myloc_pin.png';
 const DotImg = 'assets/Images/dot.png';
 const CilinderImg = 'assets/Images/cilindro.png';
+const ProfileImg = 'assets/Images/Profile.png';

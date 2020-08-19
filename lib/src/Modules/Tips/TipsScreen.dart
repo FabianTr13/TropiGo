@@ -69,9 +69,9 @@ class _TipsScreenState extends State<TipsScreen> {
                   margin: EdgeInsets.only(bottom: 15),
                   child: ButtonRoundBorder(
                     text: "Back Inicio",
-                    icon: Icons.arrow_back,
                     callback: () => Navigator.pop(context),
-                    marginRound: 0.2,
+                    width: 2,
+                    backgroundColor: Colors.red,
                   ),
                 ),
               )

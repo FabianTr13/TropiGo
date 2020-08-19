@@ -3,14 +3,6 @@ import 'package:TropiGo/src/Services/AuthService.dart';
 import 'package:flutter/material.dart';
 
 AppBar NavBar() {
-  _cerrarSesion(BuildContext context) {
-    AuthService().singOut().then(
-          (value) => Navigator.of(context).popUntil(
-            (route) => route.isFirst,
-          ),
-        );
-  }
-
   return AppBar(
     iconTheme: IconThemeData(color: Colors.grey),
     backgroundColor: Colors.white,
@@ -29,7 +21,7 @@ AppBar NavBar() {
               value: "1",
               child: FlatButton(
                 child: Text("Cerrar Sesión"),
-                onPressed: () => _cerrarSesion(context),
+                onPressed: () => AuthService().cerrarSesion(context),
               ),
             )
           ],

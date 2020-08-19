@@ -11,7 +11,7 @@ class AuthValidator {
     if (_emailRegExp.hasMatch(email)) {
       sink.add(email);
     } else {
-      sink.addError("Correo no valido");
+      sink.addError("Este correo es invalido");
     }
   });
 
@@ -20,7 +20,7 @@ class AuthValidator {
     if (password.length > 5) {
       sink.add(password);
     } else {
-      sink.addError("Contraseña invalida");
+      sink.addError("La contaseña es muy corta");
     }
   });
 

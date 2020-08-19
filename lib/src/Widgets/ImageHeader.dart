@@ -4,31 +4,34 @@ import 'package:flutter/material.dart';
 
 class ImageHeader extends StatelessWidget {
   final String title;
+  final double size;
 
-  ImageHeader({this.title = ""});
+  ImageHeader({this.title = "", this.size = 200});
   @override
   Widget build(BuildContext context) {
     return Container(
       child: Column(
         children: [
-          Divider(height: 30),
+          Divider(height: 50),
           Center(
             child: Image.asset(
               LogoImg,
-              width: 250,
-              height: 250,
+              width: this.size,
+              height: this.size,
             ),
           ),
-          Center(
-            child: Text(
-              title,
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                color: Colors.grey,
-                fontSize: 24,
+          Visibility(
+            visible: this.title != "",
+            child: Center(
+              child: Text(
+                title,
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 24,
+                ),
               ),
             ),
-          ),
+          )
         ],
       ),
     );

@@ -8,6 +8,7 @@ class InputTextbox extends StatelessWidget {
   final TextInputType keyboardType;
   final TextEditingController controller;
   final FocusNode focusNode;
+  final FocusNode nextFocus;
   final dynamic onChange;
   final Stream<String> stream;
 
@@ -22,6 +23,7 @@ class InputTextbox extends StatelessWidget {
     this.focusNode,
     this.onChange,
     this.stream,
+    this.nextFocus,
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -34,8 +36,8 @@ class InputTextbox extends StatelessWidget {
           decoration: BoxDecoration(
             border: Border(
               bottom: BorderSide(
-                color: Colors.redAccent,
-                width: 0.5,
+                color: Colors.white,
+                width: 2,
                 style: BorderStyle.solid,
               ),
             ),
@@ -47,12 +49,20 @@ class InputTextbox extends StatelessWidget {
             children: <Widget>[
               new Expanded(
                 child: TextFormField(
+                  textInputAction: TextInputAction.next,
                   onChanged: onChange,
+                  onFieldSubmitted: (String value) {
+                    FocusScope.of(context).requestFocus(nextFocus);
+                  },
                   controller: controller,
                   focusNode: focusNode,
                   autofocus: autofocus,
                   keyboardType: keyboardType,
-                  style: TextStyle(fontSize: 18),
+                  style: TextStyle(
+                    fontSize: 20,
+                    color: Colors.white,
+                  ),
+                  cursorColor: Colors.white,
                   obscureText: obscureText,
                   textAlign: TextAlign.left,
                   decoration: InputDecoration(
@@ -60,15 +70,15 @@ class InputTextbox extends StatelessWidget {
                     labelText: title,
                     errorText: snapshot.error,
                     errorStyle: TextStyle(
-                      color: Colors.red,
+                      color: Colors.white,
                     ),
                     hintText: hintText,
                     hintStyle: TextStyle(
-                      color: Colors.grey,
+                      color: Colors.white,
                       fontSize: 18,
                     ),
                     labelStyle: TextStyle(
-                      color: Colors.grey,
+                      color: Colors.white,
                       fontSize: 18,
                     ),
                   ),

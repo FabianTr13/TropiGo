@@ -14,7 +14,7 @@ class ButtonLargeSubmit extends StatelessWidget {
     this.text = "Boton",
     this.callback,
     this.color = Colors.white,
-    this.backgroundColor = Colors.redAccent,
+    this.backgroundColor = Colors.red,
     this.stream,
     this.nullText,
   }) : super(key: key);
@@ -34,27 +34,36 @@ class ButtonLargeSubmit extends StatelessWidget {
       stream: stream,
       builder: (context, snapshot) {
         return Container(
-          margin: const EdgeInsets.only(left: 10.0, right: 10.0),
-          child: new Row(
-            children: <Widget>[
-              new Expanded(
-                child: new FlatButton(
-                  color: this.backgroundColor,
-                  disabledColor: this.backgroundColor,
-                  onPressed: snapshot.hasData ? this.callback : _nullText,
-                  child: Text(
-                    this.text,
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: this.color,
-                      fontWeight: FontWeight.bold,
+            margin: const EdgeInsets.only(left: 15.0, right: 15.0),
+            height: 80,
+            child: Row(
+              children: [
+                Expanded(
+                  child: Container(
+                    height: 50,
+                    child: RaisedButton(
+                      color: this.backgroundColor,
+                      disabledColor: this.backgroundColor,
+                      onPressed: snapshot.hasData ? this.callback : _nullText,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20.0),
+                        side: BorderSide(
+                          color: Colors.white.withOpacity(0.5),
+                        ),
+                      ),
+                      child: Text(
+                        this.text,
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: this.color,
+                          fontSize: 16,
+                        ),
+                      ),
                     ),
                   ),
                 ),
-              ),
-            ],
-          ),
-        );
+              ],
+            ));
       },
     );
   }

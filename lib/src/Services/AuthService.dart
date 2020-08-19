@@ -5,6 +5,7 @@ import 'package:TropiGo/src/Modules/Auth/Models/Login.dart';
 import 'package:TropiGo/src/Modules/Auth/Models/Signup.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthService {
@@ -71,6 +72,14 @@ class AuthService {
     }
 
     return authRequest;
+  }
+
+  cerrarSesion(BuildContext context) {
+    AuthService().singOut().then(
+          (value) => Navigator.of(context).popUntil(
+            (route) => route.isFirst,
+          ),
+        );
   }
 
   Future<void> singOut() async {

@@ -2,6 +2,7 @@ import 'package:TropiGo/src/Modules/Kitchen/Bloc/KitchenBloc.dart';
 import 'package:TropiGo/src/Modules/Kitchen/Models/KitchenRecipe.dart';
 import 'package:TropiGo/src/Multimedia/Images.dart';
 import 'package:TropiGo/src/Services/KitchenService.dart';
+import 'package:TropiGo/src/Utils/BoxGradient.dart';
 import 'package:TropiGo/src/Widgets/ButtonRoundBorder.dart';
 import 'package:TropiGo/src/Widgets/Paragraph.dart';
 import 'package:flutter/material.dart';
@@ -35,15 +36,7 @@ class _KitchenScreenState extends State<KitchenScreen> {
       ),
       child: Container(
         margin: EdgeInsets.zero,
-        decoration: BoxDecoration(
-          gradient: new LinearGradient(
-            colors: [Colors.yellow, Colors.deepOrange],
-            begin: const FractionalOffset(0, 0.9),
-            end: const FractionalOffset(0, 0),
-            stops: [0.0, 1.0],
-            tileMode: TileMode.clamp,
-          ),
-        ),
+        decoration: BoxGradient(),
         child: SafeArea(
           child: CustomScrollView(
             slivers: <Widget>[
@@ -75,9 +68,10 @@ class _KitchenScreenState extends State<KitchenScreen> {
                   margin: EdgeInsets.only(bottom: 15),
                   child: ButtonRoundBorder(
                     text: "Back Inicio",
-                    icon: Icons.arrow_back,
+                    // icon: Icons.arrow_back,
                     callback: () => Navigator.pop(context),
-                    marginRound: 0.2,
+                    backgroundColor: Colors.red,
+                    width: 2,
                   ),
                 ),
               )

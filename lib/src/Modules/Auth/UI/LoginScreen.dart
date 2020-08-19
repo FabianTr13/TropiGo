@@ -1,10 +1,9 @@
 import 'package:TropiGo/src/Modules/Auth/Bloc/AuthBloc.dart';
-import 'package:TropiGo/src/Modules/Auth/Models/AuthRequest.dart';
 import 'package:TropiGo/src/Modules/Auth/UI/SignupScreen.dart';
 import 'package:TropiGo/src/Modules/Home/UI/HomeMenu.dart';
 import 'package:TropiGo/src/Services/AuthService.dart';
+import 'package:TropiGo/src/Utils/BoxGradient.dart';
 import 'package:TropiGo/src/Widgets/ButtonLargeSubmit.dart';
-import 'package:TropiGo/src/Widgets/ErrorMessage.dart';
 import 'package:TropiGo/src/Widgets/ImageHeader.dart';
 import 'package:TropiGo/src/Widgets/InputTextbox.dart';
 import 'package:TropiGo/src/Widgets/buttonLarge.dart';
@@ -21,11 +20,11 @@ class _LoginState extends State<LoginScreen> {
   bool showErrorMessage = false;
   bool isLoading = false;
   FocusNode _focusNode;
+  FocusNode _focusPassNode;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: MediaQuery.of(context).size.height,
       child: _Login(),
     );
   }
@@ -107,37 +106,41 @@ class _LoginState extends State<LoginScreen> {
         ),
         child: SingleChildScrollView(
           child: Container(
+            decoration: BoxGradient(),
+            height: MediaQuery.of(context).size.height,
             child: Form(
               child: new Column(
                 children: [
-                  ImageHeader(title: "Iniciar Sesión"),
+                  ImageHeader(title: "Bienvenido a TropiGo"),
                   InputTextbox(
                     title: "Correo",
-                    hintText: 'Correo@Correo.com',
+                    hintText: '',
                     keyboardType: TextInputType.emailAddress,
                     focusNode: _focusNode,
                     onChange: authBlocInstance.changeEmail,
                     stream: authBlocInstance.email,
+                    nextFocus: _focusPassNode,
                   ),
                   InputTextbox(
                     title: "Contraseña",
-                    hintText: '**********',
+                    hintText: '',
                     obscureText: true,
                     onChange: authBlocInstance.changePassword,
                     stream: authBlocInstance.password,
-                  ),
-                  ButtonLarge(
-                    text: "Aun no tienes cuenta?",
-                    callback: _gotoSignup,
-                    color: Colors.grey,
-                    backgroundColor: Colors.transparent,
+                    focusNode: _focusPassNode,
                   ),
                   ButtonLargeSubmit(
                     text: "INGRESAR",
                     nullText: "Rellena los campos",
                     callback: _doLogin,
                     stream: authBlocInstance.submitValidLogin,
-                  )
+                  ),
+                  ButtonLarge(
+                    text: "Aun no tienes cuenta?",
+                    callback: _gotoSignup,
+                    color: Colors.white,
+                    backgroundColor: Colors.transparent,
+                  ),
                 ],
               ),
             ),

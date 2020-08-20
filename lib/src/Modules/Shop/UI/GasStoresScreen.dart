@@ -1,7 +1,10 @@
 import 'dart:async';
 import 'dart:collection';
+import 'package:TropiGo/src/Modules/Shop/Widget/AppBar/NavBar.dart';
 import 'package:TropiGo/src/Modules/Shop/Widget/Granel/GoogleMap.dart';
+import 'package:TropiGo/src/Multimedia/Images.dart';
 import 'package:TropiGo/src/Services/GasVehicularService.dart';
+import 'package:TropiGo/src/Widgets/ButtonRoundBorder.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
@@ -22,12 +25,24 @@ class GasStoreState extends State<GasStoresScreen> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
+      appBar: NavBar(
+        withActions: false,
+        automaticallyImplyLeading: false,
+        logo: GasVehicularImg,
+        sizeLogo: 100,
+      ),
       body: GoogleMapView(),
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () => Navigator.pop(context),
-        label: Text('Back Inicio'),
-        icon: Icon(Icons.arrow_back),
-        backgroundColor: Colors.orange,
+      bottomNavigationBar: Container(
+        height: 80,
+        child: Center(
+          child: ButtonRoundBorder(
+            text: "Back Inicio",
+            callback: () => Navigator.pop(context),
+            backgroundColor: Colors.red,
+            width: 2,
+            fontSize: 22,
+          ),
+        ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );

@@ -11,7 +11,7 @@ class KitchenServise {
       (value) {
         try {
           recipe = KitchenRecipe(
-            recipe: value.data['preparacion'] + value.data['preparacion'],
+            recipe: value.data['preparacion'],
             title: value.data['titulo'],
           );
           kitchenBlocInstance.changeRecipe(recipe);

@@ -11,6 +11,7 @@ class InputTextbox extends StatelessWidget {
   final FocusNode nextFocus;
   final dynamic onChange;
   final Stream<String> stream;
+  final Color colorLines;
 
   const InputTextbox({
     Key key,
@@ -24,6 +25,7 @@ class InputTextbox extends StatelessWidget {
     this.onChange,
     this.stream,
     this.nextFocus,
+    this.colorLines = Colors.grey,
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -36,8 +38,8 @@ class InputTextbox extends StatelessWidget {
           decoration: BoxDecoration(
             border: Border(
               bottom: BorderSide(
-                color: Colors.white,
-                width: 2,
+                color: this.colorLines,
+                width: 1,
                 style: BorderStyle.solid,
               ),
             ),
@@ -60,9 +62,9 @@ class InputTextbox extends StatelessWidget {
                   keyboardType: keyboardType,
                   style: TextStyle(
                     fontSize: 20,
-                    color: Colors.white,
+                    color: this.colorLines,
                   ),
-                  cursorColor: Colors.white,
+                  cursorColor: this.colorLines,
                   obscureText: obscureText,
                   textAlign: TextAlign.left,
                   decoration: InputDecoration(
@@ -70,15 +72,15 @@ class InputTextbox extends StatelessWidget {
                     labelText: title,
                     errorText: snapshot.error,
                     errorStyle: TextStyle(
-                      color: Colors.white,
+                      color: this.colorLines,
                     ),
                     hintText: hintText,
                     hintStyle: TextStyle(
-                      color: Colors.white,
+                      color: this.colorLines,
                       fontSize: 18,
                     ),
                     labelStyle: TextStyle(
-                      color: Colors.white,
+                      color: this.colorLines,
                       fontSize: 18,
                     ),
                   ),

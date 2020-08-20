@@ -1,13 +1,9 @@
 import 'package:TropiGo/src/Modules/Auth/Bloc/SignupBloc.dart';
-import 'package:TropiGo/src/Modules/Auth/Models/AuthRequest.dart';
 import 'package:TropiGo/src/Modules/Home/UI/HomeMenu.dart';
 import 'package:TropiGo/src/Multimedia/Images.dart';
 import 'package:TropiGo/src/Services/AuthService.dart';
 import 'package:TropiGo/src/Utils/BoxGradient.dart';
 import 'package:TropiGo/src/Widgets/ButtonIconCircleSubmit.dart';
-import 'package:TropiGo/src/Widgets/ButtonLargeSubmit.dart';
-import 'package:TropiGo/src/Widgets/ErrorMessage.dart';
-import 'package:TropiGo/src/Widgets/HeaderIcon.dart';
 import 'package:TropiGo/src/Widgets/ImageHeader.dart';
 import 'package:TropiGo/src/Widgets/InputTextbox.dart';
 import 'package:flutter/material.dart';
@@ -75,9 +71,11 @@ class _SignupState extends State<SignupScreen> {
             height: MediaQuery.of(context).size.height,
             child: new Column(
               children: [
-                HeaderIcon(
-                  imagen: ProfileImg,
+                ImageHeader(
+                  image: ProfileImg,
                   title: "Crear cuenta",
+                  underLine: true,
+                  size: 80,
                 ),
                 InputTextbox(
                   title: "Correo",
@@ -87,6 +85,7 @@ class _SignupState extends State<SignupScreen> {
                   onChange: signupBlocInstance.changeEmail,
                   focusNode: _emailFocusNode,
                   nextFocus: _nameFocusNode,
+                  colorLines: Colors.white,
                 ),
                 InputTextbox(
                   title: "Nombre",
@@ -95,6 +94,7 @@ class _SignupState extends State<SignupScreen> {
                   onChange: signupBlocInstance.changeName,
                   focusNode: _nameFocusNode,
                   nextFocus: _phoneFocusNode,
+                  colorLines: Colors.white,
                 ),
                 InputTextbox(
                   title: "Teléfono",
@@ -104,6 +104,7 @@ class _SignupState extends State<SignupScreen> {
                   onChange: signupBlocInstance.changePhoneNumber,
                   focusNode: _phoneFocusNode,
                   nextFocus: _passwordFocusNode,
+                  colorLines: Colors.white,
                 ),
                 InputTextbox(
                   title: "Contraseña",
@@ -113,6 +114,7 @@ class _SignupState extends State<SignupScreen> {
                   onChange: signupBlocInstance.changePassword,
                   focusNode: _passwordFocusNode,
                   nextFocus: _repasswordFocusNode,
+                  colorLines: Colors.white,
                 ),
                 InputTextbox(
                   title: "Confirmar Contraseña",
@@ -121,6 +123,7 @@ class _SignupState extends State<SignupScreen> {
                   stream: signupBlocInstance.rePassword,
                   onChange: signupBlocInstance.changeRePassword,
                   focusNode: _repasswordFocusNode,
+                  colorLines: Colors.white,
                 ),
                 Container(
                   height: 25,

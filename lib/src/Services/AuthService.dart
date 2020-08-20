@@ -3,6 +3,7 @@ import 'package:TropiGo/src/Modules/Auth/Bloc/SignupBloc.dart';
 import 'package:TropiGo/src/Modules/Auth/Models/AuthRequest.dart';
 import 'package:TropiGo/src/Modules/Auth/Models/Login.dart';
 import 'package:TropiGo/src/Modules/Auth/Models/Signup.dart';
+import 'package:TropiGo/src/Modules/Auth/Models/UserProfile.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/cupertino.dart';
@@ -27,7 +28,7 @@ class AuthService {
         databaseReference
             .child("Users")
             .child(user.user.uid)
-            .set(signupData.toJson());
+            .set(signupData.singUptoJson());
         await prefs.setString('email', signupData.email);
         await prefs.setString('password', signupData.password);
         authRequest.success = true;
@@ -38,13 +39,39 @@ class AuthService {
     return authRequest;
   }
 
-  Future<FirebaseUser> getCurrentUser() async {
+  Future<UserProfile> getCurrentUser() async {
+    UserProfile userProfile;
     try {
-      return await _auth.currentUser();
-    } catch (e) {
-      print(e);
-    }
-    return null;
+      var user = await _auth.currentUser();
+
+      if (user != null) {
+        var userStore =
+            await databaseReference.child('Users').child(user.uid).once();
+
+        if (userStore.value != null) {
+          userProfile = UserProfile(
+            uid: userStore.key,
+            email: user.email,
+            name: userStore.value['name'],
+            phoneNumber: userStore.value['phone'].toString(),
+            provider: userStore.value['provider'],
+            userInDelivering: userStore.value['userInDelivering'],
+          );
+        }
+      }
+    } catch (e) {}
+    return userProfile;
+  }
+
+  Future<void> updateUser() {
+    Signup userUpdate = signupBlocInstance.getSignup();
+
+    print(userUpdate.uID);
+    print(userUpdate.upDatetoJson());
+    databaseReference
+        .child("Users")
+        .child(userUpdate.uID)
+        .set(userUpdate.upDatetoJson());
   }
 
   Future<AuthRequest> loginUser() async {

@@ -61,6 +61,7 @@ class _ContactScreenState extends State<ContactScreen> {
             callback: () => _launchURL(contact.tel),
             width: 3,
             radius: 100,
+            fontSize: 22,
           ),
           ButtonRoundBorder(
             text: "Email",
@@ -68,6 +69,7 @@ class _ContactScreenState extends State<ContactScreen> {
             callback: () => _launchURL(contact.email),
             width: 3,
             radius: 100,
+            fontSize: 22,
           ),
           ButtonRoundBorder(
             text: "Chat",
@@ -75,12 +77,14 @@ class _ContactScreenState extends State<ContactScreen> {
             callback: () => _launchURL(contact.chat),
             width: 3,
             radius: 100,
+            fontSize: 22,
           ),
           ButtonRoundBorder(
             text: "Back Inicio",
             callback: () => Navigator.pop(context),
             backgroundColor: Colors.red,
             width: 3,
+            fontSize: 22,
           )
         ],
       ),

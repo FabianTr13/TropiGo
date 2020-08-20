@@ -3,12 +3,10 @@ import 'package:TropiGo/src/Modules/Contact/UI/ContactScreen.dart';
 import 'package:TropiGo/src/Modules/Shop/UI/HomeShop.dart';
 import 'package:TropiGo/src/Modules/Kitchen/UI/KitchenScreen.dart';
 import 'package:TropiGo/src/Modules/Tips/TipsScreen.dart';
-import 'package:TropiGo/src/Multimedia/Images.dart';
 import 'package:TropiGo/src/Multimedia/tropi_icons_icons.dart';
 import 'package:TropiGo/src/Services/AuthService.dart';
 import 'package:TropiGo/src/Utils/BoxGradient.dart';
 import 'package:TropiGo/src/Widgets/ButtonRoundBorder.dart';
-import 'package:TropiGo/src/Widgets/HeaderIcon.dart';
 import 'package:TropiGo/src/Widgets/ImageHeader.dart';
 import 'package:flutter/material.dart';
 

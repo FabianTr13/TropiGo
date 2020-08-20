@@ -120,6 +120,7 @@ class _LoginState extends State<LoginScreen> {
                     onChange: authBlocInstance.changeEmail,
                     stream: authBlocInstance.email,
                     nextFocus: _focusPassNode,
+                    colorLines: Colors.white,
                   ),
                   InputTextbox(
                     title: "Contraseña",
@@ -128,6 +129,7 @@ class _LoginState extends State<LoginScreen> {
                     onChange: authBlocInstance.changePassword,
                     stream: authBlocInstance.password,
                     focusNode: _focusPassNode,
+                    colorLines: Colors.white,
                   ),
                   ButtonLargeSubmit(
                     text: "INGRESAR",

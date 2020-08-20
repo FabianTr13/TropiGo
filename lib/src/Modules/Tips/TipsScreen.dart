@@ -2,6 +2,7 @@ import 'package:TropiGo/src/Modules/Tips/Bloc/TipsBloc.dart';
 import 'package:TropiGo/src/Modules/Tips/Models/Tips.dart';
 import 'package:TropiGo/src/Multimedia/Images.dart';
 import 'package:TropiGo/src/Services/TipsService.dart';
+import 'package:TropiGo/src/Utils/BoxGradient.dart';
 import 'package:TropiGo/src/Widgets/ButtonRoundBorder.dart';
 import 'package:TropiGo/src/Widgets/Paragraph.dart';
 import 'package:flutter/material.dart';
@@ -35,18 +36,10 @@ class _TipsScreenState extends State<TipsScreen> {
       ),
       child: Container(
         margin: EdgeInsets.zero,
-        decoration: BoxDecoration(
-          gradient: new LinearGradient(
-            colors: [Colors.yellow, Colors.deepOrange],
-            begin: const FractionalOffset(0, 0.9),
-            end: const FractionalOffset(0, 0),
-            stops: [0.0, 1.0],
-            tileMode: TileMode.clamp,
-          ),
-        ),
+        decoration: BoxGradient(),
         child: SafeArea(
           child: CustomScrollView(
-            slivers: <Widget>[
+            slivers: [
               SliverToBoxAdapter(
                 child: StreamBuilder(
                   stream: tipsBlocInstance.tips,
@@ -54,10 +47,15 @@ class _TipsScreenState extends State<TipsScreen> {
                     children: [
                       Image.asset(
                         (snapshot.data as Tips)?.image ?? LogoImg,
-                        height: 300,
                       ),
-                      Paragraph((snapshot.data as Tips)?.title ?? "", 18),
-                      Paragraph((snapshot.data as Tips)?.description ?? "", 16),
+                      Paragraph(
+                        (snapshot.data as Tips)?.title ?? "",
+                        16,
+                      ),
+                      Paragraph(
+                        (snapshot.data as Tips)?.description ?? "",
+                        14,
+                      ),
                     ],
                   ),
                 ),
@@ -72,6 +70,7 @@ class _TipsScreenState extends State<TipsScreen> {
                     callback: () => Navigator.pop(context),
                     width: 2,
                     backgroundColor: Colors.red,
+                    fontSize: 22,
                   ),
                 ),
               )

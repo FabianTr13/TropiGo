@@ -39,7 +39,7 @@ class _KitchenScreenState extends State<KitchenScreen> {
         decoration: BoxGradient(),
         child: SafeArea(
           child: CustomScrollView(
-            slivers: <Widget>[
+            slivers: [
               SliverToBoxAdapter(
                 child: StreamBuilder(
                   stream: kitchenBlocInstance.recipe,
@@ -47,15 +47,14 @@ class _KitchenScreenState extends State<KitchenScreen> {
                     children: [
                       Image.asset(
                         (snapshot.data as KitchenRecipe)?.image ?? LogoImg,
-                        height: 300,
                       ),
                       Paragraph(
                         (snapshot.data as KitchenRecipe)?.title ?? "",
-                        18,
+                        16,
                       ),
                       Paragraph(
                         (snapshot.data as KitchenRecipe)?.recipe ?? "",
-                        16,
+                        14,
                       ),
                     ],
                   ),
@@ -68,10 +67,10 @@ class _KitchenScreenState extends State<KitchenScreen> {
                   margin: EdgeInsets.only(bottom: 15),
                   child: ButtonRoundBorder(
                     text: "Back Inicio",
-                    // icon: Icons.arrow_back,
                     callback: () => Navigator.pop(context),
                     backgroundColor: Colors.red,
                     width: 2,
+                    fontSize: 22,
                   ),
                 ),
               )

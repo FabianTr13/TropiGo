@@ -8,6 +8,7 @@ class ButtonRoundBorder extends StatelessWidget {
   final VoidCallback callback;
   final double width;
   final double radius;
+  final double fontSize;
 
   const ButtonRoundBorder({
     Key key,
@@ -18,6 +19,7 @@ class ButtonRoundBorder extends StatelessWidget {
     this.backgroundColor = Colors.transparent,
     this.width = 1,
     this.radius = 25,
+    this.fontSize = 16,
   }) : super(key: key);
 
   @override
@@ -59,7 +61,7 @@ class ButtonRoundBorder extends StatelessWidget {
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           color: this.color,
-                          fontSize: 16,
+                          fontSize: this.fontSize,
                         ),
                       ),
                     )

@@ -1,15 +1,12 @@
 import 'package:TropiGo/src/Modules/Auth/Bloc/AuthBloc.dart';
 import 'package:TropiGo/src/Modules/Auth/Bloc/SignupBloc.dart';
-import 'package:TropiGo/src/Modules/Auth/UI/SignupScreen.dart';
-import 'package:TropiGo/src/Modules/Home/UI/HomeMenu.dart';
-import 'package:TropiGo/src/Modules/Shop/Widget/AppBar/NavBar.dart';
 import 'package:TropiGo/src/Multimedia/Images.dart';
 import 'package:TropiGo/src/Services/AuthService.dart';
 import 'package:TropiGo/src/Utils/BoxGradient.dart';
+import 'package:TropiGo/src/Widgets/AppBar/NavBar.dart';
 import 'package:TropiGo/src/Widgets/ButtonLargeSubmit.dart';
 import 'package:TropiGo/src/Widgets/ImageHeader.dart';
 import 'package:TropiGo/src/Widgets/InputTextbox.dart';
-import 'package:TropiGo/src/Widgets/buttonLarge.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_styled_toast/flutter_styled_toast.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
@@ -47,8 +44,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   Future<void> _getCurrent() async {
-    var user = await AuthService().getCurrentUser();
+    setState(() {
+      isLoading = true;
+    });
 
+    var user = await AuthService().getCurrentUser();
+    setState(() {
+      isLoading = false;
+    });
     if (user.uid != null) {
       signupBlocInstance.changeUId(user.uid);
 

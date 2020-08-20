@@ -1,6 +1,6 @@
 import 'package:TropiGo/src/Modules/Shop/Bloc/GranelBloc.dart';
-import 'package:TropiGo/src/Modules/Shop/Widget/AppBar/NavBar.dart';
 import 'package:TropiGo/src/Multimedia/Images.dart';
+import 'package:TropiGo/src/Widgets/AppBar/NavBar.dart';
 import 'package:TropiGo/src/Widgets/ButtonLargeSubmit.dart';
 import 'package:TropiGo/src/Widgets/ImageHeader.dart';
 import 'package:TropiGo/src/Widgets/InputTextbox.dart';

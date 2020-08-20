@@ -1,8 +1,8 @@
 import 'package:TropiGo/src/Modules/Auth/Bloc/AuthBloc.dart';
 import 'package:TropiGo/src/Modules/Shop/UI/GasStoresScreen.dart';
 import 'package:TropiGo/src/Modules/Shop/UI/HomeShop.dart';
-import 'package:TropiGo/src/Modules/Shop/Widget/AppBar/SideMenuItem.dart';
 import 'package:TropiGo/src/Multimedia/Images.dart';
+import 'package:TropiGo/src/Widgets/AppBar/SideMenuItem.dart';
 import 'package:flutter/material.dart';
 
 Drawer SideMenu() {

@@ -1,7 +1,7 @@
 import 'package:TropiGo/src/Modules/Shop/UI/GasStoresScreen.dart';
 import 'package:TropiGo/src/Modules/Shop/UI/GranelScreen.dart';
 import 'package:TropiGo/src/Modules/Shop/UI/ShopCylinderScreen.dart';
-import 'package:TropiGo/src/Modules/Shop/Widget/CardMenuItem.dart';
+import 'package:TropiGo/src/Modules/Shop/Widget/HomeShop/MenuItem.dart';
 import 'package:TropiGo/src/Multimedia/Images.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_styled_toast/flutter_styled_toast.dart';

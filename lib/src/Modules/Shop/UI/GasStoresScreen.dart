@@ -1,9 +1,8 @@
 import 'dart:async';
 import 'dart:collection';
-import 'package:TropiGo/src/Modules/Shop/Widget/AppBar/NavBar.dart';
 import 'package:TropiGo/src/Modules/Shop/Widget/Granel/GoogleMap.dart';
 import 'package:TropiGo/src/Multimedia/Images.dart';
-import 'package:TropiGo/src/Services/GasVehicularService.dart';
+import 'package:TropiGo/src/Widgets/AppBar/NavBar.dart';
 import 'package:TropiGo/src/Widgets/ButtonRoundBorder.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';

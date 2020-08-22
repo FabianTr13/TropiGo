@@ -1,8 +1,10 @@
+import 'package:TropiGo/src/Services/TipsService.dart';
+
 const LogoImg = 'assets/Images/logo.png';
 const ContactImg = 'assets/Images/contact.png';
-const CocinaImg = 'assets/Images/tropicocina.PNG';
-const TipsImg = 'assets/Images/tropitip.PNG';
-const HeaderShopImg = 'assets/Images/HeaderShop.PNG';
+const CocinaImg = 'tropicocina.PNG';
+const TipsImg = 'tropitip.PNG';
+const HeaderShopImg = 'tropigas_fondo.png';
 const GasVehicularImg = 'assets/Images/logo_gas_vehicular.png';
 const GranelImg = 'assets/Images/logo_granel.png';
 const FacebookImg = 'assets/Images/boton_facebook.png';

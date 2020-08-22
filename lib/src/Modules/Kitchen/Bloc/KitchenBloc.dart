@@ -4,13 +4,12 @@ import 'package:TropiGo/src/Modules/Kitchen/Models/KitchenRecipe.dart';
 import 'package:rxdart/rxdart.dart';
 
 class KitchenBloc with KitchenValidator {
-  final _recipeController =
-      BehaviorSubject<KitchenRecipe>.seeded(new KitchenRecipe());
+  final _recipeController = BehaviorSubject<List<KitchenRecipe>>();
 
-  Stream<KitchenRecipe> get recipe =>
+  Stream<List<KitchenRecipe>> get recipes =>
       _recipeController.stream.transform(validaRecipe);
 
-  Function(KitchenRecipe) get changeRecipe => _recipeController.sink.add;
+  Function(List<KitchenRecipe>) get changeRecipes => _recipeController.sink.add;
 
   dispose() {
     _recipeController.close();

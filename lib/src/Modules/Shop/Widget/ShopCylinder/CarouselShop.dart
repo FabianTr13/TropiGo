@@ -19,8 +19,8 @@ class _CarouselShopState extends State<CarouselShop> {
       builder: (context, snapshot) => CarouselSlider(
         options: CarouselOptions(
           enableInfiniteScroll: false,
-          viewportFraction: 0.27,
-          height: 130.0,
+          viewportFraction: 0.25,
+          height: 135.0,
           disableCenter: true,
         ),
         items: snapshot.data?.map<Widget>((Product product) {
@@ -34,17 +34,18 @@ class _CarouselShopState extends State<CarouselShop> {
 
   Widget ItemSHOP(Product product) {
     return Container(
-      width: ((MediaQuery.of(context).size.width - 80) / 3),
+      width: ((MediaQuery.of(context).size.width - 80) / 4),
       child: Card(
+          color: product.isSelect == null || !product.isSelect
+              ? Colors.white
+              : Colors.deepOrangeAccent.withAlpha(70),
           shape: RoundedRectangleBorder(
             side: BorderSide(
-              color: product.isSelect == null || !product.isSelect
-                  ? Colors.orange
-                  : Colors.green,
+              color: Colors.orangeAccent,
             ),
             borderRadius: BorderRadius.circular(10),
           ),
-          shadowColor: Colors.grey,
+          shadowColor: Colors.orange,
           child: FlatButton(
             onPressed: () {
               shopCylinderBlocInstance.selectProduct(product);
@@ -52,10 +53,13 @@ class _CarouselShopState extends State<CarouselShop> {
             child: Container(
               child: Column(
                 children: [
+                  Container(
+                    height: 8,
+                  ),
                   Image.asset(
                     product.urlImage,
-                    height: 70,
-                    width: 80,
+                    height: 65,
+                    width: 65,
                   ),
                   Text(product.description),
                   Text(product.price),

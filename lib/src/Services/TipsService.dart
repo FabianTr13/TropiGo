@@ -3,20 +3,27 @@ import 'package:TropiGo/src/Modules/Tips/Models/Tips.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class TipsServise {
-  final _fireStore = Firestore.instance;
+  final _fireStore = FirebaseFirestore.instance;
 
-  Future<Tips> getTips() async {
-    Tips tips;
-    await _fireStore
-        .collection('tropitips')
-        .document("6RAbSny0o7bqKFBtpQG6")
-        .get()
-        .then(
+  Future<List<Tips>> getTips() async {
+    List<Tips> tips = List<Tips>();
+    await _fireStore.collection('tropitips').get().then(
       (value) {
         try {
-          tips = Tips(
-            description: value.data['descripcion'],
-            title: value.data['titulo'],
+          value.docs.forEach(
+            (element) {
+              var tip = Tips(
+                title: element.data()['titulo'],
+                description: element.data()['descripcion'],
+              );
+              tips.add(tip);
+              tips.add(
+                new Tips(
+                  title: "sss",
+                  description: element.data()['descripcion'],
+                ),
+              );
+            },
           );
           tipsBlocInstance.changeTips(tips);
         } catch (e) {}

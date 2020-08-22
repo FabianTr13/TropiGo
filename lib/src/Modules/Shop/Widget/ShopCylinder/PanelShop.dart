@@ -5,7 +5,6 @@ import 'package:TropiGo/src/Modules/Shop/Widget/ShopCylinder/Counter.dart';
 import 'package:TropiGo/src/Modules/Shop/Widget/ShopCylinder/ViewMapShop.dart';
 import 'package:TropiGo/src/Multimedia/Images.dart';
 import 'package:TropiGo/src/Widgets/ButtonLargeSubmit.dart';
-import 'package:TropiGo/src/Widgets/InputTextbox.dart';
 import 'package:flutter/material.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
@@ -13,7 +12,7 @@ SlidingUpPanel PanelShop() {
   PanelController _pc = new PanelController();
 
   return SlidingUpPanel(
-    maxHeight: 315,
+    maxHeight: 285,
     minHeight: 60,
     controller: _pc,
     renderPanelSheet: false,
@@ -30,33 +29,38 @@ Widget PanelProducts() {
     List<Product> items = [
       Product(
         id: 1,
-        price: "100",
-        description: "Gas 10L",
+        price: "107.07",
+        description: "Gas 10LB",
         urlImage: CilinderImg,
+        count: 0,
       ),
       Product(
         id: 2,
-        price: "154",
-        description: "Gas 10L",
+        price: "214.59",
+        description: "Gas 20",
         urlImage: CilinderImg,
+        count: 0,
       ),
       Product(
         id: 3,
-        price: "151",
-        description: "Gas 10L",
+        price: "215.46",
+        description: "Gas 25LB",
         urlImage: CilinderImg,
+        count: 0,
       ),
       Product(
         id: 4,
-        price: "111",
-        description: "Gas 10L",
+        price: "635.29",
+        description: "Gas 60LB",
         urlImage: CilinderImg,
+        count: 0,
       ),
       Product(
         id: 5,
-        price: "155",
-        description: "Gas 10L",
+        price: "1,170.61",
+        description: "Gas 100LB",
         urlImage: CilinderImg,
+        count: 0,
       ),
     ];
 
@@ -79,11 +83,6 @@ Widget PanelProducts() {
       children: [
         Container(
           height: 25,
-        ),
-        InputTextbox(
-          title: "Direccion",
-          stream: shopCylinderBlocInstance.address,
-          onChange: shopCylinderBlocInstance.changeAddress,
         ),
         Counter(),
         CarouselShop(),

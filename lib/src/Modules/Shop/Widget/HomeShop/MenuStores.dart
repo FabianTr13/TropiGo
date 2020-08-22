@@ -1,8 +1,15 @@
+import 'package:TropiGo/src/Modules/Shop/Bloc/ModelsBloc/Product.dart';
+import 'package:TropiGo/src/Modules/Shop/Bloc/ShopCylinderBloc.dart';
 import 'package:TropiGo/src/Modules/Shop/UI/GasStoresScreen.dart';
 import 'package:TropiGo/src/Modules/Shop/UI/GranelScreen.dart';
 import 'package:TropiGo/src/Modules/Shop/UI/ShopCylinderScreen.dart';
 import 'package:TropiGo/src/Modules/Shop/Widget/HomeShop/MenuItem.dart';
+import 'package:TropiGo/src/Modules/Shop/Widget/ShopCylinder/ConfirmationModal/Headers.dart';
+import 'package:TropiGo/src/Modules/Shop/Widget/ShopCylinder/ConfirmationModal/RowConfirmationModal.dart';
+import 'package:TropiGo/src/Modules/Shop/Widget/ShopCylinder/ConfirmationModal/SummaryRow.dart';
 import 'package:TropiGo/src/Multimedia/Images.dart';
+import 'package:TropiGo/src/Widgets/ButtonRoundBorder.dart';
+import 'package:TropiGo/src/Widgets/InputTextbox.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_styled_toast/flutter_styled_toast.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -64,7 +71,12 @@ Widget MenuStores({BuildContext context}) {
                   height: 44,
                   callback: () => _launchURL(
                       'https://www.instagram.com/tropigashn/?hl=es-la'),
-                )
+                ),
+                CardMenuItem(
+                  imagen: Image.asset(InstagranImg),
+                  height: 44,
+                  callback: null,
+                ),
               ],
             )
           ],

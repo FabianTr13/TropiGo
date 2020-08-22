@@ -1,13 +1,9 @@
-import 'package:TropiGo/src/Multimedia/Images.dart';
-
 class KitchenRecipe {
-  String recipe;
   String title;
-  String image;
+  String description;
 
   KitchenRecipe({
-    this.recipe = "",
+    this.description = "",
     this.title = "",
-    this.image = CocinaImg,
   });
 }

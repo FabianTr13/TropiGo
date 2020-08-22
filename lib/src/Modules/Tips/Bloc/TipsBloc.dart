@@ -4,11 +4,11 @@ import 'package:TropiGo/src/Modules/Tips/Models/Tips.dart';
 import 'package:rxdart/rxdart.dart';
 
 class TipsBloc with TipsValidations {
-  final _tipsController = BehaviorSubject<Tips>.seeded(new Tips());
+  final _tipsController = BehaviorSubject<List<Tips>>();
 
-  Stream<Tips> get tips => _tipsController.stream.transform(validaTips);
+  Stream<List<Tips>> get tips => _tipsController.stream.transform(validaTips);
 
-  Function(Tips) get changeTips => _tipsController.sink.add;
+  Function(List<Tips>) get changeTips => _tipsController.sink.add;
 
   dispose() {
     _tipsController.close();

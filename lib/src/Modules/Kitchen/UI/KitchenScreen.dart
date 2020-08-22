@@ -1,10 +1,11 @@
 import 'package:TropiGo/src/Modules/Kitchen/Bloc/KitchenBloc.dart';
-import 'package:TropiGo/src/Modules/Kitchen/Models/KitchenRecipe.dart';
+import 'package:TropiGo/src/Modules/Tips/Widget/CarouselText.dart';
 import 'package:TropiGo/src/Multimedia/Images.dart';
 import 'package:TropiGo/src/Services/KitchenService.dart';
+import 'package:TropiGo/src/Services/UtilsService.dart';
 import 'package:TropiGo/src/Utils/BoxGradient.dart';
 import 'package:TropiGo/src/Widgets/ButtonRoundBorder.dart';
-import 'package:TropiGo/src/Widgets/Paragraph.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 
@@ -17,12 +18,21 @@ class KitchenScreen extends StatefulWidget {
 
 class _KitchenScreenState extends State<KitchenScreen> {
   bool _isLoading = true;
+  String _imageTop;
+
   @override
   void initState() {
     super.initState();
+
     KitchenServise().getRecipes().then((value) {
       setState(() {
         _isLoading = false;
+      });
+    });
+
+    UtilsService().getImageStore(CocinaImg).then((value) {
+      setState(() {
+        _imageTop = value;
       });
     });
   }
@@ -42,19 +52,17 @@ class _KitchenScreenState extends State<KitchenScreen> {
             slivers: [
               SliverToBoxAdapter(
                 child: StreamBuilder(
-                  stream: kitchenBlocInstance.recipe,
+                  stream: kitchenBlocInstance.recipes,
                   builder: (context, snapshot) => Column(
                     children: [
-                      Image.asset(
-                        (snapshot.data as KitchenRecipe)?.image ?? LogoImg,
+                      CachedNetworkImage(
+                        imageUrl: _imageTop,
+                        placeholder: (context, url) =>
+                            CircularProgressIndicator(),
+                        errorWidget: (context, url, error) => Icon(Icons.error),
                       ),
-                      Paragraph(
-                        (snapshot.data as KitchenRecipe)?.title ?? "",
-                        16,
-                      ),
-                      Paragraph(
-                        (snapshot.data as KitchenRecipe)?.recipe ?? "",
-                        14,
+                      CarouselText(
+                        stream: kitchenBlocInstance.recipes,
                       ),
                     ],
                   ),

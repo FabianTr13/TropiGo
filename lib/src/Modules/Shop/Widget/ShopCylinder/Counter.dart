@@ -1,4 +1,5 @@
 import 'package:TropiGo/src/Modules/Shop/Bloc/ShopCylinderBloc.dart';
+import 'package:TropiGo/src/Multimedia/TropiColors.dart';
 import 'package:flutter/material.dart';
 
 class Counter extends StatefulWidget {
@@ -46,8 +47,8 @@ class _CounterState extends State<Counter> {
       child: Card(
         shape: RoundedRectangleBorder(
           side: BorderSide(
-            color: Colors.orange,
-            width: 2,
+            color: TropiColors.grey,
+            width: 1,
           ),
           borderRadius: BorderRadius.circular(5),
         ),

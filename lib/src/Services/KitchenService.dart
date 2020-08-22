@@ -3,21 +3,35 @@ import 'package:TropiGo/src/Modules/Kitchen/Models/KitchenRecipe.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class KitchenServise {
-  final _fireStore = Firestore.instance;
+  final _fireStore = FirebaseFirestore.instance;
 
-  Future<KitchenRecipe> getRecipes() async {
-    KitchenRecipe recipe;
-    await _fireStore.collection('tropicocina').document("0").get().then(
+  Future<List<KitchenRecipe>> getRecipes() async {
+    List<KitchenRecipe> recipes = List<KitchenRecipe>();
+    await _fireStore.collection('tropicocina').get().then(
       (value) {
         try {
-          recipe = KitchenRecipe(
-            recipe: value.data['preparacion'],
-            title: value.data['titulo'],
+          value.docs.forEach(
+            (element) {
+              var recipe = KitchenRecipe(
+                title: element.data()['titulo'],
+                description: element.data()['preparacion'],
+              );
+
+              recipes.add(recipe);
+
+              recipes.add(
+                new KitchenRecipe(
+                  title: "sss",
+                  description: "ddddddddddd",
+                ),
+              );
+            },
           );
-          kitchenBlocInstance.changeRecipe(recipe);
+
+          kitchenBlocInstance.changeRecipes(recipes);
         } catch (e) {}
       },
     );
-    return recipe;
+    return recipes;
   }
 }

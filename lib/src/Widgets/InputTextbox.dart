@@ -12,6 +12,8 @@ class InputTextbox extends StatelessWidget {
   final dynamic onChange;
   final Stream<String> stream;
   final Color colorLines;
+  final int maxLines;
+  final double fontSizeHint;
 
   const InputTextbox({
     Key key,
@@ -26,6 +28,8 @@ class InputTextbox extends StatelessWidget {
     this.stream,
     this.nextFocus,
     this.colorLines = Colors.grey,
+    this.maxLines = 1,
+    this.fontSizeHint = 18,
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -52,6 +56,7 @@ class InputTextbox extends StatelessWidget {
               new Expanded(
                 child: TextFormField(
                   textInputAction: TextInputAction.next,
+                  maxLines: this.maxLines,
                   onChanged: onChange,
                   onFieldSubmitted: (String value) {
                     FocusScope.of(context).requestFocus(nextFocus);
@@ -61,7 +66,7 @@ class InputTextbox extends StatelessWidget {
                   autofocus: autofocus,
                   keyboardType: keyboardType,
                   style: TextStyle(
-                    fontSize: 20,
+                    fontSize: 18,
                     color: this.colorLines,
                   ),
                   cursorColor: this.colorLines,
@@ -77,7 +82,7 @@ class InputTextbox extends StatelessWidget {
                     hintText: hintText,
                     hintStyle: TextStyle(
                       color: this.colorLines,
-                      fontSize: 18,
+                      fontSize: this.fontSizeHint,
                     ),
                     labelStyle: TextStyle(
                       color: this.colorLines,

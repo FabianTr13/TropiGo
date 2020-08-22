@@ -4,6 +4,8 @@ class Product {
   String urlImage;
   String description;
   bool isSelect;
+  int count;
+  double total;
 
   Product({
     this.id,
@@ -11,5 +13,7 @@ class Product {
     this.description,
     this.urlImage,
     this.isSelect,
+    this.count,
+    this.total,
   });
 }

@@ -2,7 +2,7 @@ import 'package:TropiGo/src/Modules/Auth/UI/ProfileScreen.dart';
 import 'package:TropiGo/src/Modules/Contact/UI/ContactScreen.dart';
 import 'package:TropiGo/src/Modules/Shop/UI/HomeShop.dart';
 import 'package:TropiGo/src/Modules/Kitchen/UI/KitchenScreen.dart';
-import 'package:TropiGo/src/Modules/Tips/Models/TipsScreen.dart';
+import 'package:TropiGo/src/Modules/Tips/UI/TipsScreen.dart';
 import 'package:TropiGo/src/Multimedia/tropi_icons_icons.dart';
 import 'package:TropiGo/src/Services/AuthService.dart';
 import 'package:TropiGo/src/Utils/BoxGradient.dart';

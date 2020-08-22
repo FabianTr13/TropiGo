@@ -1,10 +1,11 @@
 import 'package:TropiGo/src/Modules/Tips/Bloc/TipsBloc.dart';
-import 'package:TropiGo/src/Modules/Tips/Models/Tips.dart';
+import 'package:TropiGo/src/Modules/Tips/Widget/CarouselText.dart';
 import 'package:TropiGo/src/Multimedia/Images.dart';
 import 'package:TropiGo/src/Services/TipsService.dart';
+import 'package:TropiGo/src/Services/UtilsService.dart';
 import 'package:TropiGo/src/Utils/BoxGradient.dart';
 import 'package:TropiGo/src/Widgets/ButtonRoundBorder.dart';
-import 'package:TropiGo/src/Widgets/Paragraph.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 
@@ -17,12 +18,19 @@ class TipsScreen extends StatefulWidget {
 
 class _TipsScreenState extends State<TipsScreen> {
   bool _isLoading = true;
+  String imageTop = "";
   @override
   void initState() {
     super.initState();
     TipsServise().getTips().then((value) {
       setState(() {
         _isLoading = false;
+      });
+    });
+
+    UtilsService().getImageStore(TipsImg).then((value) {
+      setState(() {
+        imageTop = value;
       });
     });
   }
@@ -41,23 +49,18 @@ class _TipsScreenState extends State<TipsScreen> {
           child: CustomScrollView(
             slivers: [
               SliverToBoxAdapter(
-                child: StreamBuilder(
-                  stream: tipsBlocInstance.tips,
-                  builder: (context, snapshot) => Column(
-                    children: [
-                      Image.asset(
-                        (snapshot.data as Tips)?.image ?? LogoImg,
-                      ),
-                      Paragraph(
-                        (snapshot.data as Tips)?.title ?? "",
-                        16,
-                      ),
-                      Paragraph(
-                        (snapshot.data as Tips)?.description ?? "",
-                        14,
-                      ),
-                    ],
-                  ),
+                child: Column(
+                  children: [
+                    CachedNetworkImage(
+                      imageUrl: imageTop,
+                      placeholder: (context, url) =>
+                          CircularProgressIndicator(),
+                      errorWidget: (context, url, error) => Icon(Icons.error),
+                    ),
+                    CarouselText(
+                      stream: tipsBlocInstance.tips,
+                    ),
+                  ],
                 ),
               ),
               SliverFillRemaining(
@@ -73,7 +76,7 @@ class _TipsScreenState extends State<TipsScreen> {
                     fontSize: 22,
                   ),
                 ),
-              )
+              ),
             ],
           ),
         ),

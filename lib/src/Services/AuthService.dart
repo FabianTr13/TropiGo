@@ -42,7 +42,7 @@ class AuthService {
   Future<UserProfile> getCurrentUser() async {
     UserProfile userProfile;
     try {
-      var user = await _auth.currentUser();
+      var user = _auth.currentUser;
 
       if (user != null) {
         var userStore =

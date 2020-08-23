@@ -65,9 +65,6 @@ class AuthService {
 
   Future<void> updateUser() {
     Signup userUpdate = signupBlocInstance.getSignup();
-
-    print(userUpdate.uID);
-    print(userUpdate.upDatetoJson());
     databaseReference
         .child("Users")
         .child(userUpdate.uID)

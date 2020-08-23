@@ -54,6 +54,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
     });
     if (user.uid != null) {
       signupBlocInstance.changeUId(user.uid);
+      signupBlocInstance.changNewName(user.name);
+      signupBlocInstance.changeNewPhoneNumber(user.phoneNumber);
 
       _nameController.text = user.name;
       _phoneController.text = user.phoneNumber;
@@ -64,9 +66,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   _doSave() async {
-    setState(() {
-      isLoading = true;
-    });
+    setState(
+      () {
+        isLoading = true;
+      },
+    );
 
     await AuthService().updateUser();
 

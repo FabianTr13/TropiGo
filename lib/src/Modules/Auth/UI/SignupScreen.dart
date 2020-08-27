@@ -65,76 +65,75 @@ class _SignupState extends State<SignupScreen> {
     return new Scaffold(
       body: ModalProgressHUD(
         inAsyncCall: isLoading,
-        child: SingleChildScrollView(
-          child: Container(
-            decoration: BoxGradient(),
-            height: MediaQuery.of(context).size.height,
-            child: new Column(
-              children: [
-                ImageHeader(
-                  image: ProfileImg,
-                  title: "Crear cuenta",
-                  underLine: true,
-                  size: 80,
-                ),
-                InputTextbox(
-                  title: "Correo",
-                  hintText: '',
-                  keyboardType: TextInputType.emailAddress,
-                  stream: signupBlocInstance.email,
-                  onChange: signupBlocInstance.changeEmail,
-                  focusNode: _emailFocusNode,
-                  nextFocus: _nameFocusNode,
-                  colorLines: Colors.white,
-                ),
-                InputTextbox(
-                  title: "Nombre",
-                  hintText: '',
-                  stream: signupBlocInstance.name,
-                  onChange: signupBlocInstance.changeName,
-                  focusNode: _nameFocusNode,
-                  nextFocus: _phoneFocusNode,
-                  colorLines: Colors.white,
-                ),
-                InputTextbox(
-                  title: "Teléfono",
-                  hintText: '',
-                  keyboardType: TextInputType.number,
-                  stream: signupBlocInstance.phoneNumber,
-                  onChange: signupBlocInstance.changePhoneNumber,
-                  focusNode: _phoneFocusNode,
-                  nextFocus: _passwordFocusNode,
-                  colorLines: Colors.white,
-                ),
-                InputTextbox(
-                  title: "Contraseña",
-                  hintText: '',
-                  obscureText: true,
-                  stream: signupBlocInstance.password,
-                  onChange: signupBlocInstance.changePassword,
-                  focusNode: _passwordFocusNode,
-                  nextFocus: _repasswordFocusNode,
-                  colorLines: Colors.white,
-                ),
-                InputTextbox(
-                  title: "Confirmar Contraseña",
-                  hintText: '',
-                  obscureText: true,
-                  stream: signupBlocInstance.rePassword,
-                  onChange: signupBlocInstance.changeRePassword,
-                  focusNode: _repasswordFocusNode,
-                  colorLines: Colors.white,
-                ),
-                Container(
-                  height: 25,
-                ),
-                ButtonIconCircleSubmit(
+        child: Container(
+          decoration: BoxGradient(),
+          child: new ListView(
+            children: [
+              ImageHeader(
+                image: ProfileImg,
+                title: "Crear cuenta",
+                underLine: true,
+                size: 80,
+              ),
+              InputTextbox(
+                title: "Correo",
+                hintText: '',
+                keyboardType: TextInputType.emailAddress,
+                stream: signupBlocInstance.email,
+                onChange: signupBlocInstance.changeEmail,
+                focusNode: _emailFocusNode,
+                nextFocus: _nameFocusNode,
+                colorLines: Colors.white,
+              ),
+              InputTextbox(
+                title: "Nombre",
+                hintText: '',
+                stream: signupBlocInstance.name,
+                onChange: signupBlocInstance.changeName,
+                focusNode: _nameFocusNode,
+                nextFocus: _phoneFocusNode,
+                colorLines: Colors.white,
+              ),
+              InputTextbox(
+                title: "Teléfono",
+                hintText: '',
+                keyboardType: TextInputType.number,
+                stream: signupBlocInstance.phoneNumber,
+                onChange: signupBlocInstance.changePhoneNumber,
+                focusNode: _phoneFocusNode,
+                nextFocus: _passwordFocusNode,
+                colorLines: Colors.white,
+              ),
+              InputTextbox(
+                title: "Contraseña",
+                hintText: '',
+                obscureText: true,
+                stream: signupBlocInstance.password,
+                onChange: signupBlocInstance.changePassword,
+                focusNode: _passwordFocusNode,
+                nextFocus: _repasswordFocusNode,
+                colorLines: Colors.white,
+              ),
+              InputTextbox(
+                title: "Confirmar Contraseña",
+                hintText: '',
+                obscureText: true,
+                stream: signupBlocInstance.rePassword,
+                onChange: signupBlocInstance.changeRePassword,
+                focusNode: _repasswordFocusNode,
+                colorLines: Colors.white,
+              ),
+              Container(
+                height: 25,
+              ),
+              Center(
+                child: ButtonIconCircleSubmit(
                   nullText: "Rellene todos los campos",
                   callback: registerUser,
                   stream: signupBlocInstance.submitValidSignup,
-                )
-              ],
-            ),
+                ),
+              ),
+            ],
           ),
         ),
       ),

@@ -10,21 +10,7 @@ class TipsServise {
     await _fireStore.collection('tropitips').get().then(
       (value) {
         try {
-          value.docs.forEach(
-            (element) {
-              var tip = Tips(
-                title: element.data()['titulo'],
-                description: element.data()['descripcion'],
-              );
-              tips.add(tip);
-              tips.add(
-                new Tips(
-                  title: "sss",
-                  description: element.data()['descripcion'],
-                ),
-              );
-            },
-          );
+          tips = value.docs.map((item) => new Tips(item.data())).toList();
           tipsBlocInstance.changeTips(tips);
         } catch (e) {}
       },

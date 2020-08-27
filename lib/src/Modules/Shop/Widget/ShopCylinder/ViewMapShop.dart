@@ -35,7 +35,7 @@ class _ViewMapShopState extends State<ViewMapShop> {
   @override
   Widget build(BuildContext context) {
     return GoogleMap(
-      mapType: MapType.hybrid,
+      mapType: MapType.normal,
       initialCameraPosition: initialLocation,
       markers: Set.of((marker != null) ? [marker] : []),
       circles: Set.of((circle != null) ? [circle] : []),

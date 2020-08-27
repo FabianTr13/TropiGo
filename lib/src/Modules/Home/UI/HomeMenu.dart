@@ -24,22 +24,24 @@ class HomeMenu extends StatelessWidget {
 
     return Container(
       decoration: BoxGradient(),
-      child: new Column(
+      child: new ListView(
         children: [
           ImageHeader(
             title: "",
             size: 150,
           ),
-          Container(
-            margin: EdgeInsets.only(bottom: 10),
-            width: MediaQuery.of(context).size.width * 0.85,
-            decoration: BoxDecoration(
-                border: Border(
-              top: BorderSide(
-                width: 1,
-                color: Colors.white,
-              ),
-            )),
+          Center(
+            child: Container(
+              margin: EdgeInsets.only(bottom: 10),
+              width: MediaQuery.of(context).size.width * 0.85,
+              decoration: BoxDecoration(
+                  border: Border(
+                top: BorderSide(
+                  width: 1,
+                  color: Colors.white,
+                ),
+              )),
+            ),
           ),
           ButtonRoundBorder(
             text: "Pide tu cilindro de GAS",

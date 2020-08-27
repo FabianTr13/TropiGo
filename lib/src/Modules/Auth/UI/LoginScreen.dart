@@ -104,51 +104,51 @@ class _LoginState extends State<LoginScreen> {
         progressIndicator: CircularProgressIndicator(
           valueColor: new AlwaysStoppedAnimation<Color>(Colors.orange),
         ),
-        child: SingleChildScrollView(
-          child: Container(
-            decoration: BoxGradient(),
-            height: MediaQuery.of(context).size.height,
-            child: Form(
-              child: new Column(
-                children: [
-                  ImageHeader(title: "Bienvenido a TropiGo"),
-                  InputTextbox(
-                    title: "Correo",
-                    hintText: '',
-                    keyboardType: TextInputType.emailAddress,
-                    focusNode: _focusNode,
-                    onChange: authBlocInstance.changeEmail,
-                    stream: authBlocInstance.email,
-                    nextFocus: _focusPassNode,
-                    colorLines: Colors.white,
-                  ),
-                  InputTextbox(
-                    title: "Contraseña",
-                    hintText: '',
-                    obscureText: true,
-                    onChange: authBlocInstance.changePassword,
-                    stream: authBlocInstance.password,
-                    focusNode: _focusPassNode,
-                    colorLines: Colors.white,
-                  ),
-                  ButtonLargeSubmit(
-                    text: "INGRESAR",
-                    nullText: "Rellena los campos",
-                    callback: _doLogin,
-                    stream: authBlocInstance.submitValidLogin,
-                  ),
-                  ButtonLarge(
-                    text: "Aun no tienes cuenta?",
-                    callback: _gotoSignup,
-                    color: Colors.white,
-                    backgroundColor: Colors.transparent,
-                  ),
-                ],
-              ),
+        child: Container(
+          decoration: BoxGradient(),
+          child: Form(
+            child: new ListView(
+              children: [
+                ImageHeader(
+                  title: "Bienvenido a TropiGo",
+                ),
+                InputTextbox(
+                  title: "Correo",
+                  hintText: '',
+                  keyboardType: TextInputType.emailAddress,
+                  focusNode: _focusNode,
+                  onChange: authBlocInstance.changeEmail,
+                  stream: authBlocInstance.email,
+                  nextFocus: _focusPassNode,
+                  colorLines: Colors.white,
+                ),
+                InputTextbox(
+                  title: "Contraseña",
+                  hintText: '',
+                  obscureText: true,
+                  onChange: authBlocInstance.changePassword,
+                  stream: authBlocInstance.password,
+                  focusNode: _focusPassNode,
+                  colorLines: Colors.white,
+                ),
+                ButtonLargeSubmit(
+                  text: "INGRESAR",
+                  nullText: "Rellena los campos",
+                  callback: _doLogin,
+                  stream: authBlocInstance.submitValidLogin,
+                ),
+                ButtonLarge(
+                  text: "Aun no tienes cuenta?",
+                  callback: _gotoSignup,
+                  color: Colors.white,
+                  backgroundColor: Colors.transparent,
+                ),
+              ],
             ),
           ),
         ),
       ),
+      // ),
     );
   }
 }

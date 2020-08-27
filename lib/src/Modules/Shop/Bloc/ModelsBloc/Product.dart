@@ -1,19 +1,20 @@
 class Product {
-  int id;
-  String price;
-  String urlImage;
-  String description;
+  String codProducto;
+  double precio;
+  String nombreProducto;
   bool isSelect;
-  int count;
+  int cantidad;
   double total;
 
-  Product({
-    this.id,
-    this.price,
-    this.description,
-    this.urlImage,
-    this.isSelect,
-    this.count,
-    this.total,
-  });
+  factory Product(Map jsonMap) {
+    return new Product.deserialize(jsonMap);
+  }
+
+  Product.deserialize(Map jsonMap)
+      : codProducto = jsonMap["codProducto"].toString(),
+        precio = double.parse(jsonMap["precio"].toString()),
+        nombreProducto = jsonMap["nombreProducto"].toString(),
+        cantidad = int.parse(jsonMap["cantidad"].toString()),
+        isSelect = false,
+        total = 0;
 }

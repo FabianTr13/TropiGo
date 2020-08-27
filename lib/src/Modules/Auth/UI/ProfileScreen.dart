@@ -132,6 +132,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     controller: _phoneController,
                     colorLines: Colors.white,
                   ),
+                  Container(
+                    height: 20,
+                  ),
                   ButtonLargeSubmit(
                     text: "Guardar",
                     nullText: "Rellena los campos",

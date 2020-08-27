@@ -10,23 +10,9 @@ class KitchenServise {
     await _fireStore.collection('tropicocina').get().then(
       (value) {
         try {
-          value.docs.forEach(
-            (element) {
-              var recipe = KitchenRecipe(
-                title: element.data()['titulo'],
-                description: element.data()['preparacion'],
-              );
-
-              recipes.add(recipe);
-
-              recipes.add(
-                new KitchenRecipe(
-                  title: "sss",
-                  description: "ddddddddddd",
-                ),
-              );
-            },
-          );
+          recipes = value.docs
+              .map<KitchenRecipe>((item) => new KitchenRecipe(item.data()))
+              .toList();
 
           kitchenBlocInstance.changeRecipes(recipes);
         } catch (e) {}

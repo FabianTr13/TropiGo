@@ -24,12 +24,12 @@ class _CounterState extends State<Counter> {
         children: [
           _ButtonAction(minus, Icons.remove),
           StreamBuilder(
+            initialData: 1,
             stream: shopCylinderBlocInstance.count,
-            initialData: "0",
             builder: (BuildContext context, AsyncSnapshot snapshot) {
               return Container(
                 child: Text(
-                  snapshot.data,
+                  snapshot.data.toString(),
                   style: new TextStyle(fontSize: 22.0),
                 ),
               );

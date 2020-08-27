@@ -115,11 +115,11 @@ class _GranelState extends State<GranelScreen> {
                         stream: granelBlocInstance.nameContact,
                         colorLines: Colors.grey,
                       ),
-                      Divider(
-                        height: 15.0,
-                      ),
                     ],
                   ),
+                ),
+                Container(
+                  height: 15.0,
                 ),
                 ButtonLargeSubmit(
                   text: "ENVIAR",

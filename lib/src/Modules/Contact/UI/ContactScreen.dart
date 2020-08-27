@@ -52,7 +52,7 @@ class _ContactScreenState extends State<ContactScreen> {
             ContactImg,
             fit: BoxFit.fitHeight,
           ),
-          Divider(
+          Container(
             height: 50,
           ),
           ButtonRoundBorder(

@@ -46,7 +46,7 @@ class _GoogleMapViewState extends State<GoogleMapView> {
       child: GoogleMap(
         myLocationButtonEnabled: true,
         myLocationEnabled: true,
-        mapType: MapType.hybrid,
+        mapType: MapType.normal,
         initialCameraPosition: _kGooglePlex,
         markers: _markers,
         onMapCreated: (GoogleMapController controller) {

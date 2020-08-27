@@ -8,6 +8,7 @@ class ButtonLargeSubmit extends StatelessWidget {
   final VoidCallback callback;
   final String nullText;
   final Stream<bool> stream;
+  final double height;
 
   const ButtonLargeSubmit({
     Key key,
@@ -17,6 +18,7 @@ class ButtonLargeSubmit extends StatelessWidget {
     this.backgroundColor = Colors.red,
     this.stream,
     this.nullText,
+    this.height = 50,
   }) : super(key: key);
 
   @override
@@ -35,7 +37,7 @@ class ButtonLargeSubmit extends StatelessWidget {
       builder: (context, snapshot) {
         return Container(
             margin: const EdgeInsets.only(left: 15.0, right: 15.0),
-            height: 80,
+            height: this.height,
             child: Row(
               children: [
                 Expanded(

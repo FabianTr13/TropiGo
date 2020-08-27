@@ -1,6 +1,7 @@
 import 'dart:ui';
 import 'package:TropiGo/src/Modules/Shop/Bloc/ModelsBloc/Product.dart';
 import 'package:TropiGo/src/Modules/Shop/Bloc/ShopCylinderBloc.dart';
+import 'package:TropiGo/src/Multimedia/Images.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
@@ -19,7 +20,7 @@ class _CarouselShopState extends State<CarouselShop> {
       builder: (context, snapshot) => CarouselSlider(
         options: CarouselOptions(
           enableInfiniteScroll: false,
-          viewportFraction: 0.25,
+          viewportFraction: 0.27,
           height: 135.0,
           disableCenter: true,
         ),
@@ -51,18 +52,24 @@ class _CarouselShopState extends State<CarouselShop> {
               shopCylinderBlocInstance.selectProduct(product);
             },
             child: Container(
-              child: Column(
+              child: ListView(
                 children: [
                   Container(
                     height: 8,
                   ),
                   Image.asset(
-                    product.urlImage,
+                    CilinderImg,
                     height: 65,
                     width: 65,
                   ),
-                  Text(product.description),
-                  Text(product.price),
+                  Text(
+                    product.nombreProducto,
+                    textAlign: TextAlign.center,
+                  ),
+                  Text(
+                    product.precio.toString(),
+                    textAlign: TextAlign.center,
+                  ),
                 ],
               ),
             ),

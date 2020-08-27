@@ -9,7 +9,7 @@ class ShopCylinderScreen extends StatelessWidget {
     return Scaffold(
       appBar: NavBar(),
       drawer: SideMenu(),
-      body: PanelShop(),
+      body: PanelShop(context),
     );
   }
 }

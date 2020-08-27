@@ -1,22 +1,23 @@
-import 'package:TropiGo/src/Modules/Shop/Bloc/ModelsBloc/Product.dart';
 import 'package:TropiGo/src/Modules/Shop/Bloc/ShopCylinderBloc.dart';
 import 'package:TropiGo/src/Modules/Shop/Widget/ShopCylinder/CarouselShop.dart';
 import 'package:TropiGo/src/Modules/Shop/Widget/ShopCylinder/Counter.dart';
+import 'package:TropiGo/src/Modules/Shop/Widget/ShopCylinder/ConfirmationModal/ModalConfirmOrder.dart';
 import 'package:TropiGo/src/Modules/Shop/Widget/ShopCylinder/ViewMapShop.dart';
-import 'package:TropiGo/src/Multimedia/Images.dart';
+import 'package:TropiGo/src/Services/ShopService.dart';
 import 'package:TropiGo/src/Widgets/ButtonLargeSubmit.dart';
 import 'package:flutter/material.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
-SlidingUpPanel PanelShop() {
+SlidingUpPanel PanelShop(BuildContext context) {
   PanelController _pc = new PanelController();
+  ShopService().getProducts();
 
   return SlidingUpPanel(
-    maxHeight: 285,
+    maxHeight: 310,
     minHeight: 60,
     controller: _pc,
     renderPanelSheet: false,
-    panel: PanelProducts(),
+    panel: PanelProducts(context),
     collapsed: FloatingCollapsedPanel(
       panelController: _pc,
     ),
@@ -24,54 +25,10 @@ SlidingUpPanel PanelShop() {
   );
 }
 
-Widget PanelProducts() {
-  _getData() {
-    List<Product> items = [
-      Product(
-        id: 1,
-        price: "107.07",
-        description: "Gas 10LB",
-        urlImage: CilinderImg,
-        count: 0,
-      ),
-      Product(
-        id: 2,
-        price: "214.59",
-        description: "Gas 20",
-        urlImage: CilinderImg,
-        count: 0,
-      ),
-      Product(
-        id: 3,
-        price: "215.46",
-        description: "Gas 25LB",
-        urlImage: CilinderImg,
-        count: 0,
-      ),
-      Product(
-        id: 4,
-        price: "635.29",
-        description: "Gas 60LB",
-        urlImage: CilinderImg,
-        count: 0,
-      ),
-      Product(
-        id: 5,
-        price: "1,170.61",
-        description: "Gas 100LB",
-        urlImage: CilinderImg,
-        count: 0,
-      ),
-    ];
-
-    shopCylinderBlocInstance.changeProduct(items);
+Widget PanelProducts(BuildContext context) {
+  doBuy() {
+    ModalConfirmation().confirmationOrder(context);
   }
-
-  _doBuy() {
-    print("comprando");
-  }
-
-  _getData();
 
   return Container(
     decoration: BoxDecoration(
@@ -79,17 +36,18 @@ Widget PanelProducts() {
       borderRadius: BorderRadius.only(
           topLeft: Radius.circular(15.0), topRight: Radius.circular(15.0)),
     ),
-    child: Column(
+    child: ListView(
       children: [
         Container(
-          height: 25,
+          height: 55,
         ),
         Counter(),
         CarouselShop(),
         ButtonLargeSubmit(
           text: "Realizar pedido",
-          callback: _doBuy,
+          callback: doBuy,
           stream: shopCylinderBlocInstance.submitValidShop,
+          nullText: "Seleccione un producto",
         ),
       ],
     ),

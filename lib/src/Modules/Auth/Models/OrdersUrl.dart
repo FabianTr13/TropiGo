@@ -1,0 +1,25 @@
+import 'package:TropiGo/src/Modules/Auth/Models/UserProfile.dart';
+import 'package:TropiGo/src/Modules/Shop/Bloc/ModelsBloc/Product.dart';
+import 'package:TropiGo/src/Modules/Shop/Bloc/ShopCylinderBloc.dart';
+import 'package:TropiGo/src/Services/AuthService.dart';
+import 'package:flutter/cupertino.dart';
+
+const _baseOrder = 'http://apitropigas.hol.es/apiKio/public/api/ordenes/';
+
+class OrdersUrl {
+  String getOrder() {
+    return '${_baseOrder}nuevaOrden?codTienda=34&estacion=tropigo';
+  }
+
+  String getOrderDetails(
+      {@required Product product, @required String codOrder}) {
+    return '${_baseOrder}agregaDetalleOrden?codOrden=$codOrder&codProducto=${product.codProducto}&cantidad=${product.cantidad}';
+  }
+
+  Future<String> getEndOrder({@required String codOrder}) async {
+    UserProfile user = await AuthService().getCurrentUser();
+    String address = await shopCylinderBlocInstance.getAddress();
+
+    return '${_baseOrder}finalizaOrden?telefono=${user.phoneNumber}&nombre=${user.name}&rtn=00000000000&codColonia=1&codRepartidor=1&codOrden=$codOrder&direccion=$address&formaPago=ef&cantidadRecibidaEfectivo=0';
+  }
+}

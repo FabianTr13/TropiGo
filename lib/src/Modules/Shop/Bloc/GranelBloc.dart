@@ -15,7 +15,7 @@ class GranelBloc with ShopValidator {
   Stream<String> get contract =>
       _contractController.stream.transform(validaContract);
   Stream<String> get count =>
-      _countGalonsController.stream.transform(validaCount);
+      _countGalonsController.stream.transform(validaGallones);
   Stream<String> get nameBusiness =>
       _nameBusinessController.stream.transform(validaName);
   Stream<String> get email => _emailController.stream.transform(validaEmail);

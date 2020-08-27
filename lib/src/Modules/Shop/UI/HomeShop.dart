@@ -27,7 +27,7 @@ class _HomeShopState extends State<HomeShop> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: Column(
+      body: ListView(
         children: [
           CachedNetworkImage(
             imageUrl: imageBackground,

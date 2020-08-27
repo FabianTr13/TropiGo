@@ -18,7 +18,7 @@ class KitchenScreen extends StatefulWidget {
 
 class _KitchenScreenState extends State<KitchenScreen> {
   bool _isLoading = true;
-  String _imageTop;
+  String _imageTop = "";
 
   @override
   void initState() {

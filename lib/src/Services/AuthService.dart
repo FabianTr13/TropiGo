@@ -134,21 +134,25 @@ class AuthService {
   }
 
   void _mapErrorMessage(AuthRequest authRequest, String code) {
+    print(code);
     switch (code) {
-      case 'ERROR_USER_NOT_FOUND':
+      case 'user-not-found':
         authRequest.errorMessage = "Usuario no encontrado";
         break;
-      case 'ERROR_WRONG_PASSWORD':
+      case 'wrong-password':
         authRequest.errorMessage = "Contraseña invalida";
         break;
       case 'ERROR_NETWORK_REQUEST_FAILED':
         authRequest.errorMessage = "Error de conexion";
         break;
-      case 'ERROR_EMAIL_ALREADY_IN_USE':
+      case 'email-already-in-use':
         authRequest.errorMessage = "El usuario ya esta registrado";
         break;
-      case 'ERROR_INVALID_EMAIL':
+      case 'invalid-email':
         authRequest.errorMessage = "Correo invalido";
+        break;
+      case 'too-many-requests':
+        authRequest.errorMessage = "Muchas intentos";
         break;
       default:
         authRequest.errorMessage = code;

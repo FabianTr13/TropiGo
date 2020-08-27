@@ -32,11 +32,20 @@ class ShopValidator {
     }
   });
 
-  final validaCount =
+  final validaGallones =
       StreamTransformer<String, String>.fromHandlers(handleData: (count, sink) {
     int counter = int.tryParse(count) == null ? 0 : int.parse(count);
     if (counter >= 1) {
       sink.add(counter.toString());
+    } else {
+      sink.addError("Cantidad no valida");
+    }
+  });
+
+  final validaCounter =
+      StreamTransformer<int, int>.fromHandlers(handleData: (count, sink) {
+    if (count >= 1) {
+      sink.add(count);
     } else {
       sink.addError("Cantidad no valida");
     }

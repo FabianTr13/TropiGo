@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:typed_data';
+import 'package:TropiGo/src/Modules/Shop/Bloc/ShopCylinderBloc.dart';
 import 'package:TropiGo/src/Multimedia/Images.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -56,6 +57,8 @@ class _ViewMapShopState extends State<ViewMapShop> {
   }
 
   void updateMarkerAndCircle(LocationData newLocalData, Uint8List imageData) {
+    shopCylinderBlocInstance.changePosition(newLocalData);
+
     LatLng latlng = LatLng(newLocalData.latitude, newLocalData.longitude);
     this.setState(() {
       marker = Marker(

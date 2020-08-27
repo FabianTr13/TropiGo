@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:TropiGo/src/Modules/Shop/Bloc/ModelsBloc/Product.dart';
+import 'package:location/location.dart';
 
 class ShopValidator {
   final validaContract = StreamTransformer<String, String>.fromHandlers(
@@ -60,6 +61,12 @@ class ShopValidator {
       StreamTransformer<List<Product>, List<Product>>.fromHandlers(
           handleData: (product, sink) {
     sink.add(product);
+  });
+
+  final validaLocation =
+      StreamTransformer<LocationData, LocationData>.fromHandlers(
+          handleData: (location, sink) {
+    sink.add(location);
   });
 
   final validaProductSelect = StreamTransformer<Product, Product>.fromHandlers(

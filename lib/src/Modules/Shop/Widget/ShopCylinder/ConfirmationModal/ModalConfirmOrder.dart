@@ -1,6 +1,7 @@
 import 'package:TropiGo/src/Modules/Shop/Bloc/ShopCylinderBloc.dart';
 import 'package:TropiGo/src/Modules/Shop/Widget/ShopCylinder/ConfirmationModal/TableProducts.dart';
 import 'package:TropiGo/src/Multimedia/TropiColors.dart';
+import 'package:TropiGo/src/Services/ShopService.dart';
 import 'package:TropiGo/src/Widgets/ButtonLargeSubmit.dart';
 import 'package:TropiGo/src/Widgets/ButtonRoundBorder.dart';
 import 'package:TropiGo/src/Widgets/InputTextbox.dart';
@@ -8,6 +9,10 @@ import 'package:flutter/material.dart';
 
 class ModalConfirmation {
   Future<void> confirmationOrder(BuildContext context) async {
+    _crearOrden() async {
+      await ShopService().createOrder();
+    }
+
     await showDialog(
         context: context,
         builder: (BuildContext context) {
@@ -46,7 +51,7 @@ class ModalConfirmation {
                     stream: shopCylinderBlocInstance.submitValidOrder,
                     text: "ACEPTAR",
                     nullText: "Ingrese su dirección",
-                    callback: () => {print("hoalalallaa")},
+                    callback: _crearOrden,
                     backgroundColor: TropiColors.orangeButons,
                     height: 40,
                   ),

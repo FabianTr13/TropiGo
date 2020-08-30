@@ -131,6 +131,9 @@ class _LoginState extends State<LoginScreen> {
                   focusNode: _focusPassNode,
                   colorLines: Colors.white,
                 ),
+                Container(
+                  height: 10,
+                ),
                 ButtonLargeSubmit(
                   text: "INGRESAR",
                   nullText: "Rellena los campos",

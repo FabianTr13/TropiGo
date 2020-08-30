@@ -35,12 +35,14 @@ class ShopCylinderBloc with ShopValidator {
     List<Product> productsList = _productsController.value.map((Product item) {
       if (item.codProducto == product.codProducto) {
         item.isSelect = !item.isSelect;
-
         item.cantidad = item.isSelect ? _countController.value : 0;
         item.total = item.cantidad * item.precio;
+
         changeCount(1);
-        changeProductSelect(item);
+        if (!item.isSelect) changeProductSelect(null);
       }
+      if (item.isSelect) changeProductSelect(item);
+
       return item;
     }).toList();
 

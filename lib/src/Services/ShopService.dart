@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:TropiGo/src/Modules/Shop/Bloc/ModelsBloc/OrdersUrl.dart';
 import 'package:TropiGo/src/Modules/Shop/Bloc/ModelsBloc/Product.dart';
 import 'package:TropiGo/src/Modules/Shop/Bloc/ShopCylinderBloc.dart';
+import 'package:TropiGo/src/Modules/Shop/UI/HomeShop.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_styled_toast/flutter_styled_toast.dart';
@@ -69,21 +70,19 @@ class ShopService {
     //   }
     // ];
 
+    shopCylinderBlocInstance.changeProductSelect(null);
     List<Product> products =
         data.map<Product>((item) => new Product(item)).toList();
     shopCylinderBlocInstance.changeProduct(products);
     return products;
   }
 
-  createOrder() async {
+  createOrder(BuildContext context) async {
     try {
       String uriOrder = OrdersUrl().getOrder();
       http.Response responseOrder = await http.post(uriOrder);
       var data = json.decode(responseOrder.body);
       var codOrder = data["codOrden"].toString();
-
-      // print("mi orden es");
-      // print(codOrder);
 
       if (codOrder == null) throw Exception("Creando orden");
 
@@ -118,6 +117,21 @@ class ShopService {
           .child("OrdersLoc")
           .child(orderRef.key)
           .set(OrdersUrl().orderLocToFirebase());
+
+      showToast(
+        "Tu orden fue enviada!",
+        backgroundColor: Colors.green,
+        duration: Duration(seconds: 10),
+      );
+
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => HomeShop(),
+        ),
+      );
+
+      shopCylinderBlocInstance.changeProductSelect(null);
     } catch (e) {
       print(e);
       showToast(

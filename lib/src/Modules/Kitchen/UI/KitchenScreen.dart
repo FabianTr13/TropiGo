@@ -4,6 +4,7 @@ import 'package:TropiGo/src/Multimedia/Images.dart';
 import 'package:TropiGo/src/Services/KitchenService.dart';
 import 'package:TropiGo/src/Services/UtilsService.dart';
 import 'package:TropiGo/src/Utils/BoxGradient.dart';
+import 'package:TropiGo/src/Widgets/ButtonIconCircle.dart';
 import 'package:TropiGo/src/Widgets/ButtonRoundBorder.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -73,12 +74,10 @@ class _KitchenScreenState extends State<KitchenScreen> {
                 child: Container(
                   alignment: Alignment.bottomCenter,
                   margin: EdgeInsets.only(bottom: 15),
-                  child: ButtonRoundBorder(
-                    text: "Back Inicio",
+                  child: ButtonIconCircle(
                     callback: () => Navigator.pop(context),
                     backgroundColor: Colors.red,
-                    width: 2,
-                    fontSize: 22,
+                    icon: Icons.arrow_back,
                   ),
                 ),
               )

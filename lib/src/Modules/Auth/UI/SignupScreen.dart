@@ -1,11 +1,15 @@
 import 'package:TropiGo/src/Modules/Auth/Bloc/SignupBloc.dart';
 import 'package:TropiGo/src/Modules/Home/UI/HomeMenu.dart';
 import 'package:TropiGo/src/Multimedia/Images.dart';
+import 'package:TropiGo/src/Multimedia/TropiColors.dart';
 import 'package:TropiGo/src/Services/AuthService.dart';
 import 'package:TropiGo/src/Utils/BoxGradient.dart';
+import 'package:TropiGo/src/Utils/CalendarPicker.dart';
 import 'package:TropiGo/src/Widgets/ButtonIconCircleSubmit.dart';
 import 'package:TropiGo/src/Widgets/ImageHeader.dart';
 import 'package:TropiGo/src/Widgets/InputTextbox.dart';
+import 'package:TropiGo/src/Widgets/RadialButton.dart';
+import 'package:date_format/date_format.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_styled_toast/flutter_styled_toast.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
@@ -22,6 +26,7 @@ class _SignupState extends State<SignupScreen> {
   final FocusNode _phoneFocusNode = new FocusNode();
   final FocusNode _passwordFocusNode = new FocusNode();
   final FocusNode _repasswordFocusNode = new FocusNode();
+  TextEditingController dateCtl = TextEditingController();
 
   @override
   void dispose() {
@@ -58,6 +63,19 @@ class _SignupState extends State<SignupScreen> {
       );
     } else {
       showToast(authRequestDo.errorMessage, backgroundColor: Colors.red);
+    }
+  }
+
+  _changeSex(String value) {
+    signupBlocInstance.changeSexo(value);
+  }
+
+  _changeBirthDay() async {
+    var date = await CalendarPicker().showPicker(context);
+    if (date != null) {
+      dateCtl.text = formatDate(date, [dd, ' ', MM, ' ', yyyy]);
+      signupBlocInstance.changeBirthDate(dateCtl.text);
+      FocusScope.of(context).requestFocus(_passwordFocusNode);
     }
   }
 
@@ -103,6 +121,41 @@ class _SignupState extends State<SignupScreen> {
                 focusNode: _phoneFocusNode,
                 nextFocus: _passwordFocusNode,
                 colorLines: Colors.white,
+              ),
+              Container(
+                margin: EdgeInsets.only(
+                  left: 20,
+                ),
+                child: Text(
+                  "sexo",
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: TropiColors.white,
+                  ),
+                ),
+              ),
+              RadialButton(
+                stream: signupBlocInstance.sexo,
+                title: "Masculino",
+                value: "m",
+                callback: _changeSex,
+              ),
+              RadialButton(
+                stream: signupBlocInstance.sexo,
+                title: "Femenino",
+                value: "f",
+                callback: _changeSex,
+              ),
+              InputTextbox(
+                controller: dateCtl,
+                title: "Fecha de nacimiento",
+                hintText: '',
+                stream: signupBlocInstance.birthDay,
+                onChange: signupBlocInstance.changeBirthDate,
+                colorLines: Colors.white,
+                onTap: _changeBirthDay,
+                allowEdit: true,
               ),
               InputTextbox(
                 title: "Contraseña",

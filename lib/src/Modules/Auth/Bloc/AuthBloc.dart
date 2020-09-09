@@ -10,6 +10,8 @@ class AuthBloc with AuthValidator {
   Stream<String> get email => _emailController.stream.transform(validaEmail);
   Stream<String> get password =>
       _passwordController.stream.transform(validaPassword);
+  Stream<String> get inDelivery =>
+      _passwordController.stream.transform(validaPassword);
 
   //ValidatorCombines
   Stream<bool> get submitValidLogin =>

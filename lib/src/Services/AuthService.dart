@@ -54,6 +54,8 @@ class AuthService {
             email: user.email,
             name: userStore.value['name'],
             phoneNumber: userStore.value['phone'].toString(),
+            sexo: userStore.value['sexo'].toString(),
+            birthDate: userStore.value['fechaNacimiento'].toString(),
             provider: userStore.value['provider'],
             userInDelivering: userStore.value['userInDelivering'],
           );
@@ -69,6 +71,7 @@ class AuthService {
         .child("Users")
         .child(userUpdate.uID)
         .set(userUpdate.upDatetoJson());
+    // print(userUpdate.upDatetoJson());
   }
 
   Future<AuthRequest> loginUser() async {

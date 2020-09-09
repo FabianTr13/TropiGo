@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 class SideMenuItem extends StatelessWidget {
   final String title;
   final IconData icon;
-  final Widget routerPage;
+  final VoidCallback callback;
 
   const SideMenuItem({
     Key key,
     this.title,
     this.icon,
-    this.routerPage,
+    this.callback,
   }) : super(key: key);
 
   @override
@@ -19,20 +19,16 @@ class SideMenuItem extends StatelessWidget {
         title: Container(
           child: Row(
             children: [
-              Icon(icon),
+              Icon(
+                icon,
+                color: Colors.grey,
+              ),
               Container(width: 30),
               Text(title),
             ],
           ),
         ),
-        onTap: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => routerPage,
-            ),
-          );
-        },
+        onTap: callback,
       ),
     );
   }

@@ -44,7 +44,7 @@ Widget PanelProducts(BuildContext context) {
         Counter(),
         CarouselShop(),
         ButtonLargeSubmit(
-          text: "Realizar pedido",
+          text: "PEDIR",
           callback: doBuy,
           stream: shopCylinderBlocInstance.submitValidShop,
           nullText: "Seleccione un producto",

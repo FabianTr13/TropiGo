@@ -11,6 +11,7 @@ class ButtonRoundBorder extends StatelessWidget {
   final double fontSize;
   final double height;
   final double widthPorcent;
+  final String img;
 
   const ButtonRoundBorder({
     Key key,
@@ -24,6 +25,7 @@ class ButtonRoundBorder extends StatelessWidget {
     this.fontSize = 16,
     this.height = 60,
     this.widthPorcent = 0.85,
+    this.img = "",
   }) : super(key: key);
 
   @override
@@ -40,7 +42,7 @@ class ButtonRoundBorder extends StatelessWidget {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(this.radius),
                   side: BorderSide(
-                    color: Colors.white.withOpacity(0.5),
+                    color: Colors.white.withOpacity(0.8),
                     width: this.width,
                   ),
                 ),
@@ -54,6 +56,14 @@ class ButtonRoundBorder extends StatelessWidget {
                         this.icon,
                         color: Colors.white,
                         size: 35,
+                      ),
+                    ),
+                    Visibility(
+                      visible: this.img != "",
+                      child: Image.asset(
+                        this.img,
+                        height: 45,
+                        width: 45,
                       ),
                     ),
                     Container(

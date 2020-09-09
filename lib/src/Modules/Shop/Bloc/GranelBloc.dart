@@ -10,7 +10,7 @@ class GranelBloc with ShopValidator {
   final _emailController = BehaviorSubject<String>();
   final _phoneNumberController = BehaviorSubject<String>();
   final _nameContactController = BehaviorSubject<String>();
-  final _isNotContractController = BehaviorSubject<bool>();
+  final _isNotContractController = BehaviorSubject<bool>.seeded(false);
 
   Stream<String> get contract =>
       _contractController.stream.transform(validaContract);

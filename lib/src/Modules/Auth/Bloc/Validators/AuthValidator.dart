@@ -43,6 +43,21 @@ class AuthValidator {
     }
   });
 
+  final validaSexo =
+      StreamTransformer<String, String>.fromHandlers(handleData: (sexo, sink) {
+    sink.add(sexo);
+  });
+
+  final validaBirthDay =
+      StreamTransformer<String, String>.fromHandlers(handleData: (date, sink) {
+    if (date != null && date != "") {
+      sink.add(date);
+      sink.add(date);
+    } else {
+      sink.addError("Fecha Vacia");
+    }
+  });
+
   final validaPhoneNumber =
       StreamTransformer<String, String>.fromHandlers(handleData: (phone, sink) {
     final RegExp _phoneRegExp = RegExp(r'(^(?:[+0]9)?[0-9]{8,12}$)');

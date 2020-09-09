@@ -48,6 +48,7 @@ dependencies:
   maps_launcher: ^1.2.2+1
   cached_network_image: ^2.2.0+1
   http: ^0.12.2
+  date_format: ^1.0.8
 
 dev_dependencies:
   flutter_launcher_icons: "^0.7.3"

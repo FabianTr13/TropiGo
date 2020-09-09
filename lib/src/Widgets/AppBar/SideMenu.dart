@@ -1,11 +1,11 @@
 import 'package:TropiGo/src/Modules/Auth/Bloc/AuthBloc.dart';
-import 'package:TropiGo/src/Modules/Shop/UI/GasStoresScreen.dart';
-import 'package:TropiGo/src/Modules/Shop/UI/HomeShop.dart';
 import 'package:TropiGo/src/Multimedia/Images.dart';
+import 'package:TropiGo/src/Multimedia/tropi_icons_icons.dart';
+import 'package:TropiGo/src/Services/AuthService.dart';
 import 'package:TropiGo/src/Widgets/AppBar/SideMenuItem.dart';
 import 'package:flutter/material.dart';
 
-Drawer SideMenu() {
+Drawer SideMenu(BuildContext context) {
   return Drawer(
     child: ListView(
       children: <Widget>[
@@ -16,19 +16,9 @@ Drawer SideMenu() {
           ),
         ),
         SideMenuItem(
-          title: "Ordenar",
-          icon: Icons.camera,
-          routerPage: HomeShop(),
-        ),
-        SideMenuItem(
-          title: "Tus pedidos",
-          icon: Icons.camera,
-          routerPage: HomeShop(),
-        ),
-        SideMenuItem(
-          title: "Nuestras Tiendas",
-          icon: Icons.camera,
-          routerPage: GasStoresScreen(),
+          title: "Cerrar sesión",
+          icon: TropiIcons.logout,
+          callback: () => AuthService().cerrarSesion(context),
         ),
       ],
     ),

@@ -1,5 +1,3 @@
-import 'package:TropiGo/src/Services/TipsService.dart';
-
 const LogoImg = 'assets/Images/logo.png';
 const ContactImg = 'assets/Images/contact.png';
 const CocinaImg = 'tropicocina.PNG';
@@ -13,3 +11,7 @@ const GpsImg = 'assets/Images/tropi_myloc_pin.png';
 const DotImg = 'assets/Images/dot.png';
 const CilinderImg = 'assets/Images/cilindro.png';
 const ProfileImg = 'assets/Images/Profile.png';
+const MoneyImg = 'assets/Images/money.png';
+const CreditImg = 'assets/Images/credit-card.png';
+const KitchenIconImg = 'assets/Images/tropicocinaIcon.png';
+const TipsIconImg = 'assets/Images/tipsIcon.png';

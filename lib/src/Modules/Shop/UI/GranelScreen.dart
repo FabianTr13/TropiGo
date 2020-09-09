@@ -1,10 +1,12 @@
 import 'package:TropiGo/src/Modules/Shop/Bloc/GranelBloc.dart';
 import 'package:TropiGo/src/Multimedia/Images.dart';
+import 'package:TropiGo/src/Services/GranelService.dart';
 import 'package:TropiGo/src/Widgets/AppBar/NavBar.dart';
 import 'package:TropiGo/src/Widgets/ButtonLargeSubmit.dart';
 import 'package:TropiGo/src/Widgets/ImageHeader.dart';
 import 'package:TropiGo/src/Widgets/InputTextbox.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_styled_toast/flutter_styled_toast.dart';
 
 class GranelScreen extends StatefulWidget {
   @override
@@ -22,7 +24,11 @@ class _GranelState extends State<GranelScreen> {
     );
   }
 
-  registerUser() {}
+  registerUser() async {
+    await GranelService().sendEmail();
+    showToast("Pedido ha sido enviado");
+    Navigator.pop(context);
+  }
 
   Widget Granel() {
     return new Scaffold(
@@ -123,6 +129,7 @@ class _GranelState extends State<GranelScreen> {
                 ),
                 ButtonLargeSubmit(
                   text: "ENVIAR",
+                  nullText: "Rellene los compos",
                   callback: registerUser,
                   stream: granelBlocInstance.submitValidGranel,
                 )

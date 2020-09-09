@@ -3,6 +3,7 @@ import 'dart:collection';
 import 'package:TropiGo/src/Modules/Shop/Widget/Granel/GoogleMap.dart';
 import 'package:TropiGo/src/Multimedia/Images.dart';
 import 'package:TropiGo/src/Widgets/AppBar/NavBar.dart';
+import 'package:TropiGo/src/Widgets/ButtonIconCircle.dart';
 import 'package:TropiGo/src/Widgets/ButtonRoundBorder.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -34,12 +35,10 @@ class GasStoreState extends State<GasStoresScreen> {
       bottomNavigationBar: Container(
         height: 80,
         child: Center(
-          child: ButtonRoundBorder(
-            text: "Back Inicio",
+          child: ButtonIconCircle(
             callback: () => Navigator.pop(context),
             backgroundColor: Colors.red,
-            width: 2,
-            fontSize: 22,
+            icon: Icons.arrow_back,
           ),
         ),
       ),

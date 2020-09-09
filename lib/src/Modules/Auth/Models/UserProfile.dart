@@ -3,6 +3,8 @@ class UserProfile {
   final String email;
   final String name;
   final String phoneNumber;
+  final String sexo;
+  final String birthDate;
   final String provider;
   final bool userInDelivering;
 
@@ -11,6 +13,8 @@ class UserProfile {
     this.email,
     this.name,
     this.phoneNumber,
+    this.sexo,
+    this.birthDate,
     this.provider,
     this.userInDelivering,
   });

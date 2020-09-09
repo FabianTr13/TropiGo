@@ -3,6 +3,7 @@ import 'package:TropiGo/src/Modules/Auth/UI/SignupScreen.dart';
 import 'package:TropiGo/src/Modules/Home/UI/HomeMenu.dart';
 import 'package:TropiGo/src/Services/AuthService.dart';
 import 'package:TropiGo/src/Utils/BoxGradient.dart';
+import 'package:TropiGo/src/Widgets/ButtonIconCircleSubmit.dart';
 import 'package:TropiGo/src/Widgets/ButtonLargeSubmit.dart';
 import 'package:TropiGo/src/Widgets/ImageHeader.dart';
 import 'package:TropiGo/src/Widgets/InputTextbox.dart';
@@ -134,11 +135,12 @@ class _LoginState extends State<LoginScreen> {
                 Container(
                   height: 10,
                 ),
-                ButtonLargeSubmit(
-                  text: "INGRESAR",
-                  nullText: "Rellena los campos",
-                  callback: _doLogin,
-                  stream: authBlocInstance.submitValidLogin,
+                Center(
+                  child: ButtonIconCircleSubmit(
+                    nullText: "Rellene todos los campos",
+                    callback: _doLogin,
+                    stream: authBlocInstance.submitValidLogin,
+                  ),
                 ),
                 ButtonLarge(
                   text: "Aun no tienes cuenta?",

@@ -1,5 +1,8 @@
 import 'package:TropiGo/src/Modules/Shop/Bloc/ShopCylinderBloc.dart';
+import 'package:TropiGo/src/Modules/Shop/Widget/HomeShop/MenuItem.dart';
+import 'package:TropiGo/src/Modules/Shop/Widget/ShopCylinder/ConfirmationModal/PayButton.dart';
 import 'package:TropiGo/src/Modules/Shop/Widget/ShopCylinder/ConfirmationModal/TableProducts.dart';
+import 'package:TropiGo/src/Multimedia/Images.dart';
 import 'package:TropiGo/src/Multimedia/TropiColors.dart';
 import 'package:TropiGo/src/Services/ShopService.dart';
 import 'package:TropiGo/src/Widgets/ButtonLargeSubmit.dart';
@@ -22,7 +25,7 @@ class ModalConfirmation {
               borderRadius: BorderRadius.circular(5.0),
             ),
             child: Container(
-              height: 420,
+              height: 490,
               child: ListView(
                 children: [
                   Center(
@@ -33,6 +36,27 @@ class ModalConfirmation {
                         fontSize: 22,
                       ),
                     ),
+                  ),
+                  Container(
+                    height: 10,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      PayButton(
+                        isSelect: true,
+                        text: "Efectivo",
+                        img: MoneyImg,
+                      ),
+                      PayButton(
+                        isSelect: false,
+                        text: "Tarjeta",
+                        img: CreditImg,
+                      ),
+                    ],
+                  ),
+                  Container(
+                    height: 10,
                   ),
                   InputTextbox(
                     title: "Direccion",

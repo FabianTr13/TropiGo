@@ -2,6 +2,7 @@ import 'package:TropiGo/src/Modules/Contact/Models/Contact.dart';
 import 'package:TropiGo/src/Multimedia/Images.dart';
 import 'package:TropiGo/src/Multimedia/tropi_icons_icons.dart';
 import 'package:TropiGo/src/Services/ContactService.dart';
+import 'package:TropiGo/src/Widgets/ButtonIconCircle.dart';
 import 'package:TropiGo/src/Widgets/ButtonRoundBorder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_styled_toast/flutter_styled_toast.dart';
@@ -16,6 +17,7 @@ class ContactScreen extends StatefulWidget {
 
 class _ContactScreenState extends State<ContactScreen> {
   Contact contact = Contact();
+  final double height = 60;
 
   @override
   void initState() {
@@ -52,39 +54,35 @@ class _ContactScreenState extends State<ContactScreen> {
             ContactImg,
             fit: BoxFit.fitHeight,
           ),
-          Container(
-            height: 50,
-          ),
+          Container(height: 45),
           ButtonRoundBorder(
             text: "Llama *Tropi",
             icon: TropiIcons.phone,
             callback: () => _launchURL(contact.tel),
-            width: 3,
-            radius: 100,
             fontSize: 22,
+            height: this.height,
           ),
           ButtonRoundBorder(
             text: "Email",
             icon: TropiIcons.correo,
             callback: () => _launchURL(contact.email),
-            width: 3,
-            radius: 100,
             fontSize: 22,
+            height: this.height,
           ),
           ButtonRoundBorder(
             text: "Chat",
             icon: TropiIcons.chat,
             callback: () => _launchURL(contact.chat),
-            width: 3,
-            radius: 100,
             fontSize: 22,
+            height: this.height,
           ),
-          ButtonRoundBorder(
-            text: "Back Inicio",
+          Container(
+            height: 10,
+          ),
+          ButtonIconCircle(
             callback: () => Navigator.pop(context),
             backgroundColor: Colors.red,
-            width: 3,
-            fontSize: 22,
+            icon: Icons.arrow_back,
           )
         ],
       ),

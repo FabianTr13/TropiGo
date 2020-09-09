@@ -18,4 +18,28 @@ class Granel {
     this.contact,
     this.isContract,
   });
+
+  Map<String, String> getGranelMail() {
+    Map<String, String> json;
+    if (!this.isContract) {
+      json = {
+        "nombre": "",
+        "contacto": "",
+        "contrato": this.contract,
+        "cantidad": this.count,
+        "telefono": "",
+        "email": "",
+      };
+    } else {
+      json = {
+        "nombre": this.nameBusiness,
+        "contacto": this.contact,
+        "contrato": "",
+        "cantidad": this.count,
+        "telefono": this.phoneNumber,
+        "email": this.email,
+      };
+    }
+    return json;
+  }
 }

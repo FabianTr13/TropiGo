@@ -14,6 +14,8 @@ class InputTextbox extends StatelessWidget {
   final Color colorLines;
   final int maxLines;
   final double fontSizeHint;
+  final VoidCallback onTap;
+  final bool allowEdit;
 
   const InputTextbox({
     Key key,
@@ -30,6 +32,8 @@ class InputTextbox extends StatelessWidget {
     this.colorLines = Colors.grey,
     this.maxLines = 1,
     this.fontSizeHint = 18,
+    this.onTap,
+    this.allowEdit = false,
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -58,9 +62,11 @@ class InputTextbox extends StatelessWidget {
                   textInputAction: TextInputAction.next,
                   maxLines: this.maxLines,
                   onChanged: onChange,
+                  onTap: this.onTap,
                   onFieldSubmitted: (String value) {
                     FocusScope.of(context).requestFocus(nextFocus);
                   },
+                  readOnly: this.allowEdit,
                   controller: controller,
                   focusNode: focusNode,
                   autofocus: autofocus,

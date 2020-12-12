@@ -1,13 +1,13 @@
 import 'package:TropiGo/src/Modules/Auth/Bloc/AuthBloc.dart';
+import 'package:TropiGo/src/Modules/Auth/UI/RestoreScreen.dart';
 import 'package:TropiGo/src/Modules/Auth/UI/SignupScreen.dart';
 import 'package:TropiGo/src/Modules/Home/UI/HomeMenu.dart';
 import 'package:TropiGo/src/Services/AuthService.dart';
 import 'package:TropiGo/src/Utils/BoxGradient.dart';
 import 'package:TropiGo/src/Widgets/ButtonIconCircleSubmit.dart';
-import 'package:TropiGo/src/Widgets/ButtonLargeSubmit.dart';
+import 'package:TropiGo/src/Widgets/ButtonLarge.dart';
 import 'package:TropiGo/src/Widgets/ImageHeader.dart';
 import 'package:TropiGo/src/Widgets/InputTextbox.dart';
-import 'package:TropiGo/src/Widgets/buttonLarge.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_styled_toast/flutter_styled_toast.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
@@ -96,6 +96,14 @@ class _LoginState extends State<LoginScreen> {
     FocusScope.of(context).requestFocus(_focusNode);
   }
 
+  _gotoRestore() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => RestoreScreen()),
+    );
+    FocusScope.of(context).requestFocus(_focusNode);
+  }
+
   Widget _Login() {
     return new Scaffold(
       body: ModalProgressHUD(
@@ -145,6 +153,12 @@ class _LoginState extends State<LoginScreen> {
                 ButtonLarge(
                   text: "Aun no tienes cuenta?",
                   callback: _gotoSignup,
+                  color: Colors.white,
+                  backgroundColor: Colors.transparent,
+                ),
+                ButtonLarge(
+                  text: "Olvide mi contraseña",
+                  callback: _gotoRestore,
                   color: Colors.white,
                   backgroundColor: Colors.transparent,
                 ),

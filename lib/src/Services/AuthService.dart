@@ -101,6 +101,17 @@ class AuthService {
     return authRequest;
   }
 
+  Future<String> sendRestartEmail() async {
+    String email = authBlocInstance.getRestartEmail();
+    try {
+      var restartRequest =
+          await _auth.sendPasswordResetEmail(email: email).then((value) {});
+      return "Se envio un correo para restablecer tu contraseña";
+    } catch (e) {
+      return "Correo no valido";
+    }
+  }
+
   cerrarSesion(BuildContext context) {
     AuthService().singOut().then(
           (value) => Navigator.of(context).popUntil(

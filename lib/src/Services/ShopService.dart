@@ -13,62 +13,62 @@ class ShopService {
   final databaseReference = FirebaseDatabase.instance.reference();
 
   Future<List<Product>> getProducts() async {
-    // http.Response response = await http
-    //     .get("http://apitropigas.hol.es/apiKio/public/api/productos/34");
+    http.Response response = await http
+        .get("http://apitropigas.hol.es/apiKio/public/api/productos/34");
 
-    // var data = json.decode(response.body);
-    var data = [
-      {
-        "codProducto": "43",
-        "exento": 1,
-        "nombreProducto": "Gas 10LB",
-        "impuesto": 0,
-        "precio": "107.07",
-        "manejaInventario": "0",
-        "precioDigitadoManual": "0",
-        "cantidad": "0"
-      },
-      {
-        "codProducto": "44",
-        "exento": 1,
-        "nombreProducto": "Gas 20LB",
-        "impuesto": 0,
-        "precio": "214.59",
-        "manejaInventario": "0",
-        "precioDigitadoManual": "0",
-        "cantidad": "0"
-      },
-      {
-        "codProducto": "31",
-        "exento": 1,
-        "nombreProducto": "Gas 25LB",
-        "impuesto": 0,
-        "precio": "215.46",
-        "manejaInventario": "0",
-        "precioDigitadoManual": "0",
-        "cantidad": "0"
-      },
-      {
-        "codProducto": "39",
-        "exento": 1,
-        "nombreProducto": "Gas 60LB",
-        "impuesto": 0,
-        "precio": "635.29",
-        "manejaInventario": "0",
-        "precioDigitadoManual": "0",
-        "cantidad": "0"
-      },
-      {
-        "codProducto": "40",
-        "exento": 1,
-        "nombreProducto": "Gas 100LB",
-        "impuesto": 0,
-        "precio": "1170.61",
-        "manejaInventario": "0",
-        "precioDigitadoManual": "0",
-        "cantidad": "0"
-      }
-    ];
+    var data = json.decode(response.body);
+    // var data = [
+    //   {
+    //     "codProducto": "43",
+    //     "exento": 1,
+    //     "nombreProducto": "Gas 10LB",
+    //     "impuesto": 0,
+    //     "precio": "107.07",
+    //     "manejaInventario": "0",
+    //     "precioDigitadoManual": "0",
+    //     "cantidad": "0"
+    //   },
+    //   {
+    //     "codProducto": "44",
+    //     "exento": 1,
+    //     "nombreProducto": "Gas 20LB",
+    //     "impuesto": 0,
+    //     "precio": "214.59",
+    //     "manejaInventario": "0",
+    //     "precioDigitadoManual": "0",
+    //     "cantidad": "0"
+    //   },
+    //   {
+    //     "codProducto": "31",
+    //     "exento": 1,
+    //     "nombreProducto": "Gas 25LB",
+    //     "impuesto": 0,
+    //     "precio": "215.46",
+    //     "manejaInventario": "0",
+    //     "precioDigitadoManual": "0",
+    //     "cantidad": "0"
+    //   },
+    //   {
+    //     "codProducto": "39",
+    //     "exento": 1,
+    //     "nombreProducto": "Gas 60LB",
+    //     "impuesto": 0,
+    //     "precio": "635.29",
+    //     "manejaInventario": "0",
+    //     "precioDigitadoManual": "0",
+    //     "cantidad": "0"
+    //   },
+    //   {
+    //     "codProducto": "40",
+    //     "exento": 1,
+    //     "nombreProducto": "Gas 100LB",
+    //     "impuesto": 0,
+    //     "precio": "1170.61",
+    //     "manejaInventario": "0",
+    //     "precioDigitadoManual": "0",
+    //     "cantidad": "0"
+    //   }
+    // ];
 
     shopCylinderBlocInstance.changeProductSelect(null);
     List<Product> products =

@@ -2,7 +2,7 @@ import 'package:TropiGo/src/Modules/Shop/Bloc/ModelsBloc/Product.dart';
 import 'package:TropiGo/src/Modules/Shop/Bloc/ShopCylinderBloc.dart';
 import 'package:flutter/material.dart';
 
-Widget TableProduct() {
+Widget tableProduct() {
   return StreamBuilder(
     stream: shopCylinderBlocInstance.products,
     initialData: [],
@@ -15,7 +15,7 @@ Widget TableProduct() {
             dividerThickness: 0,
             headingRowHeight: 25,
             columnSpacing: 45,
-            columns: HeadersConfirmation(),
+            columns: headersConfirmation(),
             rows: rowData(snapshot.data),
           ),
         ),
@@ -24,11 +24,11 @@ Widget TableProduct() {
   );
 }
 
-List<DataColumn> HeadersConfirmation() {
+List<DataColumn> headersConfirmation() {
   return [
     header(text: "Producto", textAlign: TextAlign.start),
     header(text: "Cant.", textAlign: TextAlign.center),
-    header(text: "Total", textAlign: TextAlign.end),
+    header(text: "Total", textAlign: TextAlign.end)
   ];
 }
 

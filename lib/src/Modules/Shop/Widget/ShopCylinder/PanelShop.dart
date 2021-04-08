@@ -8,74 +8,52 @@ import 'package:TropiGo/src/Widgets/ButtonLargeSubmit.dart';
 import 'package:flutter/material.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
-SlidingUpPanel PanelShop(BuildContext context) {
+SlidingUpPanel panelShop(BuildContext context) {
   PanelController _pc = new PanelController();
   ShopService().getProducts();
 
   return SlidingUpPanel(
-    maxHeight: 310,
-    minHeight: 60,
-    controller: _pc,
-    renderPanelSheet: false,
-    panel: PanelProducts(context),
-    collapsed: FloatingCollapsedPanel(
-      panelController: _pc,
-    ),
-    body: ViewMapShop(),
-  );
+      maxHeight: 310,
+      minHeight: 60,
+      controller: _pc,
+      renderPanelSheet: false,
+      panel: panelProducts(context),
+      collapsed: floatingCollapsedPanel(panelController: _pc),
+      body: ViewMapShop());
 }
 
-Widget PanelProducts(BuildContext context) {
+Widget panelProducts(BuildContext context) {
   doBuy() {
     ModalConfirmation().confirmationOrder(context);
   }
 
   return Container(
-    decoration: BoxDecoration(
-      color: Colors.white,
-      borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(15.0), topRight: Radius.circular(15.0)),
-    ),
-    child: ListView(
-      children: [
-        Container(
-          height: 55,
-        ),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(15.0), topRight: Radius.circular(15.0)),
+      ),
+      child: ListView(children: [
+        Container(height: 55),
         Counter(),
         CarouselShop(),
         ButtonLargeSubmit(
-          text: "PEDIR",
-          callback: doBuy,
-          stream: shopCylinderBlocInstance.submitValidShop,
-          nullText: "Seleccione un producto",
-        ),
-      ],
-    ),
-  );
+            text: "PEDIR",
+            callback: doBuy,
+            stream: shopCylinderBlocInstance.submitValidShop,
+            nullText: "Seleccione un producto")
+      ]));
 }
 
-Widget FloatingCollapsedPanel({PanelController panelController}) {
+Widget floatingCollapsedPanel({PanelController panelController}) {
   return Container(
-    decoration: BoxDecoration(
-      color: Colors.deepOrange,
-      borderRadius: BorderRadius.only(
-        topLeft: Radius.circular(15.0),
-        topRight: Radius.circular(15.0),
-      ),
-    ),
-    child: FlatButton(
-      onPressed: () => {
-        panelController.open(),
-      },
-      child: Center(
-        child: Text(
-          "ORDENAR AHORA",
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 22,
-          ),
-        ),
-      ),
-    ),
-  );
+      decoration: BoxDecoration(
+          color: Colors.deepOrange,
+          borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(15.0), topRight: Radius.circular(15.0))),
+      child: FlatButton(
+          onPressed: () => {panelController.open()},
+          child: Center(
+              child: Text("ORDENAR AHORA",
+                  style: TextStyle(color: Colors.white, fontSize: 22)))));
 }

@@ -16,21 +16,20 @@ import 'package:modal_progress_hud/modal_progress_hud.dart';
 
 class SignupScreen extends StatefulWidget {
   @override
-  _SignupState createState() => new _SignupState();
+  _SignupState createState() => _SignupState();
 }
 
 class _SignupState extends State<SignupScreen> {
   bool isLoading = false;
-  final FocusNode _emailFocusNode = new FocusNode();
-  final FocusNode _nameFocusNode = new FocusNode();
-  final FocusNode _phoneFocusNode = new FocusNode();
-  final FocusNode _passwordFocusNode = new FocusNode();
-  final FocusNode _repasswordFocusNode = new FocusNode();
+  final FocusNode _emailFocusNode = FocusNode();
+  final FocusNode _nameFocusNode = FocusNode();
+  final FocusNode _phoneFocusNode = FocusNode();
+  final FocusNode _passwordFocusNode = FocusNode();
+  final FocusNode _repasswordFocusNode = FocusNode();
   TextEditingController dateCtl = TextEditingController();
 
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
     _emailFocusNode.dispose();
     _nameFocusNode.dispose();
@@ -42,7 +41,7 @@ class _SignupState extends State<SignupScreen> {
   @override
   Widget build(BuildContext context) {
     return Container(
-        height: MediaQuery.of(context).size.height, child: Signup());
+        height: MediaQuery.of(context).size.height, child: signup());
   }
 
   Future<void> registerUser() async {
@@ -79,117 +78,93 @@ class _SignupState extends State<SignupScreen> {
     }
   }
 
-  Widget Signup() {
+  Widget signup() {
     return new Scaffold(
-      body: ModalProgressHUD(
-        inAsyncCall: isLoading,
-        child: Container(
-          decoration: BoxGradient(),
-          child: new ListView(
-            children: [
-              ImageHeader(
-                image: ProfileImg,
-                title: "Crear cuenta",
-                underLine: true,
-                size: 80,
-              ),
-              InputTextbox(
-                title: "Correo",
-                hintText: '',
-                keyboardType: TextInputType.emailAddress,
-                stream: signupBlocInstance.email,
-                onChange: signupBlocInstance.changeEmail,
-                focusNode: _emailFocusNode,
-                nextFocus: _nameFocusNode,
-                colorLines: Colors.white,
-              ),
-              InputTextbox(
-                title: "Nombre",
-                hintText: '',
-                stream: signupBlocInstance.name,
-                onChange: signupBlocInstance.changeName,
-                focusNode: _nameFocusNode,
-                nextFocus: _phoneFocusNode,
-                colorLines: Colors.white,
-              ),
-              InputTextbox(
-                title: "Teléfono",
-                hintText: '',
-                keyboardType: TextInputType.number,
-                stream: signupBlocInstance.phoneNumber,
-                onChange: signupBlocInstance.changePhoneNumber,
-                focusNode: _phoneFocusNode,
-                nextFocus: _passwordFocusNode,
-                colorLines: Colors.white,
-              ),
-              Container(
-                margin: EdgeInsets.only(
-                  left: 20,
-                ),
-                child: Text(
-                  "sexo",
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    color: TropiColors.white,
-                  ),
-                ),
-              ),
-              RadialButton(
-                stream: signupBlocInstance.sexo,
-                title: "Masculino",
-                value: "m",
-                callback: _changeSex,
-              ),
-              RadialButton(
-                stream: signupBlocInstance.sexo,
-                title: "Femenino",
-                value: "f",
-                callback: _changeSex,
-              ),
-              InputTextbox(
-                controller: dateCtl,
-                title: "Fecha de nacimiento",
-                hintText: '',
-                stream: signupBlocInstance.birthDay,
-                onChange: signupBlocInstance.changeBirthDate,
-                colorLines: Colors.white,
-                onTap: _changeBirthDay,
-                allowEdit: true,
-              ),
-              InputTextbox(
-                title: "Contraseña",
-                hintText: '',
-                obscureText: true,
-                stream: signupBlocInstance.password,
-                onChange: signupBlocInstance.changePassword,
-                focusNode: _passwordFocusNode,
-                nextFocus: _repasswordFocusNode,
-                colorLines: Colors.white,
-              ),
-              InputTextbox(
-                title: "Confirmar Contraseña",
-                hintText: '',
-                obscureText: true,
-                stream: signupBlocInstance.rePassword,
-                onChange: signupBlocInstance.changeRePassword,
-                focusNode: _repasswordFocusNode,
-                colorLines: Colors.white,
-              ),
-              Container(
-                height: 25,
-              ),
-              Center(
-                child: ButtonIconCircleSubmit(
-                  nullText: "Rellene todos los campos",
-                  callback: registerUser,
-                  stream: signupBlocInstance.submitValidSignup,
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
+        body: ModalProgressHUD(
+            inAsyncCall: isLoading,
+            child: Container(
+                decoration: boxGradient(),
+                child: new ListView(children: [
+                  ImageHeader(
+                      image: ProfileImg,
+                      title: "Crear cuenta",
+                      underLine: true,
+                      size: 80),
+                  InputTextbox(
+                      title: "Correo",
+                      hintText: '',
+                      keyboardType: TextInputType.emailAddress,
+                      stream: signupBlocInstance.email,
+                      onChange: signupBlocInstance.changeEmail,
+                      focusNode: _emailFocusNode,
+                      nextFocus: _nameFocusNode,
+                      colorLines: Colors.white),
+                  InputTextbox(
+                      title: "Nombre",
+                      hintText: '',
+                      stream: signupBlocInstance.name,
+                      onChange: signupBlocInstance.changeName,
+                      focusNode: _nameFocusNode,
+                      nextFocus: _phoneFocusNode,
+                      colorLines: Colors.white),
+                  InputTextbox(
+                      title: "Teléfono",
+                      hintText: '',
+                      keyboardType: TextInputType.number,
+                      stream: signupBlocInstance.phoneNumber,
+                      onChange: signupBlocInstance.changePhoneNumber,
+                      focusNode: _phoneFocusNode,
+                      nextFocus: _passwordFocusNode,
+                      colorLines: Colors.white),
+                  Container(
+                      margin: EdgeInsets.only(left: 20),
+                      child: Text("sexo",
+                          style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                              color: TropiColors.white))),
+                  RadialButton(
+                      stream: signupBlocInstance.sexo,
+                      title: "Masculino",
+                      value: "m",
+                      callback: _changeSex),
+                  RadialButton(
+                      stream: signupBlocInstance.sexo,
+                      title: "Femenino",
+                      value: "f",
+                      callback: _changeSex),
+                  InputTextbox(
+                      controller: dateCtl,
+                      title: "Fecha de nacimiento",
+                      hintText: '',
+                      stream: signupBlocInstance.birthDay,
+                      onChange: signupBlocInstance.changeBirthDate,
+                      colorLines: Colors.white,
+                      onTap: _changeBirthDay,
+                      allowEdit: true),
+                  InputTextbox(
+                      title: "Contraseña",
+                      hintText: '',
+                      obscureText: true,
+                      stream: signupBlocInstance.password,
+                      onChange: signupBlocInstance.changePassword,
+                      focusNode: _passwordFocusNode,
+                      nextFocus: _repasswordFocusNode,
+                      colorLines: Colors.white),
+                  InputTextbox(
+                      title: "Confirmar Contraseña",
+                      hintText: '',
+                      obscureText: true,
+                      stream: signupBlocInstance.rePassword,
+                      onChange: signupBlocInstance.changeRePassword,
+                      focusNode: _repasswordFocusNode,
+                      colorLines: Colors.white),
+                  Container(height: 25),
+                  Center(
+                      child: ButtonIconCircleSubmit(
+                          nullText: "Rellene todos los campos",
+                          callback: registerUser,
+                          stream: signupBlocInstance.submitValidSignup))
+                ]))));
   }
 }

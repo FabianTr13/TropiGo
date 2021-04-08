@@ -8,16 +8,12 @@ class ShopCylinderScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: NavBar(),
-      drawer: SideMenu(context),
-      body: PanelShop(context),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          // Add your onPressed code here!
-        },
-        child: Icon(Icons.close),
-        backgroundColor: TropiColors.orangeButons,
-      ),
-    );
+        appBar: navBar(),
+        drawer: sideMenu(context),
+        body: panelShop(context),
+        floatingActionButton: FloatingActionButton(
+            onPressed: () {},
+            child: Icon(Icons.close),
+            backgroundColor: TropiColors.orangeButons));
   }
 }

@@ -5,7 +5,6 @@ import 'package:TropiGo/src/Services/KitchenService.dart';
 import 'package:TropiGo/src/Services/UtilsService.dart';
 import 'package:TropiGo/src/Utils/BoxGradient.dart';
 import 'package:TropiGo/src/Widgets/ButtonIconCircle.dart';
-import 'package:TropiGo/src/Widgets/ButtonRoundBorder.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
@@ -47,7 +46,7 @@ class _KitchenScreenState extends State<KitchenScreen> {
       ),
       child: Container(
         margin: EdgeInsets.zero,
-        decoration: BoxGradient(),
+        decoration: boxGradient(),
         child: SafeArea(
           child: CustomScrollView(
             slivers: [

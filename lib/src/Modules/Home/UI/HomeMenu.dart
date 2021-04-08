@@ -27,7 +27,7 @@ class HomeMenu extends StatelessWidget {
     }
 
     return Container(
-      decoration: BoxGradient(),
+      decoration: boxGradient(),
       child: new ListView(
         children: [
           ImageHeader(

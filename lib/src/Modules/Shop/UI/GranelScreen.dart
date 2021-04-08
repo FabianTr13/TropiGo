@@ -20,7 +20,7 @@ class _GranelState extends State<GranelScreen> {
   Widget build(BuildContext context) {
     return Container(
       height: MediaQuery.of(context).size.height,
-      child: Granel(),
+      child: granel(),
     );
   }
 
@@ -30,9 +30,9 @@ class _GranelState extends State<GranelScreen> {
     Navigator.pop(context);
   }
 
-  Widget Granel() {
+  Widget granel() {
     return new Scaffold(
-        appBar: NavBar(
+        appBar: navBar(
           withActions: false,
           automaticallyImplyLeading: false,
           logo: GranelImg,

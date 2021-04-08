@@ -3,7 +3,6 @@ import 'package:TropiGo/src/Multimedia/Images.dart';
 import 'package:TropiGo/src/Services/AuthService.dart';
 import 'package:TropiGo/src/Utils/BoxGradient.dart';
 import 'package:TropiGo/src/Widgets/ButtonIconCircle.dart';
-import 'package:TropiGo/src/Widgets/ButtonIconCircleSubmit.dart';
 import 'package:TropiGo/src/Widgets/ImageHeader.dart';
 import 'package:TropiGo/src/Widgets/InputTextbox.dart';
 import 'package:flutter/material.dart';
@@ -21,7 +20,6 @@ class _RestoreScreen extends State<RestoreScreen> {
 
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
     _emailFocusNode.dispose();
   }
@@ -29,7 +27,7 @@ class _RestoreScreen extends State<RestoreScreen> {
   @override
   Widget build(BuildContext context) {
     return Container(
-        height: MediaQuery.of(context).size.height, child: RestorePassword());
+        height: MediaQuery.of(context).size.height, child: restorePassword());
   }
 
   _sendEMail() async {
@@ -37,12 +35,12 @@ class _RestoreScreen extends State<RestoreScreen> {
     showToast(result);
   }
 
-  Widget RestorePassword() {
+  Widget restorePassword() {
     return new Scaffold(
       body: ModalProgressHUD(
         inAsyncCall: isLoading,
         child: Container(
-          decoration: BoxGradient(),
+          decoration: boxGradient(),
           child: new ListView(
             children: [
               ImageHeader(

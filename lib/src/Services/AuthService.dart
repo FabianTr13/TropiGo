@@ -65,7 +65,7 @@ class AuthService {
     return userProfile;
   }
 
-  Future<void> updateUser() {
+  void updateUser() {
     Signup userUpdate = signupBlocInstance.getSignup();
     databaseReference
         .child("Users")
@@ -106,6 +106,7 @@ class AuthService {
     try {
       var restartRequest =
           await _auth.sendPasswordResetEmail(email: email).then((value) {});
+      print(restartRequest);
       return "Se envio un correo para restablecer tu contraseña";
     } catch (e) {
       return "Correo no valido";

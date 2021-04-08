@@ -26,7 +26,7 @@ class _LoginState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: _Login(),
+      child: _login(),
     );
   }
 
@@ -104,7 +104,7 @@ class _LoginState extends State<LoginScreen> {
     FocusScope.of(context).requestFocus(_focusNode);
   }
 
-  Widget _Login() {
+  Widget _login() {
     return new Scaffold(
       body: ModalProgressHUD(
         inAsyncCall: isLoading,
@@ -114,7 +114,7 @@ class _LoginState extends State<LoginScreen> {
           valueColor: new AlwaysStoppedAnimation<Color>(Colors.orange),
         ),
         child: Container(
-          decoration: BoxGradient(),
+          decoration: boxGradient(),
           child: Form(
             child: new ListView(
               children: [

@@ -31,7 +31,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: _UpdateProfile(),
+      child: _updateProfile(),
     );
   }
 
@@ -81,7 +81,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       },
     );
 
-    await AuthService().updateUser();
+    AuthService().updateUser();
 
     setState(() {
       isLoading = false;
@@ -107,9 +107,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
     }
   }
 
-  Widget _UpdateProfile() {
+  Widget _updateProfile() {
     return new Scaffold(
-      appBar: NavBar(
+      appBar: navBar(
         withActions: false,
         automaticallyImplyLeading: false,
       ),
@@ -122,7 +122,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         ),
         child: SingleChildScrollView(
           child: Container(
-            decoration: BoxGradient(),
+            decoration: boxGradient(),
             height: MediaQuery.of(context).size.height,
             child: Form(
               child: new Column(

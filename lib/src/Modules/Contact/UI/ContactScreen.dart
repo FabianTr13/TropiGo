@@ -42,10 +42,10 @@ class _ContactScreenState extends State<ContactScreen> {
     return Container(
       height: MediaQuery.of(context).size.height,
       decoration: BoxDecoration(
-          gradient: new LinearGradient(
-              colors: [Colors.yellow, Colors.deepOrange],
+          gradient: LinearGradient(
               begin: const FractionalOffset(0, 1.3),
               end: const FractionalOffset(0, 0),
+              colors: [Colors.yellow, Colors.deepOrange],
               stops: [0.0, 1.0],
               tileMode: TileMode.clamp)),
       child: new Column(

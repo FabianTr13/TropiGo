@@ -36,41 +36,30 @@ class _RestoreScreen extends State<RestoreScreen> {
   }
 
   Widget restorePassword() {
-    return new Scaffold(
-      body: ModalProgressHUD(
-        inAsyncCall: isLoading,
-        child: Container(
-          decoration: boxGradient(),
-          child: new ListView(
-            children: [
-              ImageHeader(
-                image: ProfileImg,
-                title: "Crear cuenta",
-                underLine: true,
-                size: 80,
-              ),
-              InputTextbox(
-                title: "Correo",
-                hintText: '',
-                keyboardType: TextInputType.emailAddress,
-                stream: authBlocInstance.emailRestore,
-                onChange: authBlocInstance.changeEmailRestore,
-                focusNode: _emailFocusNode,
-                colorLines: Colors.white,
-              ),
-              Container(
-                height: 25,
-              ),
-              Center(
-                child: ButtonIconCircle(
-                  nullText: "Rellene todos los campos",
-                  callback: _sendEMail,
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
+    return Scaffold(
+        body: ModalProgressHUD(
+            inAsyncCall: isLoading,
+            child: Container(
+                decoration: boxGradient(),
+                child: ListView(children: [
+                  ImageHeader(
+                      image: ProfileImg,
+                      title: "Crear cuenta",
+                      underLine: true,
+                      size: 80),
+                  InputTextbox(
+                      title: "Correo",
+                      hintText: '',
+                      keyboardType: TextInputType.emailAddress,
+                      stream: authBlocInstance.emailRestore,
+                      onChange: authBlocInstance.changeEmailRestore,
+                      focusNode: _emailFocusNode,
+                      colorLines: Colors.white),
+                  Container(height: 25),
+                  Center(
+                      child: ButtonIconCircle(
+                          nullText: "Rellene todos los campos",
+                          callback: _sendEMail))
+                ]))));
   }
 }

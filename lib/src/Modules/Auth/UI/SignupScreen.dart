@@ -24,6 +24,7 @@ class _SignupState extends State<SignupScreen> {
   final FocusNode _emailFocusNode = FocusNode();
   final FocusNode _nameFocusNode = FocusNode();
   final FocusNode _phoneFocusNode = FocusNode();
+  final FocusNode _colonyFocusNode = FocusNode();
   final FocusNode _passwordFocusNode = FocusNode();
   final FocusNode _repasswordFocusNode = FocusNode();
   TextEditingController dateCtl = TextEditingController();
@@ -57,9 +58,7 @@ class _SignupState extends State<SignupScreen> {
 
     if (authRequestDo.success) {
       Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => HomeMenu()),
-      );
+          context, MaterialPageRoute(builder: (context) => HomeMenu()));
     } else {
       showToast(authRequestDo.errorMessage, backgroundColor: Colors.red);
     }
@@ -87,7 +86,7 @@ class _SignupState extends State<SignupScreen> {
                 child: new ListView(children: [
                   ImageHeader(
                       image: ProfileImg,
-                      title: "Crear cuenta",
+                      title: "Crear Cuenta",
                       underLine: true,
                       size: 80),
                   InputTextbox(
@@ -118,7 +117,7 @@ class _SignupState extends State<SignupScreen> {
                       colorLines: Colors.white),
                   Container(
                       margin: EdgeInsets.only(left: 20),
-                      child: Text("sexo",
+                      child: Text("Sexo",
                           style: TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.bold,
@@ -133,6 +132,27 @@ class _SignupState extends State<SignupScreen> {
                       title: "Femenino",
                       value: "f",
                       callback: _changeSex),
+                  Container(
+                      margin: EdgeInsets.only(left: 20),
+                      child: Text("Ciudad",
+                          style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                              color: TropiColors.white))),
+                  Container(
+                      alignment: Alignment.centerRight,
+                      child: IconButton(
+                          icon: Icon(Icons.arrow_drop_down),
+                          onPressed: () =>
+                              {_buildMyPaymentsMethodsModal(context)})),
+                  InputTextbox(
+                      title: "Colonia",
+                      hintText: '',
+                      stream: signupBlocInstance.name,
+                      onChange: signupBlocInstance.changeName,
+                      focusNode: _colonyFocusNode,
+                      nextFocus: _repasswordFocusNode,
+                      colorLines: Colors.white),
                   InputTextbox(
                       controller: dateCtl,
                       title: "Fecha de nacimiento",
@@ -166,5 +186,20 @@ class _SignupState extends State<SignupScreen> {
                           callback: registerUser,
                           stream: signupBlocInstance.submitValidSignup))
                 ]))));
+  }
+
+  void _buildMyPaymentsMethodsModal(BuildContext context) {
+    showModalBottomSheet(
+        context: context,
+        builder: (BuildContext bc) => Container(
+            color: Color(0xFF737373),
+            child: Container(
+                height: 600,
+                //child: MyPaymentMethods(userId: userId),
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.only(
+                        topLeft: const Radius.circular(10),
+                        topRight: const Radius.circular(10))))));
   }
 }

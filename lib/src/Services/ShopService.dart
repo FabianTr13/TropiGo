@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:TropiGo/src/Modules/Auth/Models/City.dart';
 import 'package:TropiGo/src/Modules/Shop/Bloc/ModelsBloc/OrdersUrl.dart';
 import 'package:TropiGo/src/Modules/Shop/Bloc/ModelsBloc/Product.dart';
 import 'package:TropiGo/src/Modules/Shop/Bloc/ShopCylinderBloc.dart';
@@ -8,6 +9,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_styled_toast/flutter_styled_toast.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:http/http.dart';
 
 class ShopService {
   final databaseReference = FirebaseDatabase.instance.reference();
@@ -140,5 +143,51 @@ class ShopService {
         duration: Duration(seconds: 20),
       );
     }
+  }
+
+  Future<List<City>> getCities() async {
+    final Response response =
+        await http.get("http://apitropigas.hol.es/apiKio/public/api/ciudades");
+
+    if (response.statusCode == 200) {
+      return buildCities(response.body);
+    } else {
+      return [];
+    }
+  }
+
+  List<City> buildCities(String getCities) {
+    List<City> cities = [];
+
+    if (getCities.isNotEmpty) {
+      final List<dynamic> cityList = json.decode(getCities);
+
+      for (dynamic city in cityList) {
+        cities.add(City(codCiudad: city['codCiudad'], nombre: city['nombre']));
+      }
+    }
+    return cities;
+  }
+
+  saveCityId(String cityId) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString('cityId', cityId);
+  }
+
+  Future<String> getCityId() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    final String getCityId = prefs.getString("cityId");
+    return getCityId;
+  }
+
+  saveCityName(String cityName) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString('cityName', cityName);
+  }
+
+  Future<String> getCityName() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    final String getCityName = prefs.getString("cityName");
+    return getCityName;
   }
 }

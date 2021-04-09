@@ -35,72 +35,52 @@ class InputTextbox extends StatelessWidget {
     this.onTap,
     this.allowEdit = false,
   }) : super(key: key);
+
   @override
-  Widget build(BuildContext context) {
-    return StreamBuilder(
+  Widget build(BuildContext context) => StreamBuilder(
       stream: stream,
-      builder: (context, snapshot) {
-        return Container(
+      builder: (context, snapshot) => Container(
           margin: const EdgeInsets.only(left: 20.0, right: 20.0),
           alignment: Alignment.center,
           decoration: BoxDecoration(
-            border: Border(
-              bottom: BorderSide(
-                color: this.colorLines,
-                width: 1,
-                style: BorderStyle.solid,
-              ),
-            ),
-          ),
+              border: Border(
+                  bottom: BorderSide(
+                      color: this.colorLines,
+                      width: 1,
+                      style: BorderStyle.solid))),
           padding: const EdgeInsets.only(left: 0.0, right: 10.0),
-          child: new Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: <Widget>[
-              new Expanded(
-                child: TextFormField(
-                  textInputAction: TextInputAction.next,
-                  maxLines: this.maxLines,
-                  onChanged: onChange,
-                  onTap: this.onTap,
-                  onFieldSubmitted: (String value) {
-                    FocusScope.of(context).requestFocus(nextFocus);
-                  },
-                  readOnly: this.allowEdit,
-                  controller: controller,
-                  focusNode: focusNode,
-                  autofocus: autofocus,
-                  keyboardType: keyboardType,
-                  style: TextStyle(
-                    fontSize: 18,
-                    color: this.colorLines,
-                  ),
-                  cursorColor: this.colorLines,
-                  obscureText: obscureText,
-                  textAlign: TextAlign.left,
-                  decoration: InputDecoration(
-                    border: InputBorder.none,
-                    labelText: title,
-                    errorText: snapshot.error,
-                    errorStyle: TextStyle(
-                      color: this.colorLines,
-                    ),
-                    hintText: hintText,
-                    hintStyle: TextStyle(
-                      color: this.colorLines,
-                      fontSize: this.fontSizeHint,
-                    ),
-                    labelStyle: TextStyle(
-                      color: this.colorLines,
-                      fontSize: 18,
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
-        );
-      },
-    );
-  }
+          child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: <Widget>[
+                Expanded(
+                    child: TextFormField(
+                        textInputAction: TextInputAction.next,
+                        maxLines: this.maxLines,
+                        onChanged: onChange,
+                        onTap: this.onTap,
+                        onFieldSubmitted: (String value) {
+                          FocusScope.of(context).requestFocus(nextFocus);
+                        },
+                        readOnly: this.allowEdit,
+                        controller: controller,
+                        focusNode: focusNode,
+                        autofocus: autofocus,
+                        keyboardType: keyboardType,
+                        style: TextStyle(fontSize: 18, color: this.colorLines),
+                        cursorColor: this.colorLines,
+                        obscureText: obscureText,
+                        textAlign: TextAlign.left,
+                        decoration: InputDecoration(
+                            border: InputBorder.none,
+                            labelText: title,
+                            errorText: snapshot.error,
+                            errorStyle: TextStyle(color: this.colorLines),
+                            hintText: hintText,
+                            hintStyle: TextStyle(
+                                color: this.colorLines,
+                                fontSize: this.fontSizeHint),
+                            labelStyle: TextStyle(
+                                color: this.colorLines, fontSize: 18))))
+              ])));
 }

@@ -16,11 +16,10 @@ class _SplashState extends State<Splash> {
   @override
   Widget build(BuildContext context) {
     return SplashScreen.navigate(
-      name: 'assets/Animations/Splash.flr',
-      next: (context) => LoginScreen(),
-      until: () => Future.delayed(Duration(milliseconds: 1000)),
-      startAnimation: 'Start',
-      backgroundColor: Colors.white,
-    );
+        name: 'assets/Animations/Splash.flr',
+        next: (context) => LoginScreen(),
+        until: () => Future.delayed(Duration(milliseconds: 1000)),
+        startAnimation: 'Start',
+        backgroundColor: Colors.white);
   }
 }

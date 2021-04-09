@@ -10,8 +10,8 @@ void main() async {
       locale: const Locale('es', 'HN'),
       toastPositions: StyledToastPosition.center,
       toastAnimation: StyledToastAnimation.slideFromTop,
-      child: new MaterialApp(
+      child: MaterialApp(
           debugShowCheckedModeBanner: false,
           theme: ThemeData(fontFamily: 'Monserrat'),
-          home: new Splash())));
+          home: Splash())));
 }

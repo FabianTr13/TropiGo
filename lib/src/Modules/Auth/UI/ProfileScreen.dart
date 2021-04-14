@@ -28,6 +28,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   bool isLoading = false;
   FocusNode _focusNameNode;
   FocusNode _focusPassNode;
+  FocusNode _focusColonyNode;
   TextEditingController _nameController = TextEditingController();
   TextEditingController _phoneController = TextEditingController();
   TextEditingController _colonyController = TextEditingController();
@@ -74,6 +75,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
       _phoneController.text = user.phoneNumber;
       _colonyController.text = user.colony;
       dateCtl.text = user.birthDate;
+
+      setState(() {
+        cityName = user.cityName ?? "Elige tu ciudad";
+      });
     } else {
       showToast("Ocurrio un error al obtener perfil");
       Navigator.pop(context);
@@ -190,7 +195,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         InputTextbox(
                             title: "Colonia",
                             hintText: '',
-                            focusNode: _focusNameNode,
+                            focusNode: _focusColonyNode,
                             stream: signupBlocInstance.colony,
                             onChange: signupBlocInstance.changeColony,
                             nextFocus: _focusPassNode,

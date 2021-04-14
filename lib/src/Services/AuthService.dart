@@ -107,7 +107,6 @@ class AuthService {
     } catch (e) {
       _mapErrorMessage(authRequest, e.code);
     }
-
     return authRequest;
   }
 
@@ -146,13 +145,11 @@ class AuthService {
     //GetFrom local storage
     String email = (prefs.getString('email') ?? null);
     String password = (prefs.getString('password') ?? null);
-
     if (email != null && password != null) {
       authBlocInstance.changeEmail(email);
       authBlocInstance.changePassword(password);
       authRequest = await AuthService().loginUser();
     }
-
     return authRequest;
   }
 

@@ -1,4 +1,3 @@
-import 'package:TropiGo/src/Multimedia/Images.dart';
 import 'package:flutter/material.dart';
 
 class PayButton extends StatelessWidget {
@@ -14,34 +13,20 @@ class PayButton extends StatelessWidget {
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return Container(
+  Widget build(BuildContext context) => Container(
       child: Card(
           color: !this.isSelect ? Colors.white : Colors.red.withAlpha(60),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10),
-          ),
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
           shadowColor: Colors.orange,
           child: FlatButton(
-            onPressed: null,
-            child: Container(
-              width: 115,
-              child: Column(
-                children: [
-                  Image.asset(
-                    this.img,
-                    height: 36,
-                    width: 36,
-                  ),
-                  Text(
-                    this.text,
-                    textAlign: TextAlign.center,
-                    style: TextStyle(color: Colors.black54),
-                  ),
-                ],
-              ),
-            ),
-          )),
-    );
-  }
+              onPressed: null,
+              child: Container(
+                  width: 115,
+                  child: Column(children: [
+                    Image.asset(this.img, height: 36, width: 36),
+                    Text(this.text,
+                        textAlign: TextAlign.center,
+                        style: TextStyle(color: Colors.black54))
+                  ])))));
 }

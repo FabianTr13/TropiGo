@@ -3,7 +3,6 @@ import 'package:TropiGo/src/Multimedia/Images.dart';
 import 'package:TropiGo/src/Services/AuthService.dart';
 import 'package:TropiGo/src/Utils/BoxGradient.dart';
 import 'package:TropiGo/src/Widgets/ButtonIconCircle.dart';
-import 'package:TropiGo/src/Widgets/ButtonIconCircleSubmit.dart';
 import 'package:TropiGo/src/Widgets/ImageHeader.dart';
 import 'package:TropiGo/src/Widgets/InputTextbox.dart';
 import 'package:flutter/material.dart';
@@ -21,7 +20,6 @@ class _RestoreScreen extends State<RestoreScreen> {
 
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
     _emailFocusNode.dispose();
   }
@@ -29,7 +27,7 @@ class _RestoreScreen extends State<RestoreScreen> {
   @override
   Widget build(BuildContext context) {
     return Container(
-        height: MediaQuery.of(context).size.height, child: RestorePassword());
+        height: MediaQuery.of(context).size.height, child: restorePassword());
   }
 
   _sendEMail() async {
@@ -37,42 +35,31 @@ class _RestoreScreen extends State<RestoreScreen> {
     showToast(result);
   }
 
-  Widget RestorePassword() {
-    return new Scaffold(
-      body: ModalProgressHUD(
-        inAsyncCall: isLoading,
-        child: Container(
-          decoration: BoxGradient(),
-          child: new ListView(
-            children: [
-              ImageHeader(
-                image: ProfileImg,
-                title: "Crear cuenta",
-                underLine: true,
-                size: 80,
-              ),
-              InputTextbox(
-                title: "Correo",
-                hintText: '',
-                keyboardType: TextInputType.emailAddress,
-                stream: authBlocInstance.emailRestore,
-                onChange: authBlocInstance.changeEmailRestore,
-                focusNode: _emailFocusNode,
-                colorLines: Colors.white,
-              ),
-              Container(
-                height: 25,
-              ),
-              Center(
-                child: ButtonIconCircle(
-                  nullText: "Rellene todos los campos",
-                  callback: _sendEMail,
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
+  Widget restorePassword() {
+    return Scaffold(
+        body: ModalProgressHUD(
+            inAsyncCall: isLoading,
+            child: Container(
+                decoration: boxGradient(),
+                child: ListView(children: [
+                  ImageHeader(
+                      image: ProfileImg,
+                      title: "Crear cuenta",
+                      underLine: true,
+                      size: 80),
+                  InputTextbox(
+                      title: "Correo",
+                      hintText: '',
+                      keyboardType: TextInputType.emailAddress,
+                      stream: authBlocInstance.emailRestore,
+                      onChange: authBlocInstance.changeEmailRestore,
+                      focusNode: _emailFocusNode,
+                      colorLines: Colors.white),
+                  Container(height: 25),
+                  Center(
+                      child: ButtonIconCircle(
+                          nullText: "Rellene todos los campos",
+                          callback: _sendEMail))
+                ]))));
   }
 }

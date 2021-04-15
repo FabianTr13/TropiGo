@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:TropiGo/src/Modules/Auth/Models/City.dart';
 import 'package:TropiGo/src/Modules/Shop/Bloc/ModelsBloc/OrdersUrl.dart';
 import 'package:TropiGo/src/Modules/Shop/Bloc/ModelsBloc/Product.dart';
 import 'package:TropiGo/src/Modules/Shop/Bloc/ShopCylinderBloc.dart';
@@ -8,72 +9,29 @@ import 'package:flutter/material.dart';
 import 'package:flutter_styled_toast/flutter_styled_toast.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:http/http.dart';
 
 class ShopService {
   final databaseReference = FirebaseDatabase.instance.reference();
 
   Future<List<Product>> getProducts() async {
-    http.Response response = await http
-        .get("http://apitropigas.hol.es/apiKio/public/api/productos/34");
+    String cityId = await getCityId() ?? "1";
 
-    var data = json.decode(response.body);
-    // var data = [
-    //   {
-    //     "codProducto": "43",
-    //     "exento": 1,
-    //     "nombreProducto": "Gas 10LB",
-    //     "impuesto": 0,
-    //     "precio": "107.07",
-    //     "manejaInventario": "0",
-    //     "precioDigitadoManual": "0",
-    //     "cantidad": "0"
-    //   },
-    //   {
-    //     "codProducto": "44",
-    //     "exento": 1,
-    //     "nombreProducto": "Gas 20LB",
-    //     "impuesto": 0,
-    //     "precio": "214.59",
-    //     "manejaInventario": "0",
-    //     "precioDigitadoManual": "0",
-    //     "cantidad": "0"
-    //   },
-    //   {
-    //     "codProducto": "31",
-    //     "exento": 1,
-    //     "nombreProducto": "Gas 25LB",
-    //     "impuesto": 0,
-    //     "precio": "215.46",
-    //     "manejaInventario": "0",
-    //     "precioDigitadoManual": "0",
-    //     "cantidad": "0"
-    //   },
-    //   {
-    //     "codProducto": "39",
-    //     "exento": 1,
-    //     "nombreProducto": "Gas 60LB",
-    //     "impuesto": 0,
-    //     "precio": "635.29",
-    //     "manejaInventario": "0",
-    //     "precioDigitadoManual": "0",
-    //     "cantidad": "0"
-    //   },
-    //   {
-    //     "codProducto": "40",
-    //     "exento": 1,
-    //     "nombreProducto": "Gas 100LB",
-    //     "impuesto": 0,
-    //     "precio": "1170.61",
-    //     "manejaInventario": "0",
-    //     "precioDigitadoManual": "0",
-    //     "cantidad": "0"
-    //   }
-    // ];
+    final Response response = await http
+        .get("http://apitropigas.hol.es/apiKio/public/api/productos/$cityId");
 
-    shopCylinderBlocInstance.changeProductSelect(null);
-    List<Product> products =
-        data.map<Product>((item) => new Product(item)).toList();
-    shopCylinderBlocInstance.changeProduct(products);
+    List<Product> products = [];
+    if (response.statusCode == 200) {
+      final dynamic data = json.decode(response.body);
+
+      bool validateData = data is String;
+      if (!validateData) {
+        shopCylinderBlocInstance.changeProductSelect(null);
+        products = data.map<Product>((item) => Product(item)).toList();
+        shopCylinderBlocInstance.changeProduct(products);
+      }
+    }
     return products;
   }
 
@@ -140,5 +98,51 @@ class ShopService {
         duration: Duration(seconds: 20),
       );
     }
+  }
+
+  Future<List<City>> getCities() async {
+    final Response response =
+        await http.get("http://apitropigas.hol.es/apiKio/public/api/ciudades");
+
+    if (response.statusCode == 200) {
+      return buildCities(response.body);
+    } else {
+      return [];
+    }
+  }
+
+  List<City> buildCities(String getCities) {
+    List<City> cities = [];
+
+    if (getCities.isNotEmpty) {
+      final List<dynamic> cityList = json.decode(getCities);
+
+      for (dynamic city in cityList) {
+        cities.add(City(codCiudad: city['codCiudad'], nombre: city['nombre']));
+      }
+    }
+    return cities;
+  }
+
+  saveCityId(String cityId) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString('cityId', cityId);
+  }
+
+  Future<String> getCityId() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    final String getCityId = prefs.getString("cityId");
+    return getCityId;
+  }
+
+  saveCityName(String cityName) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString('cityName', cityName);
+  }
+
+  Future<String> getCityName() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    final String getCityName = prefs.getString("cityName");
+    return getCityName;
   }
 }

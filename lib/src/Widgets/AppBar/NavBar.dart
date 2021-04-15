@@ -2,7 +2,7 @@ import 'package:TropiGo/src/Multimedia/Images.dart';
 import 'package:TropiGo/src/Services/AuthService.dart';
 import 'package:flutter/material.dart';
 
-AppBar NavBar({
+AppBar navBar({
   bool withActions = true,
   bool automaticallyImplyLeading = true,
   String logo = LogoImg,

@@ -34,7 +34,7 @@ class _HomeShopState extends State<HomeShop> {
             placeholder: (context, url) => CircularProgressIndicator(),
             errorWidget: (context, url, error) => Icon(Icons.error),
           ),
-          MenuStores(context: context),
+          menuStores(context: context),
         ],
       ),
     );

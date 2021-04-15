@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_styled_toast/flutter_styled_toast.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-Widget MenuStores({BuildContext context}) {
+Widget menuStores({BuildContext context}) {
   gotoMenu(Widget option) {
     Navigator.push(
       context,

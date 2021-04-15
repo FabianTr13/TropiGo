@@ -6,6 +6,7 @@ import 'package:TropiGo/src/Modules/Tips/UI/TipsScreen.dart';
 import 'package:TropiGo/src/Multimedia/Images.dart';
 import 'package:TropiGo/src/Multimedia/tropi_icons_icons.dart';
 import 'package:TropiGo/src/Services/AuthService.dart';
+import 'package:TropiGo/src/Services/ShopService.dart';
 import 'package:TropiGo/src/Utils/BoxGradient.dart';
 import 'package:TropiGo/src/Widgets/ButtonRoundBorder.dart';
 import 'package:TropiGo/src/Widgets/ImageHeader.dart';
@@ -18,66 +19,58 @@ class HomeMenu extends StatelessWidget {
     final double marginButtons = 0.75;
 
     gotoMenu(Widget option) {
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => option,
-        ),
-      );
+      Navigator.push(context, MaterialPageRoute(builder: (context) => option));
     }
 
     return Container(
-      decoration: BoxGradient(),
-      child: new ListView(
-        children: [
-          ImageHeader(
-            title: "",
-            size: 150,
-          ),
+        decoration: boxGradient(),
+        child: ListView(children: [
+          ImageHeader(title: "", size: 150),
           ButtonRoundBorder(
-            text: "Pide tu cilindro de GAS",
-            icon: TropiIcons.corazon,
-            callback: () => gotoMenu(HomeShop()),
-            widthPorcent: marginButtons,
-            height: height,
-          ),
+              text: "Pide tu cilindro de GAS",
+              icon: TropiIcons.corazon,
+              callback: () => gotoMenu(HomeShop()),
+              widthPorcent: marginButtons,
+              height: height),
           ButtonRoundBorder(
-            text: "Mi Perfil",
-            icon: TropiIcons.user,
-            callback: () => gotoMenu(ProfileScreen()),
-            widthPorcent: marginButtons,
-            height: height,
-          ),
+              text: "Mi Perfil",
+              icon: TropiIcons.user,
+              callback: () => goToProfileScreen(context),
+              widthPorcent: marginButtons,
+              height: height),
           ButtonRoundBorder(
-            text: "Cocina con tropi",
-            img: KitchenIconImg,
-            callback: () => gotoMenu(KitchenScreen()),
-            widthPorcent: marginButtons,
-            height: height,
-          ),
+              text: "Cocina con tropi",
+              img: KitchenIconImg,
+              callback: () => gotoMenu(KitchenScreen()),
+              widthPorcent: marginButtons,
+              height: height),
           ButtonRoundBorder(
-            text: "Tropi Tips",
-            img: TipsIconImg,
-            callback: () => gotoMenu(TipsScreen()),
-            widthPorcent: marginButtons,
-            height: height,
-          ),
+              text: "Tropi Tips",
+              img: TipsIconImg,
+              callback: () => gotoMenu(TipsScreen()),
+              widthPorcent: marginButtons,
+              height: height),
           ButtonRoundBorder(
-            text: "Sugerencias Tropigas",
-            icon: TropiIcons.correo,
-            callback: () => gotoMenu(ContactScreen()),
-            widthPorcent: marginButtons,
-            height: height,
-          ),
+              text: "Sugerencias Tropigas",
+              icon: TropiIcons.correo,
+              callback: () => gotoMenu(ContactScreen()),
+              widthPorcent: marginButtons,
+              height: height),
           ButtonRoundBorder(
-            text: "Cerrar Sesión",
-            icon: TropiIcons.logout,
-            callback: () => AuthService().cerrarSesion(context),
-            widthPorcent: marginButtons,
-            height: height,
-          )
-        ],
-      ),
-    );
+              text: "Cerrar Sesión",
+              icon: TropiIcons.logout,
+              callback: () => AuthService().cerrarSesion(context),
+              widthPorcent: marginButtons,
+              height: height)
+        ]));
+  }
+
+  void goToProfileScreen(BuildContext context) async {
+    String getCityName = await ShopService().getCityName();
+
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => ProfileScreen(getCity: getCityName)));
   }
 }

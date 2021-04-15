@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class ErrorMessage extends StatelessWidget {
   final String errorMessage;
-  bool visible;
+  final bool visible;
 
   ErrorMessage({
     this.errorMessage,

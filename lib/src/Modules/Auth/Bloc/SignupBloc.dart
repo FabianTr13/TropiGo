@@ -7,6 +7,7 @@ class SignupBloc with AuthValidator {
   final _emailController = BehaviorSubject<String>();
   final _passwordController = BehaviorSubject<String>();
   final _nameController = BehaviorSubject<String>();
+  final _colonyController = BehaviorSubject<String>();
   final _sexoController = BehaviorSubject<String>.seeded("m");
   final _birthDayController = BehaviorSubject<String>();
   final _phoneNumberController = BehaviorSubject<String>();
@@ -23,6 +24,8 @@ class SignupBloc with AuthValidator {
   Stream<String> get name => _nameController.stream.transform(validaName);
   Stream<String> get phoneNumber =>
       _phoneNumberController.stream.transform(validaPhoneNumber);
+
+  Stream<String> get colony => _colonyController.stream.transform(validaColony);
   Stream<String> get password =>
       _passwordController.stream.transform(validaPassword);
   Stream<String> get sexo => _sexoController.stream.transform(validaSexo);
@@ -54,6 +57,7 @@ class SignupBloc with AuthValidator {
 
   Function(String) get changeEmail => _emailController.sink.add;
   Function(String) get changeName => _nameController.sink.add;
+  Function(String) get changeColony => _colonyController.sink.add;
   Function(String) get changePhoneNumber => _phoneNumberController.sink.add;
   Function(String) get changeSexo => _sexoController.sink.add;
   Function(String) get changeBirthDate => _birthDayController.sink.add;
@@ -70,12 +74,15 @@ class SignupBloc with AuthValidator {
     return _passwordController.value;
   }
 
-  Signup getSignup() {
+  Signup getSignup(cityId, cityName) {
     return Signup(
       uID: _uIdController.value,
       email: _emailController.value,
       name: _nameController.value,
       phoneNumber: _phoneNumberController.value,
+      colony: _colonyController.value,
+      cityId: cityId,
+      cityName: cityName,
       sexo: _sexoController.value,
       birthday: _birthDayController.value,
       password: _passwordController.value,
@@ -91,6 +98,7 @@ class SignupBloc with AuthValidator {
     _emailController.close();
     _passwordController.close();
     _nameController.close();
+    _colonyController.close();
     _phoneNumberController.close();
     _rePasswordController.close();
     _newNameController.close();

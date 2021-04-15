@@ -43,6 +43,15 @@ class AuthValidator {
     }
   });
 
+  final validaColony = StreamTransformer<String, String>.fromHandlers(
+      handleData: (colony, sink) {
+    if (colony.length > 3) {
+      sink.add(colony);
+    } else {
+      sink.addError("Colonia incompleto");
+    }
+  });
+
   final validaSexo =
       StreamTransformer<String, String>.fromHandlers(handleData: (sexo, sink) {
     sink.add(sexo);

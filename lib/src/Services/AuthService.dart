@@ -4,6 +4,7 @@ import 'package:TropiGo/src/Modules/Auth/Models/AuthRequest.dart';
 import 'package:TropiGo/src/Modules/Auth/Models/Login.dart';
 import 'package:TropiGo/src/Modules/Auth/Models/Signup.dart';
 import 'package:TropiGo/src/Modules/Auth/Models/UserProfile.dart';
+import 'package:TropiGo/src/Services/ShopService.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/cupertino.dart';
@@ -15,7 +16,11 @@ class AuthService {
 
   Future<AuthRequest> createUser() async {
     AuthRequest authRequest = AuthRequest();
-    Signup signupData = signupBlocInstance.getSignup();
+
+    final String cityId = await ShopService().getCityId();
+    final String cityName = await ShopService().getCityName();
+
+    Signup signupData = signupBlocInstance.getSignup(cityId, cityName);
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
     try {
@@ -53,6 +58,9 @@ class AuthService {
             uid: userStore.key,
             email: user.email,
             name: userStore.value['name'],
+            cityId: userStore.value['cityId'],
+            cityName: userStore.value['cityName'],
+            colony: userStore.value['colony'],
             phoneNumber: userStore.value['phone'].toString(),
             sexo: userStore.value['sexo'].toString(),
             birthDate: userStore.value['fechaNacimiento'].toString(),
@@ -65,13 +73,15 @@ class AuthService {
     return userProfile;
   }
 
-  Future<void> updateUser() {
-    Signup userUpdate = signupBlocInstance.getSignup();
+  void updateUser() async {
+    final String cityId = await ShopService().getCityId();
+    final String cityName = await ShopService().getCityName();
+
+    Signup userUpdate = signupBlocInstance.getSignup(cityId, cityName);
     databaseReference
         .child("Users")
         .child(userUpdate.uID)
         .set(userUpdate.upDatetoJson());
-    // print(userUpdate.upDatetoJson());
   }
 
   Future<AuthRequest> loginUser() async {
@@ -97,7 +107,6 @@ class AuthService {
     } catch (e) {
       _mapErrorMessage(authRequest, e.code);
     }
-
     return authRequest;
   }
 
@@ -106,6 +115,7 @@ class AuthService {
     try {
       var restartRequest =
           await _auth.sendPasswordResetEmail(email: email).then((value) {});
+      print(restartRequest);
       return "Se envio un correo para restablecer tu contraseña";
     } catch (e) {
       return "Correo no valido";
@@ -113,11 +123,9 @@ class AuthService {
   }
 
   cerrarSesion(BuildContext context) {
-    AuthService().singOut().then(
-          (value) => Navigator.of(context).popUntil(
-            (route) => route.isFirst,
-          ),
-        );
+    AuthService().singOut().then((value) => Navigator.of(context).popUntil(
+          (route) => route.isFirst,
+        ));
   }
 
   Future<void> singOut() async {
@@ -137,13 +145,11 @@ class AuthService {
     //GetFrom local storage
     String email = (prefs.getString('email') ?? null);
     String password = (prefs.getString('password') ?? null);
-
     if (email != null && password != null) {
       authBlocInstance.changeEmail(email);
       authBlocInstance.changePassword(password);
       authRequest = await AuthService().loginUser();
     }
-
     return authRequest;
   }
 

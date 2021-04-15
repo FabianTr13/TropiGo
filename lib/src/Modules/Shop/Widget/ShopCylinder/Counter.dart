@@ -22,7 +22,7 @@ class _CounterState extends State<Counter> {
       child: new Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          _ButtonAction(minus, Icons.remove),
+          _buttonAction(minus, Icons.remove),
           StreamBuilder(
             initialData: 1,
             stream: shopCylinderBlocInstance.count,
@@ -35,13 +35,13 @@ class _CounterState extends State<Counter> {
               );
             },
           ),
-          _ButtonAction(add, Icons.add),
+          _buttonAction(add, Icons.add),
         ],
       ),
     );
   }
 
-  Widget _ButtonAction(VoidCallback callback, IconData icon) {
+  Widget _buttonAction(VoidCallback callback, IconData icon) {
     return FlatButton(
       onPressed: callback,
       child: Card(

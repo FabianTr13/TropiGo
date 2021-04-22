@@ -10,7 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 
 class TipsScreen extends StatefulWidget {
-  TipsScreen({Key key}) : super(key: key);
+  const TipsScreen({Key key}) : super(key: key);
 
   @override
   _TipsScreenState createState() => _TipsScreenState();
@@ -19,6 +19,7 @@ class TipsScreen extends StatefulWidget {
 class _TipsScreenState extends State<TipsScreen> {
   bool _isLoading = true;
   String imageTop = "";
+
   @override
   void initState() {
     super.initState();
@@ -36,34 +37,28 @@ class _TipsScreenState extends State<TipsScreen> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return ModalProgressHUD(
-        inAsyncCall: _isLoading,
-        progressIndicator: CircularProgressIndicator(
-            valueColor: new AlwaysStoppedAnimation<Color>(Colors.orange)),
-        child: Container(
-            margin: EdgeInsets.zero,
-            decoration: boxGradient(),
-            child: SafeArea(
-                child: CustomScrollView(slivers: [
-              SliverToBoxAdapter(
+  Widget build(BuildContext context) => ModalProgressHUD(
+      inAsyncCall: _isLoading,
+      progressIndicator: CircularProgressIndicator(
+          valueColor: AlwaysStoppedAnimation<Color>(Colors.orange)),
+      child: Container(
+          margin: EdgeInsets.zero,
+          decoration: boxGradient(),
+          child: SafeArea(
+              child: SingleChildScrollView(
                   child: Column(children: [
-                CachedNetworkImage(
-                    imageUrl: imageTop,
-                    width: MediaQuery.of(context).size.width * 0.95,
-                    placeholder: (context, url) => CircularProgressIndicator(),
-                    errorWidget: (context, url, error) => Icon(Icons.error)),
-                CarouselText(stream: tipsBlocInstance.tips)
-              ])),
-              SliverFillRemaining(
-                  hasScrollBody: false,
-                  child: Container(
-                      alignment: Alignment.bottomCenter,
-                      margin: EdgeInsets.only(bottom: 15),
-                      child: ButtonIconCircle(
-                          callback: () => Navigator.pop(context),
-                          backgroundColor: Colors.red,
-                          icon: Icons.arrow_back)))
-            ]))));
-  }
+            CachedNetworkImage(
+                imageUrl: imageTop,
+                width: MediaQuery.of(context).size.width * 0.95,
+                placeholder: (context, url) => CircularProgressIndicator(),
+                errorWidget: (context, url, error) => Icon(Icons.error)),
+            CarouselText(stream: tipsBlocInstance.tips),
+            Container(
+                alignment: Alignment.bottomCenter,
+                margin: EdgeInsets.only(bottom: 15),
+                child: ButtonIconCircle(
+                    callback: () => Navigator.pop(context),
+                    backgroundColor: Colors.red,
+                    icon: Icons.arrow_back))
+          ])))));
 }

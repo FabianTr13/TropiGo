@@ -10,7 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 
 class KitchenScreen extends StatefulWidget {
-  KitchenScreen({Key key}) : super(key: key);
+  const KitchenScreen({Key key}) : super(key: key);
 
   @override
   _KitchenScreenState createState() => _KitchenScreenState();
@@ -46,8 +46,8 @@ class _KitchenScreenState extends State<KitchenScreen> {
           margin: EdgeInsets.zero,
           height: MediaQuery.of(context).size.height,
           decoration: boxGradient(),
-          child: SingleChildScrollView(
-              child: SafeArea(
+          child: SafeArea(
+              child: SingleChildScrollView(
                   child: Column(children: [
             StreamBuilder(
                 stream: kitchenBlocInstance.recipes,

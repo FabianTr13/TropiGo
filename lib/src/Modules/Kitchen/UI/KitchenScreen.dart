@@ -38,53 +38,35 @@ class _KitchenScreenState extends State<KitchenScreen> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return ModalProgressHUD(
+  Widget build(BuildContext context) => ModalProgressHUD(
       inAsyncCall: _isLoading,
       progressIndicator: CircularProgressIndicator(
-        valueColor: new AlwaysStoppedAnimation<Color>(Colors.orange),
-      ),
+          valueColor: AlwaysStoppedAnimation<Color>(Colors.orange)),
       child: Container(
-        margin: EdgeInsets.zero,
-        decoration: boxGradient(),
-        child: SafeArea(
-          child: CustomScrollView(
-            slivers: [
-              SliverToBoxAdapter(
-                child: StreamBuilder(
-                  stream: kitchenBlocInstance.recipes,
-                  builder: (context, snapshot) => Column(
-                    children: [
+          margin: EdgeInsets.zero,
+          height: MediaQuery.of(context).size.height,
+          decoration: boxGradient(),
+          child: SingleChildScrollView(
+              child: SafeArea(
+                  child: Column(children: [
+            StreamBuilder(
+                stream: kitchenBlocInstance.recipes,
+                builder: (context, snapshot) => Column(children: [
                       CachedNetworkImage(
-                        imageUrl: _imageTop,
-                        width: MediaQuery.of(context).size.width * 0.95,
-                        placeholder: (context, url) =>
-                            CircularProgressIndicator(),
-                        errorWidget: (context, url, error) => Icon(Icons.error),
-                      ),
-                      CarouselText(
-                        stream: kitchenBlocInstance.recipes,
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              SliverFillRemaining(
-                hasScrollBody: false,
-                child: Container(
-                  alignment: Alignment.bottomCenter,
-                  margin: EdgeInsets.only(bottom: 15),
-                  child: ButtonIconCircle(
+                          imageUrl: _imageTop,
+                          width: MediaQuery.of(context).size.width * 0.95,
+                          placeholder: (context, url) =>
+                              CircularProgressIndicator(),
+                          errorWidget: (context, url, error) =>
+                              Icon(Icons.error)),
+                      CarouselText(stream: kitchenBlocInstance.recipes)
+                    ])),
+            Container(
+                alignment: Alignment.bottomCenter,
+                margin: EdgeInsets.only(bottom: 15),
+                child: ButtonIconCircle(
                     callback: () => Navigator.pop(context),
                     backgroundColor: Colors.red,
-                    icon: Icons.arrow_back,
-                  ),
-                ),
-              )
-            ],
-          ),
-        ),
-      ),
-    );
-  }
+                    icon: Icons.arrow_back))
+          ])))));
 }

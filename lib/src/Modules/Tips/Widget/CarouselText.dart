@@ -31,6 +31,7 @@ class _CarouselTextState extends State<CarouselText> {
 
   Widget buildItem(item) => Container(
       width: MediaQuery.of(context).size.width,
+      height: MediaQuery.of(context).size.height * 0.95,
       child: Container(
           child: Column(children: [
         paragraph(item.title, 16),

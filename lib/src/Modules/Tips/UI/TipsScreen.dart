@@ -50,6 +50,7 @@ class _TipsScreenState extends State<TipsScreen> {
                   child: Column(children: [
                 CachedNetworkImage(
                     imageUrl: imageTop,
+                    width: MediaQuery.of(context).size.width * 0.95,
                     placeholder: (context, url) => CircularProgressIndicator(),
                     errorWidget: (context, url, error) => Icon(Icons.error)),
                 CarouselText(stream: tipsBlocInstance.tips)

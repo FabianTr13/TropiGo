@@ -31,7 +31,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   FocusNode _focusColonyNode;
   TextEditingController _nameController = TextEditingController();
   TextEditingController _phoneController = TextEditingController();
-  TextEditingController _colonyController = TextEditingController();
+  //TextEditingController _colonyController = TextEditingController();
   TextEditingController dateCtl = TextEditingController();
   String cityId = "";
   String cityName;
@@ -73,7 +73,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       signupBlocInstance.changeEmail(user.email);
       _nameController.text = user.name;
       _phoneController.text = user.phoneNumber;
-      _colonyController.text = user.colony;
+      //_colonyController.text = user.colony;
       dateCtl.text = user.birthDate;
 
       setState(() {
@@ -192,7 +192,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                       Icon(Icons.arrow_drop_down)
                                     ])),
                             onTap: () => {_buildingCitiesModal(context)}),
-                        InputTextbox(
+                        /*InputTextbox(
                             title: "Colonia",
                             hintText: '',
                             focusNode: _focusColonyNode,
@@ -200,7 +200,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             onChange: signupBlocInstance.changeColony,
                             nextFocus: _focusPassNode,
                             controller: _colonyController,
-                            colorLines: Colors.white),
+                            colorLines: Colors.white),*/
                         InputTextbox(
                             controller: dateCtl,
                             title: "Fecha de nacimiento",
@@ -212,7 +212,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             allowEdit: true),
                         SizedBox(height: 20),
                         Container(
-                            width: MediaQuery.of(context).size.width * 0.65,
+                            width: MediaQuery.of(context).size.width,
                             child: ButtonLargeSubmit(
                                 text: "GUARDAR",
                                 nullText: "Rellena los campos",

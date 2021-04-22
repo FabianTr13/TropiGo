@@ -57,6 +57,7 @@ class _KitchenScreenState extends State<KitchenScreen> {
                     children: [
                       CachedNetworkImage(
                         imageUrl: _imageTop,
+                        width: MediaQuery.of(context).size.width * 0.95,
                         placeholder: (context, url) =>
                             CircularProgressIndicator(),
                         errorWidget: (context, url, error) => Icon(Icons.error),

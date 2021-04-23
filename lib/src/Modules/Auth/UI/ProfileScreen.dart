@@ -28,10 +28,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
   bool isLoading = false;
   FocusNode _focusNameNode;
   FocusNode _focusPassNode;
-  FocusNode _focusColonyNode;
   TextEditingController _nameController = TextEditingController();
   TextEditingController _phoneController = TextEditingController();
-  //TextEditingController _colonyController = TextEditingController();
   TextEditingController dateCtl = TextEditingController();
   String cityId = "";
   String cityName;
@@ -73,7 +71,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
       signupBlocInstance.changeEmail(user.email);
       _nameController.text = user.name;
       _phoneController.text = user.phoneNumber;
-      //_colonyController.text = user.colony;
       dateCtl.text = user.birthDate;
 
       setState(() {
@@ -120,105 +117,95 @@ class _ProfileScreenState extends State<ProfileScreen> {
           color: Colors.orangeAccent,
           progressIndicator: CircularProgressIndicator(
               valueColor: AlwaysStoppedAnimation<Color>(Colors.orange)),
-          child: SingleChildScrollView(
-              child: Container(
-                  decoration: boxGradient(),
-                  height: MediaQuery.of(context).size.height,
+          child: Container(
+              decoration: boxGradient(),
+              height: MediaQuery.of(context).size.height,
+              child: SingleChildScrollView(
                   child: Form(
                       child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                        ImageHeader(
-                            title: "Mi Perfil",
-                            image: ProfileImg,
-                            underLine: true,
-                            size: 80),
-                        InputTextbox(
-                            title: "Nombre",
-                            hintText: '',
-                            focusNode: _focusNameNode,
-                            onChange: signupBlocInstance.changNewName,
-                            stream: signupBlocInstance.newName,
-                            nextFocus: _focusPassNode,
-                            controller: _nameController,
-                            colorLines: Colors.white),
-                        InputTextbox(
-                            title: "Teléfono",
-                            hintText: '',
-                            keyboardType: TextInputType.number,
-                            onChange: signupBlocInstance.changeNewPhoneNumber,
-                            stream: signupBlocInstance.newPhoneNumber,
-                            focusNode: _focusPassNode,
-                            controller: _phoneController,
-                            colorLines: Colors.white),
-                        Container(
-                            alignment: Alignment.bottomLeft,
-                            margin: EdgeInsets.only(left: 20),
-                            child: Text("Sexo",
-                                textAlign: TextAlign.start,
-                                style: TextStyle(
-                                    fontSize: 18, color: TropiColors.white))),
-                        RadialButton(
-                            stream: signupBlocInstance.newsexo,
-                            title: "Masculino",
-                            value: "m",
-                            callback: _changeSex),
-                        RadialButton(
-                            stream: signupBlocInstance.newsexo,
-                            title: "Femenino",
-                            value: "f",
-                            callback: _changeSex),
-                        Container(
-                            margin: EdgeInsets.only(left: 20),
-                            child: Text("Ciudad",
-                                style: TextStyle(
-                                    fontSize: 18, color: TropiColors.white))),
-                        GestureDetector(
-                            child: Container(
-                                margin: EdgeInsets.only(
-                                    left: 20, bottom: 10, top: 15),
-                                width: MediaQuery.of(context).size.width,
-                                alignment: Alignment.centerRight,
-                                child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: [
-                                      Text(cityName ?? "",
-                                          style: TextStyle(
-                                              fontSize: 16,
-                                              color: TropiColors.white)),
-                                      Icon(Icons.arrow_drop_down)
-                                    ])),
-                            onTap: () => {_buildingCitiesModal(context)}),
-                        /*InputTextbox(
-                            title: "Colonia",
-                            hintText: '',
-                            focusNode: _focusColonyNode,
-                            stream: signupBlocInstance.colony,
-                            onChange: signupBlocInstance.changeColony,
-                            nextFocus: _focusPassNode,
-                            controller: _colonyController,
-                            colorLines: Colors.white),*/
-                        InputTextbox(
-                            controller: dateCtl,
-                            title: "Fecha de nacimiento",
-                            hintText: '',
-                            stream: signupBlocInstance.newBirthDay,
-                            onChange: signupBlocInstance.changeNewBirthDay,
-                            colorLines: Colors.white,
-                            onTap: _changeBirthDay,
-                            allowEdit: true),
-                        SizedBox(height: 20),
-                        Container(
+                    ImageHeader(
+                        title: "Mi Perfil",
+                        image: ProfileImg,
+                        underLine: true,
+                        size: 80),
+                    InputTextbox(
+                        title: "Nombre",
+                        hintText: '',
+                        focusNode: _focusNameNode,
+                        onChange: signupBlocInstance.changNewName,
+                        stream: signupBlocInstance.newName,
+                        nextFocus: _focusPassNode,
+                        controller: _nameController,
+                        colorLines: Colors.white),
+                    InputTextbox(
+                        title: "Teléfono",
+                        hintText: '',
+                        keyboardType: TextInputType.number,
+                        onChange: signupBlocInstance.changeNewPhoneNumber,
+                        stream: signupBlocInstance.newPhoneNumber,
+                        focusNode: _focusPassNode,
+                        controller: _phoneController,
+                        colorLines: Colors.white),
+                    Container(
+                        alignment: Alignment.bottomLeft,
+                        margin: EdgeInsets.only(left: 20),
+                        child: Text("Sexo",
+                            textAlign: TextAlign.start,
+                            style: TextStyle(
+                                fontSize: 18, color: TropiColors.white))),
+                    RadialButton(
+                        stream: signupBlocInstance.newsexo,
+                        title: "Masculino",
+                        value: "m",
+                        callback: _changeSex),
+                    RadialButton(
+                        stream: signupBlocInstance.newsexo,
+                        title: "Femenino",
+                        value: "f",
+                        callback: _changeSex),
+                    Container(
+                        margin: EdgeInsets.only(left: 20),
+                        child: Text("Ciudad",
+                            style: TextStyle(
+                                fontSize: 18, color: TropiColors.white))),
+                    GestureDetector(
+                        child: Container(
+                            margin:
+                                EdgeInsets.only(left: 20, bottom: 10, top: 15),
                             width: MediaQuery.of(context).size.width,
-                            child: ButtonLargeSubmit(
-                                text: "GUARDAR",
-                                nullText: "Rellena los campos",
-                                callback: _doSave,
-                                stream: authBlocInstance.submitValidLogin))
-                      ]))))));
+                            alignment: Alignment.centerRight,
+                            child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Text(cityName ?? "",
+                                      style: TextStyle(
+                                          fontSize: 16,
+                                          color: TropiColors.white)),
+                                  Icon(Icons.arrow_drop_down)
+                                ])),
+                        onTap: () => {_buildingCitiesModal(context)}),
+                    InputTextbox(
+                        controller: dateCtl,
+                        title: "Fecha de nacimiento",
+                        hintText: '',
+                        stream: signupBlocInstance.newBirthDay,
+                        onChange: signupBlocInstance.changeNewBirthDay,
+                        colorLines: Colors.white,
+                        onTap: _changeBirthDay,
+                        allowEdit: true),
+                    SizedBox(height: 20),
+                    Container(
+                        width: MediaQuery.of(context).size.width,
+                        child: ButtonLargeSubmit(
+                            text: "GUARDAR",
+                            nullText: "Rellena los campos",
+                            callback: _doSave,
+                            stream: authBlocInstance.submitValidLogin))
+                  ]))))));
 
   void _buildingCitiesModal(BuildContext context) {
     showModalBottomSheet(
@@ -226,10 +213,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
         builder: (BuildContext bc) => Container(
             color: Color(0xFF737373),
             child: Container(
-              height: 600,
-              child: buildCityModal(),
-              decoration: boxGradient(),
-            )));
+                height: 600,
+                child: buildCityModal(),
+                decoration: boxGradient())));
   }
 
   Widget buildCityModal() =>

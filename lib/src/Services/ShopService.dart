@@ -16,7 +16,7 @@ class ShopService {
   final databaseReference = FirebaseDatabase.instance.reference();
 
   Future<List<Product>> getProducts() async {
-    String cityId = await getCityId() ?? "1";
+    final String cityId = await getCityId() ?? "1";
 
     final Response response = await http
         .get("http://apitropigas.hol.es/apiKio/public/api/productos/$cityId");
@@ -83,20 +83,13 @@ class ShopService {
       );
 
       Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => HomeShop(),
-        ),
-      );
+          context, MaterialPageRoute(builder: (context) => HomeShop()));
 
       shopCylinderBlocInstance.changeProductSelect(null);
     } catch (e) {
       print(e);
-      showToast(
-        "Ocurrio un error al crear su orden: ${e.toString()}",
-        backgroundColor: Colors.red,
-        duration: Duration(seconds: 20),
-      );
+      showToast("Ocurrio un error al crear su orden: ${e.toString()}",
+          backgroundColor: Colors.red, duration: Duration(seconds: 20));
     }
   }
 
@@ -112,7 +105,7 @@ class ShopService {
   }
 
   List<City> buildCities(String getCities) {
-    List<City> cities = [];
+    final List<City> cities = [];
 
     if (getCities.isNotEmpty) {
       final List<dynamic> cityList = json.decode(getCities);

@@ -17,7 +17,7 @@ class ButtonLarge extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Container(
       margin: const EdgeInsets.only(left: 10.0, right: 10.0),
-      child: Row(children: <Widget>[
+      child: Row(children: [
         Expanded(
             child: FlatButton(
                 color: this.backgroundColor,

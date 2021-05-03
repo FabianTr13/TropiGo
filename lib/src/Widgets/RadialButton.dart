@@ -7,40 +7,28 @@ class RadialButton extends StatelessWidget {
   final String value;
   final void Function(String) callback;
 
-  const RadialButton({
-    Key key,
-    @required this.stream,
-    @required this.title,
-    @required this.value,
-    @required this.callback,
-  }) : super(key: key);
+  const RadialButton(
+      {Key key,
+      @required this.stream,
+      @required this.title,
+      @required this.value,
+      @required this.callback})
+      : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return ListTile(
+  Widget build(BuildContext context) => ListTile(
       visualDensity: VisualDensity(horizontal: 0, vertical: -4),
-      title: Text(
-        this.title,
-        style: TextStyle(
-          color: TropiColors.white,
-          fontSize: 18,
-        ),
-      ),
+      title: Text(this.title,
+          style: TextStyle(color: TropiColors.white, fontSize: 18)),
       onTap: () => callback(this.value),
       leading: StreamBuilder(
-        stream: this.stream,
-        initialData: this.value,
-        builder: (BuildContext context, AsyncSnapshot snapshot) {
-          return Radio(
-            value: this.value,
-            groupValue: snapshot.data,
-            activeColor: TropiColors.orangeButons,
-            onChanged: (value) {
-              callback(this.value);
-            },
-          );
-        },
-      ),
-    );
-  }
+          stream: this.stream,
+          initialData: this.value,
+          builder: (BuildContext context, AsyncSnapshot snapshot) => Radio(
+              value: this.value,
+              groupValue: snapshot.data,
+              activeColor: TropiColors.orangeButons,
+              onChanged: (value) {
+                callback(this.value);
+              })));
 }

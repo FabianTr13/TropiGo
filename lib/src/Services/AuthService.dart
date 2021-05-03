@@ -111,7 +111,7 @@ class AuthService {
   }
 
   Future<String> sendRestartEmail() async {
-    String email = authBlocInstance.getRestartEmail();
+    final String email = authBlocInstance.getRestartEmail();
     try {
       var restartRequest =
           await _auth.sendPasswordResetEmail(email: email).then((value) {});

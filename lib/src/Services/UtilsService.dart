@@ -6,7 +6,7 @@ class UtilsService {
 
   Future<String> getImageStore(String imageName) async {
     final ref = _fireStore.child(imageName);
-    var url = await ref.getDownloadURL();
+    final url = await ref.getDownloadURL();
     return url?.toString() ?? LogoImg;
   }
 }

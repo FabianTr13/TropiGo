@@ -14,7 +14,7 @@ import 'package:modal_progress_hud/modal_progress_hud.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
-  _LoginState createState() => new _LoginState();
+  _LoginState createState() => _LoginState();
 }
 
 class _LoginState extends State<LoginScreen> {
@@ -24,9 +24,7 @@ class _LoginState extends State<LoginScreen> {
   FocusNode _focusPassNode;
 
   @override
-  Widget build(BuildContext context) {
-    return Container(child: _login());
-  }
+  Widget build(BuildContext context) => Container(child: _login());
 
   @override
   void initState() {

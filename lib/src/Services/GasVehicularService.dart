@@ -7,10 +7,9 @@ class GasVehicularService {
   Future<List<GpsStores>> getStores() async {
     var documents = await _fireStore.collection('gasvehicular').get();
 
-    List<GpsStores> stores = documents.docs
+    final List<GpsStores> stores = documents.docs
         .map<GpsStores>((item) => new GpsStores(item.data()))
         .toList();
-
     return stores;
   }
 }

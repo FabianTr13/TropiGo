@@ -6,14 +6,13 @@ class ContactService {
       FirebaseDatabase.instance.reference().child("ajustes");
 
   Future<Contact> getSetting() async {
-    var data = await databaseReference.once();
+    final data = await databaseReference.once();
 
     if (data.value != null) {
       return Contact(
-        tel: 'tel:' + data.value["tel"].toString(),
-        email: 'mailto:' + data.value["email"].toString(),
-        chat: 'https://wa.me/' + data.value["chat"].toString(),
-      );
+          tel: 'tel:' + data.value["tel"].toString(),
+          email: 'mailto:' + data.value["email"].toString(),
+          chat: 'https://wa.me/' + data.value["chat"].toString());
     } else {
       return Contact();
     }

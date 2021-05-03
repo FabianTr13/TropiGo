@@ -9,47 +9,33 @@ class ButtonIconCircleSubmit extends StatelessWidget {
   final Stream<bool> stream;
   final IconData icon;
 
-  const ButtonIconCircleSubmit({
-    Key key,
-    this.callback,
-    this.color = Colors.white,
-    this.backgroundColor = Colors.red,
-    this.stream,
-    this.nullText,
-    this.icon = Icons.arrow_forward,
-  }) : super(key: key);
+  const ButtonIconCircleSubmit(
+      {Key key,
+      this.callback,
+      this.color = Colors.white,
+      this.backgroundColor = Colors.red,
+      this.stream,
+      this.nullText,
+      this.icon = Icons.arrow_forward})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     _nullText() {
-      showToast(
-        this.nullText,
-        backgroundColor: Colors.red,
-      );
+      showToast(this.nullText, backgroundColor: Colors.red);
     }
 
     return StreamBuilder(
-      stream: stream,
-      builder: (context, snapshot) {
-        return ClipOval(
-          child: Material(
-            color: this.backgroundColor,
-            child: InkWell(
-              splashColor: Colors.red,
-              child: SizedBox(
-                width: 66,
-                height: 66,
-                child: Icon(
-                  this.icon,
-                  color: Colors.white,
-                  size: 50,
-                ),
-              ),
-              onTap: snapshot.hasData ? this.callback : _nullText,
-            ),
-          ),
-        );
-      },
-    );
+        stream: stream,
+        builder: (context, snapshot) => ClipOval(
+            child: Material(
+                color: this.backgroundColor,
+                child: InkWell(
+                    splashColor: Colors.red,
+                    child: SizedBox(
+                        width: 66,
+                        height: 66,
+                        child: Icon(this.icon, color: Colors.white, size: 50)),
+                    onTap: snapshot.hasData ? this.callback : _nullText))));
   }
 }

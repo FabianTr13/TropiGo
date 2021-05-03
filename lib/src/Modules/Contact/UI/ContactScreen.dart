@@ -38,9 +38,9 @@ class _ContactScreenState extends State<ContactScreen> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return Container(
+  Widget build(BuildContext context) => Container(
       height: MediaQuery.of(context).size.height,
+      padding: EdgeInsets.only(bottom: 20),
       decoration: BoxDecoration(
           gradient: LinearGradient(
               begin: const FractionalOffset(0, 1.3),
@@ -48,44 +48,36 @@ class _ContactScreenState extends State<ContactScreen> {
               colors: [Colors.yellow, Colors.deepOrange],
               stops: [0.0, 1.0],
               tileMode: TileMode.clamp)),
-      child: new Column(
-        children: [
-          Image.asset(
-            ContactImg,
-            fit: BoxFit.fitHeight,
-          ),
-          Container(height: 45),
-          ButtonRoundBorder(
+      child:
+          Column(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+        _showOptionsContainer(),
+        ButtonIconCircle(
+            callback: () => Navigator.pop(context),
+            backgroundColor: Colors.red,
+            icon: Icons.arrow_back)
+      ]));
+
+  Widget _showOptionsContainer() => Container(
+          child: Column(children: [
+        Image.asset(ContactImg, fit: BoxFit.fitHeight),
+        SizedBox(height: 45),
+        ButtonRoundBorder(
             text: "Llama *Tropi",
             icon: TropiIcons.phone,
             callback: () => _launchURL(contact.tel),
             fontSize: 22,
-            height: this.height,
-          ),
-          ButtonRoundBorder(
+            height: this.height),
+        ButtonRoundBorder(
             text: "Email",
             icon: TropiIcons.correo,
             callback: () => _launchURL(contact.email),
             fontSize: 22,
-            height: this.height,
-          ),
-          ButtonRoundBorder(
+            height: this.height),
+        ButtonRoundBorder(
             text: "Chat",
             icon: TropiIcons.chat,
             callback: () => _launchURL(contact.chat),
             fontSize: 22,
-            height: this.height,
-          ),
-          Container(
-            height: 10,
-          ),
-          ButtonIconCircle(
-            callback: () => Navigator.pop(context),
-            backgroundColor: Colors.red,
-            icon: Icons.arrow_back,
-          )
-        ],
-      ),
-    );
-  }
+            height: this.height)
+      ]));
 }

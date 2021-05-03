@@ -17,24 +17,24 @@ class InputTextbox extends StatelessWidget {
   final VoidCallback onTap;
   final bool allowEdit;
 
-  const InputTextbox({
-    Key key,
-    @required this.title,
-    this.hintText,
-    this.obscureText = false,
-    this.autofocus = false,
-    this.keyboardType = TextInputType.text,
-    this.controller,
-    this.focusNode,
-    this.onChange,
-    this.stream,
-    this.nextFocus,
-    this.colorLines = Colors.grey,
-    this.maxLines = 1,
-    this.fontSizeHint = 18,
-    this.onTap,
-    this.allowEdit = false,
-  }) : super(key: key);
+  const InputTextbox(
+      {Key key,
+      @required this.title,
+      this.hintText,
+      this.obscureText = false,
+      this.autofocus = false,
+      this.keyboardType = TextInputType.text,
+      this.controller,
+      this.focusNode,
+      this.onChange,
+      this.stream,
+      this.nextFocus,
+      this.colorLines = Colors.grey,
+      this.maxLines = 1,
+      this.fontSizeHint = 18,
+      this.onTap,
+      this.allowEdit = false})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) => StreamBuilder(
@@ -52,7 +52,7 @@ class InputTextbox extends StatelessWidget {
           child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.start,
-              children: <Widget>[
+              children: [
                 Expanded(
                     child: TextFormField(
                         textInputAction: TextInputAction.next,

@@ -6,7 +6,7 @@ class TipsServise {
   final _fireStore = FirebaseFirestore.instance;
 
   Future<List<Tips>> getTips() async {
-    List<Tips> tips = List<Tips>();
+    List<Tips> tips = [];
     await _fireStore.collection('tropitips').get().then(
       (value) {
         try {
@@ -17,4 +17,7 @@ class TipsServise {
     );
     return tips;
   }
+
+  // Stream<QuerySnapshot> getTips() =>
+  //   _fireStore.collection('tropitips').snapshots();
 }

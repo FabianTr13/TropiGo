@@ -7,17 +7,15 @@ class KitchenServise {
 
   Future<List<KitchenRecipe>> getRecipes() async {
     List<KitchenRecipe> recipes = List<KitchenRecipe>();
-    await _fireStore.collection('tropicocina').get().then(
-      (value) {
-        try {
-          recipes = value.docs
-              .map<KitchenRecipe>((item) => new KitchenRecipe(item.data()))
-              .toList();
+    await _fireStore.collection('tropicocina').get().then((value) {
+      try {
+        recipes = value.docs
+            .map<KitchenRecipe>((item) => new KitchenRecipe(item.data()))
+            .toList();
 
-          kitchenBlocInstance.changeRecipes(recipes);
-        } catch (e) {}
-      },
-    );
+        kitchenBlocInstance.changeRecipes(recipes);
+      } catch (e) {}
+    });
     return recipes;
   }
 }

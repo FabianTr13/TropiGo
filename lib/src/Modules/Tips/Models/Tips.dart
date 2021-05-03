@@ -6,7 +6,11 @@ class Tips {
     return new Tips.deserialize(jsonMap);
   }
 
-  Tips.deserialize(Map jsonMap)
+  Tips.deserialize(dynamic jsonMap)
       : title = jsonMap["titulo"].toString(),
         description = jsonMap["descripcion"].toString();
+
+  Tips.fromJson(dynamic json)
+      : title = json["titulo"],
+        description = json["descripcion"];
 }

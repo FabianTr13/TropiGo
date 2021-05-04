@@ -10,9 +10,6 @@ class GasStoresScreen extends StatefulWidget {
 }
 
 class GasStoreState extends State<GasStoresScreen> {
-  // Completer<GoogleMapController> _controller = Completer();
-  // Set<Marker> _markers = HashSet<Marker>();
-
   @override
   void initState() {
     super.initState();

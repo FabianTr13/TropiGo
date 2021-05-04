@@ -17,46 +17,25 @@ class _CounterState extends State<Counter> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: new Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          _buttonAction(minus, Icons.remove),
-          StreamBuilder(
+  Widget build(BuildContext context) => Center(
+          child:
+              Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
+        _buttonAction(minus, Icons.remove),
+        StreamBuilder(
             initialData: 1,
             stream: shopCylinderBlocInstance.count,
-            builder: (BuildContext context, AsyncSnapshot snapshot) {
-              return Container(
-                child: Text(
-                  snapshot.data.toString(),
-                  style: new TextStyle(fontSize: 22.0),
-                ),
-              );
-            },
-          ),
-          _buttonAction(add, Icons.add),
-        ],
-      ),
-    );
-  }
+            builder: (BuildContext context, AsyncSnapshot snapshot) =>
+                Container(
+                    child: Text(snapshot.data.toString(),
+                        style: TextStyle(fontSize: 22.0)))),
+        _buttonAction(add, Icons.add)
+      ]));
 
-  Widget _buttonAction(VoidCallback callback, IconData icon) {
-    return FlatButton(
+  Widget _buttonAction(VoidCallback callback, IconData icon) => FlatButton(
       onPressed: callback,
       child: Card(
-        shape: RoundedRectangleBorder(
-          side: BorderSide(
-            color: TropiColors.grey,
-            width: 1,
-          ),
-          borderRadius: BorderRadius.circular(5),
-        ),
-        child: Icon(
-          icon,
-          size: 40,
-        ),
-      ),
-    );
-  }
+          shape: RoundedRectangleBorder(
+              side: BorderSide(color: TropiColors.grey, width: 1),
+              borderRadius: BorderRadius.circular(5)),
+          child: Icon(icon, size: 40)));
 }

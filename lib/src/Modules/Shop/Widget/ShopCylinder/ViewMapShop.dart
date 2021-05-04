@@ -10,7 +10,7 @@ import 'package:location/location.dart';
 import 'package:maps_launcher/maps_launcher.dart';
 
 class ViewMapShop extends StatefulWidget {
-  ViewMapShop({Key key}) : super(key: key);
+  const ViewMapShop({Key key}) : super(key: key);
 
   @override
   _ViewMapShopState createState() => _ViewMapShopState();
@@ -34,22 +34,17 @@ class _ViewMapShopState extends State<ViewMapShop> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return GoogleMap(
+  Widget build(BuildContext context) => GoogleMap(
       mapType: MapType.normal,
       initialCameraPosition: initialLocation,
       markers: Set.of((marker != null) ? [marker] : []),
       circles: Set.of((circle != null) ? [circle] : []),
       onMapCreated: (GoogleMapController controller) {
         _controller = controller;
-      },
-    );
-  }
+      });
 
-  static final CameraPosition initialLocation = CameraPosition(
-    target: LatLng(15.506150, -88.026935),
-    zoom: 14.4746,
-  );
+  static final CameraPosition initialLocation =
+      CameraPosition(target: LatLng(15.506150, -88.026935), zoom: 14.4746);
 
   Future<Uint8List> getMarker() async {
     ByteData byteData = await DefaultAssetBundle.of(context).load(DotImg);
@@ -62,39 +57,32 @@ class _ViewMapShopState extends State<ViewMapShop> {
     LatLng latlng = LatLng(newLocalData.latitude, newLocalData.longitude);
     this.setState(() {
       marker = Marker(
-        markerId: MarkerId("home"),
-        position: latlng,
-        rotation: newLocalData.heading,
-        draggable: false,
-        zIndex: 2,
-        flat: true,
-        anchor: Offset(0.5, 0.5),
-        icon: BitmapDescriptor.fromBytes(imageData),
-        onTap: () {
-          MapsLauncher.launchCoordinates(37.4220041, -122.0862462);
-        },
-      );
+          markerId: MarkerId("home"),
+          position: latlng,
+          rotation: newLocalData.heading,
+          draggable: false,
+          zIndex: 2,
+          flat: true,
+          anchor: Offset(0.5, 0.5),
+          icon: BitmapDescriptor.fromBytes(imageData),
+          onTap: () {
+            MapsLauncher.launchCoordinates(37.4220041, -122.0862462);
+          });
       circle = Circle(
-        circleId: CircleId("Home"),
-        radius: 20,
-        zIndex: 1,
-        strokeColor: Colors.blue,
-        strokeWidth: 1,
-        center: latlng,
-        fillColor: Colors.blue.withAlpha(70),
-      );
+          circleId: CircleId("Home"),
+          radius: 20,
+          zIndex: 1,
+          strokeColor: Colors.blue,
+          strokeWidth: 1,
+          center: latlng,
+          fillColor: Colors.blue.withAlpha(70));
     });
 
-    _controller.animateCamera(
-      CameraUpdate.newCameraPosition(
-        new CameraPosition(
-          bearing: 192.8334901395799,
-          target: LatLng(newLocalData.latitude, newLocalData.longitude),
-          tilt: 0,
-          zoom: 18.00,
-        ),
-      ),
-    );
+    _controller.animateCamera(CameraUpdate.newCameraPosition(new CameraPosition(
+        bearing: 192.8334901395799,
+        target: LatLng(newLocalData.latitude, newLocalData.longitude),
+        tilt: 0,
+        zoom: 18.00)));
   }
 
   void getCurrentLocation() async {
@@ -105,9 +93,7 @@ class _ViewMapShopState extends State<ViewMapShop> {
       updateMarkerAndCircle(location, imageData);
     } on PlatformException catch (e) {
       if (e.code == 'PERMISSION_DENIED') {
-        showToast(
-          "Se necesita acceso al gps para continuar",
-        );
+        showToast("Se necesita acceso al gps para continuar");
       }
     }
   }

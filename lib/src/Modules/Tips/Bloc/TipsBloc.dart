@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'package:TropiGo/src/Modules/Tips/Bloc/TipsValidations.dart';
 import 'package:TropiGo/src/Modules/Tips/Models/Tips.dart';
-import 'package:TropiGo/src/Services/TipsService.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:rxdart/rxdart.dart';
 

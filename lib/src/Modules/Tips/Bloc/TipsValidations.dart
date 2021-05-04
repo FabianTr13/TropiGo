@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:TropiGo/src/Modules/Tips/Models/Tips.dart';
 
 class TipsValidations {

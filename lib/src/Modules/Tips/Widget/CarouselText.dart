@@ -1,23 +1,36 @@
 import 'package:TropiGo/src/Widgets/Paragraph.dart';
 import 'package:flutter/material.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 
-class CarouselText extends StatelessWidget {
+class CarouselText extends StatefulWidget {
   final Stream stream;
-  const CarouselText({Key key, @required this.stream}) : super(key: key);
+  final Widget widgetItem;
+  final double height;
+  const CarouselText({Key key, this.stream, this.widgetItem, this.height})
+      : super(key: key);
+  _CarouselTextState createState() => _CarouselTextState();
+}
 
+class _CarouselTextState extends State<CarouselText> {
   @override
   Widget build(BuildContext context) => StreamBuilder(
-      stream: stream,
-      builder: (context, snapshot) {
-        final List info = (snapshot.data == null) ? [] : snapshot.data;
-        List<Widget> items =
-            info.map((item) => buildItem(context, item)).toList();
-        return Container(child: Column(children: items));
-      });
+      stream: widget.stream,
+      builder: (context, snapshot) => Container(
+          height: widget.height,
+          child: CarouselSlider(
+              options: CarouselOptions(
+                  enableInfiniteScroll: false,
+                  viewportFraction: 1,
+                  disableCenter: true),
+              items: snapshot.data?.map<Widget>((item) {
+                return Builder(builder: (BuildContext context) {
+                  return CustomScrollView(
+                      slivers: [SliverToBoxAdapter(child: buildItem(item))]);
+                });
+              })?.toList())));
 
-  Widget buildItem(BuildContext context, item) => Container(
+  Widget buildItem(item) => Container(
       width: MediaQuery.of(context).size.width,
-      margin: EdgeInsets.only(bottom: 10),
       child: Container(
           child: Column(children: [
         paragraph(item.title, 16),

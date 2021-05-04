@@ -17,7 +17,4 @@ class TipsServise {
     );
     return tips;
   }
-
-  // Stream<QuerySnapshot> getTips() =>
-  //   _fireStore.collection('tropitips').snapshots();
 }

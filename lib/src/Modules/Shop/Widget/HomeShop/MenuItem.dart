@@ -8,33 +8,24 @@ class CardMenuItem extends StatelessWidget {
   final double radius;
   final String text;
 
-  const CardMenuItem({
-    Key key,
-    this.height = 100,
-    @required this.imagen,
-    this.callback,
-    this.background = Colors.white,
-    this.radius = 25,
-    this.text = "",
-  }) : super(key: key);
+  const CardMenuItem(
+      {Key key,
+      this.height = 100,
+      @required this.imagen,
+      this.callback,
+      this.background = Colors.white,
+      this.radius = 25,
+      this.text = ""})
+      : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return Card(
+  Widget build(BuildContext context) => Card(
       color: this.background,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(
-          Radius.circular(this.radius),
-        ),
-      ),
+          borderRadius: BorderRadius.all(Radius.circular(this.radius))),
       child: Container(
           height: this.height,
           width: (MediaQuery.of(context).size.width / 2) - 30,
           alignment: Alignment.center,
-          child: FlatButton(
-            child: this.imagen,
-            onPressed: callback,
-          )),
-    );
-  }
+          child: FlatButton(child: this.imagen, onPressed: callback)));
 }

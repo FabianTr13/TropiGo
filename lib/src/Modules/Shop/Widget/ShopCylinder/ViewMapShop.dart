@@ -78,7 +78,7 @@ class _ViewMapShopState extends State<ViewMapShop> {
           fillColor: Colors.blue.withAlpha(70));
     });
 
-    _controller.animateCamera(CameraUpdate.newCameraPosition(new CameraPosition(
+    _controller.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(
         bearing: 192.8334901395799,
         target: LatLng(newLocalData.latitude, newLocalData.longitude),
         tilt: 0,

@@ -20,5 +20,5 @@ Widget _headerSide() => Container(
       Image.asset(LogoImg, height: 120, width: 120),
       StreamBuilder(
           stream: authBlocInstance.email,
-          builder: (context, snapshot) => Text(snapshot.data))
+          builder: (context, snapshot) => Text("${snapshot.data} "))
     ]));

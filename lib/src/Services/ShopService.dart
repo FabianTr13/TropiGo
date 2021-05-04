@@ -18,14 +18,18 @@ class ShopService {
   Future<List<Product>> getProducts() async {
     final String cityId = await getCityId() ?? "1";
 
-    final Response response = await http
-        .get("http://apitropigas.hol.es/apiKio/public/api/productos/$cityId");
-
+    final Response response = await http.post(
+        "https://tropigohn.com/api/public/api/app/productos",
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8'
+        },
+        body: jsonEncode(<String, dynamic>{"codCiudad": cityId}));
+    print(response.body);
     List<Product> products = [];
     if (response.statusCode == 200) {
       final dynamic data = json.decode(response.body);
 
-      bool validateData = data is String;
+      bool validateData = data is String || data is Map;
       if (!validateData) {
         shopCylinderBlocInstance.changeProductSelect(null);
         products = data.map<Product>((item) => Product(item)).toList();
@@ -94,8 +98,12 @@ class ShopService {
   }
 
   Future<List<City>> getCities() async {
-    final Response response =
-        await http.get("http://apitropigas.hol.es/apiKio/public/api/ciudades");
+    final Response response = await http.post(
+        "https://tropigohn.com/api/public/api/app/ciudades",
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8'
+        },
+        body: jsonEncode(<String, dynamic>{"codTienda ": 0}));
 
     if (response.statusCode == 200) {
       return buildCities(response.body);

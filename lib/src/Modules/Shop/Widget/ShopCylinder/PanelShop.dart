@@ -45,15 +45,13 @@ Widget panelProducts(BuildContext context) {
       ]));
 }
 
-Widget floatingCollapsedPanel({PanelController panelController}) {
-  return Container(
-      decoration: BoxDecoration(
-          color: Colors.deepOrange,
-          borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(15.0), topRight: Radius.circular(15.0))),
-      child: FlatButton(
-          onPressed: () => {panelController.open()},
-          child: Center(
-              child: Text("ORDENAR AHORA",
-                  style: TextStyle(color: Colors.white, fontSize: 22)))));
-}
+Widget floatingCollapsedPanel({PanelController panelController}) => Container(
+    decoration: BoxDecoration(
+        color: Colors.deepOrange,
+        borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(15.0), topRight: Radius.circular(15.0))),
+    child: FlatButton(
+        onPressed: () => {panelController.open()},
+        child: Center(
+            child: Text("ORDENAR AHORA",
+                style: TextStyle(color: Colors.white, fontSize: 22)))));

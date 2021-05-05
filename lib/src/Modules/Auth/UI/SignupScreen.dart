@@ -52,10 +52,8 @@ class _SignupState extends State<SignupScreen> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return Container(
-        height: MediaQuery.of(context).size.height, child: signup());
-  }
+  Widget build(BuildContext context) =>
+      Container(height: MediaQuery.of(context).size.height, child: signup());
 
   Future<void> registerUser() async {
     setState(() {
@@ -198,7 +196,7 @@ class _SignupState extends State<SignupScreen> {
                     onChange: signupBlocInstance.changeRePassword,
                     focusNode: _repasswordFocusNode,
                     colorLines: Colors.white),
-                Container(height: 25),
+                SizedBox(height: 25),
                 Center(
                     child: ButtonIconCircleSubmit(
                         nullText: "Rellene todos los campos",

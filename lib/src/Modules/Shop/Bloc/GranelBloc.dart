@@ -43,17 +43,14 @@ class GranelBloc with ShopValidator {
   Function(String) get changeContact => _nameContactController.sink.add;
   Function(bool) get changeIsContract => _isNotContractController.sink.add;
 
-  Granel getGranel() {
-    return Granel(
+  Granel getGranel() => Granel(
       contract: _contractController.value,
       count: _countGalonsController.value,
       nameBusiness: _nameBusinessController.value,
       email: _emailController.value,
       phoneNumber: _phoneNumberController.value,
       contact: _nameContactController.value,
-      isContract: _isNotContractController.value,
-    );
-  }
+      isContract: _isNotContractController.value);
 
   dispose() {
     _contractController.close();

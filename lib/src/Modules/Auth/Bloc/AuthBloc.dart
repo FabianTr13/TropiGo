@@ -26,9 +26,7 @@ class AuthBloc with AuthValidator {
 
   Login getLogin() {
     return Login(
-      email: _emailController.value,
-      password: _passwordController.value,
-    );
+        email: _emailController.value, password: _passwordController.value);
   }
 
   String getRestartEmail() {

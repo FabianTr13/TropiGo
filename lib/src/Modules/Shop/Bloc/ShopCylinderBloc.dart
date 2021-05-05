@@ -49,15 +49,12 @@ class ShopCylinderBloc with ShopValidator {
     changeProduct(productsList);
   }
 
-  List<Product> getProductsSelect() {
-    return _productsController.value
-        .where((Product item) => item.isSelect != null && item.isSelect)
-        .toList();
-  }
+  List<Product> getProductsSelect() => _productsController.value
+      .where((Product item) => item.isSelect != null && item.isSelect)
+      .toList();
 
-  List<Map<String, dynamic>> getProductsSelectJson() {
-    return getProductsSelect().map((Product item) => item.toJson()).toList();
-  }
+  List<Map<String, dynamic>> getProductsSelectJson() =>
+      getProductsSelect().map((Product item) => item.toJson()).toList();
 
   Map<String, dynamic> getTotals() {
     double total = 0;
@@ -67,19 +64,12 @@ class ShopCylinderBloc with ShopValidator {
       }
     });
 
-    return {
-      "impuesto": 0,
-      "total": total,
-    };
+    return {"impuesto": 0, "total": total};
   }
 
-  String getAddress() {
-    return _addressController.value;
-  }
+  String getAddress() => _addressController.value;
 
-  LocationData getLocation() {
-    return _positionController.value;
-  }
+  LocationData getLocation() => _positionController.value;
 
   sumMinus(String type) {
     int newValue = 1;

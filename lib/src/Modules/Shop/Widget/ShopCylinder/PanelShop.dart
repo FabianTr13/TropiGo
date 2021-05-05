@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
 SlidingUpPanel panelShop(BuildContext context) {
-  PanelController _pc = new PanelController();
+  PanelController _pc = PanelController();
   ShopService().getProducts();
 
   return SlidingUpPanel(

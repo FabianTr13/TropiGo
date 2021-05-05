@@ -6,9 +6,7 @@ class Product {
   int cantidad;
   double total;
 
-  factory Product(Map jsonMap) {
-    return new Product.deserialize(jsonMap);
-  }
+  factory Product(Map jsonMap) => Product.deserialize(jsonMap);
 
   Product.deserialize(Map jsonMap)
       : codProducto = jsonMap["codProducto"].toString(),

@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:TropiGo/src/Modules/Kitchen/Models/KitchenRecipe.dart';
 
 class KitchenValidator {

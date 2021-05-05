@@ -11,17 +11,16 @@ class UserProfile {
   final String provider;
   final bool userInDelivering;
 
-  UserProfile({
-    this.uid,
-    this.email,
-    this.name,
-    this.phoneNumber,
-    this.sexo,
-    this.cityId,
-    this.colony,
-    this.cityName,
-    this.birthDate,
-    this.provider,
-    this.userInDelivering,
-  });
+  UserProfile(
+      {this.uid,
+      this.email,
+      this.name,
+      this.phoneNumber,
+      this.sexo,
+      this.cityId,
+      this.colony,
+      this.cityName,
+      this.birthDate,
+      this.provider,
+      this.userInDelivering});
 }

@@ -5,12 +5,8 @@ class PayButton extends StatelessWidget {
   final String text;
   final String img;
 
-  const PayButton({
-    Key key,
-    this.isSelect,
-    this.text,
-    this.img,
-  }) : super(key: key);
+  const PayButton({Key key, this.isSelect, this.text, this.img})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) => Container(

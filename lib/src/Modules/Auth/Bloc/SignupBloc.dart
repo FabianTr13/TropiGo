@@ -70,12 +70,9 @@ class SignupBloc with AuthValidator {
   Function(String) get changeNewSex => _newSexoController.sink.add;
   Function(String) get changeNewBirthDay => _newBithDayController.sink.add;
 
-  String getRePassword() {
-    return _passwordController.value;
-  }
+  String getRePassword() => _passwordController.value;
 
-  Signup getSignup(cityId, cityName) {
-    return Signup(
+  Signup getSignup(cityId, cityName) => Signup(
       uID: _uIdController.value,
       email: _emailController.value,
       name: _nameController.value,
@@ -90,9 +87,7 @@ class SignupBloc with AuthValidator {
       newName: _newNameController.value,
       newPhoneNumber: _newPhoneNumberController.value,
       newSexo: _newSexoController.value,
-      newBirthDay: _newBithDayController.value,
-    );
-  }
+      newBirthDay: _newBithDayController.value);
 
   dispose() {
     _emailController.close();

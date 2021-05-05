@@ -11,12 +11,12 @@ import 'package:modal_progress_hud/modal_progress_hud.dart';
 
 class RestoreScreen extends StatefulWidget {
   @override
-  _RestoreScreen createState() => new _RestoreScreen();
+  _RestoreScreen createState() => _RestoreScreen();
 }
 
 class _RestoreScreen extends State<RestoreScreen> {
   bool isLoading = false;
-  final FocusNode _emailFocusNode = new FocusNode();
+  final FocusNode _emailFocusNode = FocusNode();
 
   @override
   void dispose() {
@@ -25,41 +25,37 @@ class _RestoreScreen extends State<RestoreScreen> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return Container(
-        height: MediaQuery.of(context).size.height, child: restorePassword());
-  }
+  Widget build(BuildContext context) => Container(
+      height: MediaQuery.of(context).size.height, child: restorePassword());
 
   _sendEMail() async {
     var result = await AuthService().sendRestartEmail();
     showToast(result);
   }
 
-  Widget restorePassword() {
-    return Scaffold(
-        body: ModalProgressHUD(
-            inAsyncCall: isLoading,
-            child: Container(
-                decoration: boxGradient(),
-                child: ListView(children: [
-                  ImageHeader(
-                      image: ProfileImg,
-                      title: "Crear cuenta",
-                      underLine: true,
-                      size: 80),
-                  InputTextbox(
-                      title: "Correo",
-                      hintText: '',
-                      keyboardType: TextInputType.emailAddress,
-                      stream: authBlocInstance.emailRestore,
-                      onChange: authBlocInstance.changeEmailRestore,
-                      focusNode: _emailFocusNode,
-                      colorLines: Colors.white),
-                  Container(height: 25),
-                  Center(
-                      child: ButtonIconCircle(
-                          nullText: "Rellene todos los campos",
-                          callback: _sendEMail))
-                ]))));
-  }
+  Widget restorePassword() => Scaffold(
+      body: ModalProgressHUD(
+          inAsyncCall: isLoading,
+          child: Container(
+              decoration: boxGradient(),
+              child: ListView(children: [
+                ImageHeader(
+                    image: ProfileImg,
+                    title: "Crear cuenta",
+                    underLine: true,
+                    size: 80),
+                InputTextbox(
+                    title: "Correo",
+                    hintText: '',
+                    keyboardType: TextInputType.emailAddress,
+                    stream: authBlocInstance.emailRestore,
+                    onChange: authBlocInstance.changeEmailRestore,
+                    focusNode: _emailFocusNode,
+                    colorLines: Colors.white),
+                SizedBox(height: 25),
+                Center(
+                    child: ButtonIconCircle(
+                        nullText: "Rellene todos los campos",
+                        callback: _sendEMail))
+              ]))));
 }

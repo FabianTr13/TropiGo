@@ -3,9 +3,5 @@ class Contact {
   final String email;
   final String tel;
 
-  Contact({
-    this.chat = "",
-    this.email = "",
-    this.tel = "",
-  });
+  Contact({this.chat = "", this.email = "", this.tel = ""});
 }

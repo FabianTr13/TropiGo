@@ -3,9 +3,7 @@ class GpsStores {
   double log;
   String titulo;
 
-  factory GpsStores(Map jsonMap) {
-    return new GpsStores.deserialize(jsonMap);
-  }
+  factory GpsStores(Map jsonMap) => GpsStores.deserialize(jsonMap);
 
   GpsStores.deserialize(Map jsonMap)
       : lat = double.parse(jsonMap["lat"].toString()),

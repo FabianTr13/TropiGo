@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:TropiGo/src/Modules/Auth/Bloc/SignupBloc.dart';
 
 class AuthValidator {

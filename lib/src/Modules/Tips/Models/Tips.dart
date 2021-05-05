@@ -2,9 +2,7 @@ class Tips {
   String description;
   String title;
 
-  factory Tips(Map jsonMap) {
-    return new Tips.deserialize(jsonMap);
-  }
+  factory Tips(Map jsonMap) => Tips.deserialize(jsonMap);
 
   Tips.deserialize(dynamic jsonMap)
       : title = jsonMap["titulo"].toString(),

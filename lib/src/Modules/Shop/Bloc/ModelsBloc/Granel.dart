@@ -9,15 +9,14 @@ class Granel {
   String contact;
   bool isContract;
 
-  Granel({
-    this.contract,
-    this.count,
-    this.nameBusiness,
-    this.email,
-    this.phoneNumber,
-    this.contact,
-    this.isContract,
-  });
+  Granel(
+      {this.contract,
+      this.count,
+      this.nameBusiness,
+      this.email,
+      this.phoneNumber,
+      this.contact,
+      this.isContract});
 
   Map<String, String> getGranelMail() {
     Map<String, String> json;
@@ -28,7 +27,7 @@ class Granel {
         "contrato": this.contract,
         "cantidad": this.count,
         "telefono": "",
-        "email": "",
+        "email": ""
       };
     } else {
       json = {
@@ -37,7 +36,7 @@ class Granel {
         "contrato": "",
         "cantidad": this.count,
         "telefono": this.phoneNumber,
-        "email": this.email,
+        "email": this.email
       };
     }
     return json;

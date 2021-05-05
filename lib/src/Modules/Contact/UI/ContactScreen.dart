@@ -9,7 +9,7 @@ import 'package:flutter_styled_toast/flutter_styled_toast.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ContactScreen extends StatefulWidget {
-  ContactScreen({Key key}) : super(key: key);
+  const ContactScreen({Key key}) : super(key: key);
 
   @override
   _ContactScreenState createState() => _ContactScreenState();

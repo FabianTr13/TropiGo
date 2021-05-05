@@ -24,19 +24,13 @@ class _HomeShopState extends State<HomeShop> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
+  Widget build(BuildContext context) => Scaffold(
       backgroundColor: Colors.white,
-      body: ListView(
-        children: [
-          CachedNetworkImage(
+      body: ListView(children: [
+        CachedNetworkImage(
             imageUrl: imageBackground,
             placeholder: (context, url) => CircularProgressIndicator(),
-            errorWidget: (context, url, error) => Icon(Icons.error),
-          ),
-          menuStores(context: context),
-        ],
-      ),
-    );
-  }
+            errorWidget: (context, url, error) => Icon(Icons.error)),
+        menuStores(context: context)
+      ]));
 }

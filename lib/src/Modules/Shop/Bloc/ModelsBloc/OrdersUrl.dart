@@ -5,7 +5,7 @@ import 'package:TropiGo/src/Services/AuthService.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:location/location.dart';
 
-const _baseOrder = 'http://apitropigas.hol.es/apiKio/public/api/ordenes/';
+const _baseOrder = 'https://tropigohn.com/api/public/api/ordenes/';
 
 class OrdersUrl {
   String getOrder() {

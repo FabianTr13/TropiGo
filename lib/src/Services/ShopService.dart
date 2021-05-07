@@ -24,7 +24,6 @@ class ShopService {
           'Content-Type': 'application/json; charset=UTF-8'
         },
         body: jsonEncode(<String, dynamic>{"codCiudad": cityId}));
-    print(response.body);
     List<Product> products = [];
     if (response.statusCode == 200) {
       final dynamic data = json.decode(response.body);

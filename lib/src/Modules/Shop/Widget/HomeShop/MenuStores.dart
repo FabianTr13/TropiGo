@@ -3,6 +3,9 @@ import 'package:TropiGo/src/Modules/Shop/UI/GranelScreen.dart';
 import 'package:TropiGo/src/Modules/Shop/UI/ShopCylinderScreen.dart';
 import 'package:TropiGo/src/Modules/Shop/Widget/HomeShop/MenuItem.dart';
 import 'package:TropiGo/src/Multimedia/Images.dart';
+import 'package:TropiGo/src/Services/ShopService.dart';
+import 'package:TropiGo/src/Widgets/AppBar/NavBar.dart';
+import 'package:TropiGo/src/Widgets/AppBar/SideMenu.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_styled_toast/flutter_styled_toast.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -28,7 +31,7 @@ Widget menuStores({BuildContext context}) {
         Row(children: [
           CardMenuItem(
               imagen: Image.asset(LogoImg),
-              callback: () => gotoMenu(ShopCylinderScreen())),
+              callback: () => gotoMenu(thisUserHasAPendingOrder())),
           CardMenuItem(
               imagen: Image.asset(GasVehicularImg),
               callback: () => gotoMenu(GasStoresScreen()))
@@ -52,3 +55,16 @@ Widget menuStores({BuildContext context}) {
         ])
       ]));
 }
+
+FutureBuilder<bool> thisUserHasAPendingOrder() => FutureBuilder<bool>(
+    future: ShopService().thisUserHasAPendingOrder(),
+    builder: (context, snapshot) {
+      if (!snapshot.hasData) {
+        return Scaffold(
+            appBar: navBar(),
+            drawer: sideMenu(context),
+            body: SafeArea(child: Container()));
+      }
+
+      return ShopCylinderScreen(orderPending: snapshot.data ?? false);
+    });

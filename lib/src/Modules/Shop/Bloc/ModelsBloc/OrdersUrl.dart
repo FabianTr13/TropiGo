@@ -10,6 +10,8 @@ class OrdersUrl {
 
   String getEndOrder() => '${_baseOrder}finalizarOrden';
 
+  String cancelOrder() => '${_baseOrder}cancelaOrden';
+
   Map<String, dynamic> orderToFirebase({String codOrder}) => {
         "details": shopCylinderBlocInstance.getProductsSelectJson(),
         "driver": "",

@@ -42,11 +42,55 @@ class ShopService {
     return products;
   }
 
-  validateIfOrderExist() async {
+  Future<bool> thisUserHasAPendingOrder() async {
     UserProfile user = await AuthService().getCurrentUser();
 
-    // final order =
-    //     databaseReference.child("OrdersLoc").child(user.uid).onValue();
+    final getOrderFromFirebase =
+        databaseReference.child("OrdersLoc").child(user.uid);
+
+    final orderValue = await getOrderFromFirebase.onValue.first;
+    final order = orderValue.snapshot.value;
+    print("Order null: ${orderValue.snapshot.value}");
+    return (order == null) ? false : true;
+  }
+
+  cancelOrder(BuildContext context) async {
+    try {
+      final String orderId = await UtilsService().getOrderId() ?? "";
+      final UserProfile user = await AuthService().getCurrentUser();
+      final String uriOrder = OrdersUrl().cancelOrder();
+
+      // //Insert in firebase
+      // var orderRef = databaseReference.child("Orders").push();
+      // orderRef.remove();
+
+      //remove OrderLoc
+      databaseReference.child("OrdersLoc").child(user.uid).remove();
+
+      final String orderBody = jsonEncode(<String, dynamic>{
+        "codOrden": orderId,
+        "observacion": shopCylinderBlocInstance.getObservation() ?? ""
+      });
+
+      final Response response = await http.post(uriOrder,
+          headers: <String, String>{
+            'Content-Type': 'application/json; charset=UTF-8'
+          },
+          body: orderBody);
+
+      if (response.statusCode != 200) {
+        throw Exception("cancelar orden");
+      }
+
+      showToast("Tu orden fue cancelada!",
+          backgroundColor: Colors.green, duration: Duration(seconds: 10));
+
+      Navigator.pop(context);
+    } catch (e) {
+      print(e);
+      showToast("Ocurrió un error al cancelar su orden",
+          backgroundColor: Colors.red, duration: Duration(seconds: 20));
+    }
   }
 
   createOrder(BuildContext context) async {
@@ -70,11 +114,12 @@ class ShopService {
           body: orderBody);
       var data = json.decode(responseOrder.body);
 
-      var codOrder = data["codOrden"].toString();
-
+      final String codOrder = data["codOrden"].toString();
       if (codOrder == null) {
         throw Exception("Creando orden");
       }
+
+      UtilsService().saveOrderId(codOrder);
 
       //insert del detalle
       List<Product> products = shopCylinderBlocInstance.getProductsSelect();
@@ -103,7 +148,6 @@ class ShopService {
 
       //insert del finalizar orden
       String uriEnd = OrdersUrl().getEndOrder();
-      print(uriEnd);
 
       final String body = jsonEncode(<String, dynamic>{
         "codOrden": int.parse(codOrder),
@@ -130,8 +174,6 @@ class ShopService {
       // //Insert in firebase
       var orderRef = databaseReference.child("Orders").push();
       orderRef.set(OrdersUrl().orderToFirebase(codOrder: codOrder));
-
-      print("UserId: ${user.uid}");
 
       //InsertOrderLoc
       databaseReference

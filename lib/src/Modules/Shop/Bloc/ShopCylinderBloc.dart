@@ -6,6 +6,7 @@ import 'package:rxdart/rxdart.dart';
 
 class ShopCylinderBloc with ShopValidator {
   final _addressController = BehaviorSubject<String>();
+  final _observationController = BehaviorSubject<String>();
   final _countController = BehaviorSubject<int>.seeded(1);
   final _productsController = BehaviorSubject<List<Product>>();
   final _productSelectController = BehaviorSubject<Product>();
@@ -21,8 +22,14 @@ class ShopCylinderBloc with ShopValidator {
       Rx.combineLatest2(productSelect, count, (e, p) => true);
   Stream<bool> get submitValidOrder =>
       Rx.combineLatest2(address, productSelect, (a, e) => true);
+  Stream<bool> get submitValidCancelOrder =>
+      Rx.combineLatest2(observation, productSelect, (a, e) => true);
   Stream<LocationData> get location =>
       _positionController.stream.transform(validaLocation);
+
+  Stream<String> get observation =>
+      _observationController.stream.transform(validaName);
+  Function(String) get changeObservation => _observationController.sink.add;
 
   Function(String) get changeAddress => _addressController.sink.add;
   Function(int) get changeCount => _countController.sink.add;
@@ -69,6 +76,8 @@ class ShopCylinderBloc with ShopValidator {
 
   String getAddress() => _addressController.value;
 
+  String getObservation() => _observationController.value;
+
   LocationData getLocation() => _positionController.value;
 
   sumMinus(String type) {
@@ -84,6 +93,7 @@ class ShopCylinderBloc with ShopValidator {
 
   dispose() {
     _addressController.close();
+    _observationController.close();
     _countController.close();
     _productsController.close();
     _productSelectController.close();

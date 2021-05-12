@@ -1,5 +1,6 @@
 import 'package:TropiGo/src/Modules/Shop/Bloc/ShopCylinderBloc.dart';
 import 'package:TropiGo/src/Modules/Shop/Widget/ShopCylinder/CarouselShop.dart';
+import 'package:TropiGo/src/Modules/Shop/Widget/ShopCylinder/ConfirmationModal/ModalCancelOrder.dart';
 import 'package:TropiGo/src/Modules/Shop/Widget/ShopCylinder/ConfirmationModal/ModalConfirmOrder.dart';
 import 'package:TropiGo/src/Modules/Shop/Widget/ShopCylinder/Counter.dart';
 import 'package:TropiGo/src/Modules/Shop/Widget/ShopCylinder/ViewMapShop.dart';
@@ -12,7 +13,9 @@ import 'package:TropiGo/src/Widgets/ButtonLargeSubmit.dart';
 import 'package:flutter/material.dart';
 
 class ShopCylinderScreen extends StatefulWidget {
-  const ShopCylinderScreen({Key key}) : super(key: key);
+  final bool orderPending;
+  const ShopCylinderScreen({Key key, @required this.orderPending})
+      : super(key: key);
   _ShopCylinderScreen createState() => _ShopCylinderScreen();
 }
 
@@ -32,11 +35,36 @@ class _ShopCylinderScreen extends State<ShopCylinderScreen> {
     ModalConfirmation().confirmationOrder(context);
   }
 
+  cancelOrder() async {
+    loadingBloc.setIsLoading(false);
+    ModalCancelOrder().cancelOrder(context);
+  }
+
   @override
   Widget build(BuildContext context) => Scaffold(
       appBar: navBar(),
       drawer: sideMenu(context),
-      body: SafeArea(child: _buildUI(context)));
+      body: SafeArea(child: _buildUI(context)),
+      floatingActionButton:
+          Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
+        (widget.orderPending)
+            ? Container(
+                padding: EdgeInsets.all(10),
+                margin: EdgeInsets.only(left: 10),
+                child: ClipOval(
+                    child: Material(
+                        color: Colors.red,
+                        child: InkWell(
+                            splashColor: Colors.red,
+                            child: SizedBox(
+                                width: 55,
+                                height: 55,
+                                child: Icon(Icons.cancel_outlined,
+                                    color: Colors.white, size: 30)),
+                            onTap: () => cancelOrder()))))
+            : Container(),
+        SizedBox(height: 120)
+      ]));
 
   Widget _buildUI(BuildContext context) => Stack(children: [
         ViewMapShop(),
@@ -44,11 +72,26 @@ class _ShopCylinderScreen extends State<ShopCylinderScreen> {
             alignment: Alignment.bottomCenter,
             child: GestureDetector(
                 child: buttonToOrder(),
-                onTap: () {
-                  ShopService().getProducts();
-                  _buildOrderModal(context, doBuy);
+                onTap: () async {
+                  if (!widget.orderPending) {
+                    ShopService().getProducts();
+                    _buildOrderModal(context, doBuy);
+                  }
                 }))
       ]);
+
+  Widget buttonToOrder() => Container(
+      height: 65,
+      decoration: BoxDecoration(
+          color: Colors.deepOrange,
+          borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(15.0), topRight: Radius.circular(15.0))),
+      child: Center(
+          child: Text(
+              (widget.orderPending)
+                  ? "BUSCANDO REPARTIDOR..."
+                  : "ORDENAR AHORA",
+              style: TextStyle(color: Colors.white, fontSize: 22))));
 
   void _buildOrderModal(BuildContext context, VoidCallback doBuy) {
     showModalBottomSheet(
@@ -84,14 +127,4 @@ class _ShopCylinderScreen extends State<ShopCylinderScreen> {
                         topLeft: const Radius.circular(15),
                         topRight: const Radius.circular(15))))));
   }
-
-  Widget buttonToOrder() => Container(
-      height: 65,
-      decoration: BoxDecoration(
-          color: Colors.deepOrange,
-          borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(15.0), topRight: Radius.circular(15.0))),
-      child: Center(
-          child: Text("ORDENAR AHORA",
-              style: TextStyle(color: Colors.white, fontSize: 22))));
 }

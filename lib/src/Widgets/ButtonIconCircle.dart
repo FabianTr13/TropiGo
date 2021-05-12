@@ -6,6 +6,7 @@ class ButtonIconCircle extends StatelessWidget {
   final VoidCallback callback;
   final String nullText;
   final IconData icon;
+  final double size;
 
   const ButtonIconCircle(
       {Key key,
@@ -13,6 +14,7 @@ class ButtonIconCircle extends StatelessWidget {
       this.color = Colors.white,
       this.backgroundColor = Colors.red,
       this.nullText,
+      this.size,
       this.icon = Icons.arrow_forward})
       : super(key: key);
 
@@ -25,6 +27,7 @@ class ButtonIconCircle extends StatelessWidget {
               child: SizedBox(
                   width: 55,
                   height: 55,
-                  child: Icon(this.icon, color: Colors.white, size: 44)),
+                  child:
+                      Icon(this.icon, color: Colors.white, size: size ?? 44)),
               onTap: this.callback)));
 }

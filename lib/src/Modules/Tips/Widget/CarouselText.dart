@@ -15,19 +15,25 @@ class _CarouselTextState extends State<CarouselText> {
   @override
   Widget build(BuildContext context) => StreamBuilder(
       stream: widget.stream,
-      builder: (context, snapshot) => Container(
-          height: widget.height,
-          child: CarouselSlider(
-              options: CarouselOptions(
-                  enableInfiniteScroll: false,
-                  viewportFraction: 1,
-                  disableCenter: true),
-              items: snapshot.data?.map<Widget>((item) {
-                return Builder(builder: (BuildContext context) {
-                  return CustomScrollView(
-                      slivers: [SliverToBoxAdapter(child: buildItem(item))]);
-                });
-              })?.toList())));
+      builder: (context, snapshot) {
+        if (!snapshot.hasData) {
+          return Container(
+              height: 135.0, child: Center(child: CircularProgressIndicator()));
+        }
+        return Container(
+            height: widget.height,
+            child: CarouselSlider(
+                options: CarouselOptions(
+                    enableInfiniteScroll: false,
+                    viewportFraction: 1,
+                    disableCenter: true),
+                items: snapshot.data?.map<Widget>((item) {
+                  return Builder(builder: (BuildContext context) {
+                    return CustomScrollView(
+                        slivers: [SliverToBoxAdapter(child: buildItem(item))]);
+                  });
+                })?.toList()));
+      });
 
   Widget buildItem(item) => Container(
       width: MediaQuery.of(context).size.width,

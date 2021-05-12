@@ -9,6 +9,7 @@ class ButtonLargeSubmit extends StatelessWidget {
   final String nullText;
   final Stream<bool> stream;
   final double height;
+  final double width;
 
   const ButtonLargeSubmit(
       {Key key,
@@ -18,6 +19,7 @@ class ButtonLargeSubmit extends StatelessWidget {
       this.backgroundColor = Colors.red,
       this.stream,
       this.nullText,
+      this.width,
       this.height = 50})
       : super(key: key);
 
@@ -33,6 +35,7 @@ class ButtonLargeSubmit extends StatelessWidget {
     return StreamBuilder(
         stream: stream,
         builder: (context, snapshot) => Container(
+            width: width ?? MediaQuery.of(context).size.width,
             margin: const EdgeInsets.only(left: 15.0, right: 15.0),
             height: this.height,
             child: Row(children: [

@@ -14,17 +14,24 @@ class _CarouselShopState extends State<CarouselShop> {
   @override
   Widget build(BuildContext context) => StreamBuilder(
       stream: shopCylinderBlocInstance.products,
-      builder: (context, snapshot) => CarouselSlider(
-          options: CarouselOptions(
-              enableInfiniteScroll: false,
-              viewportFraction: 0.27,
-              height: 135.0,
-              disableCenter: true),
-          items: snapshot.data?.map<Widget>((Product product) {
-            return Builder(builder: (BuildContext context) {
-              return itemSHOP(product);
-            });
-          })?.toList()));
+      builder: (context, snapshot) {
+        if (!snapshot.hasData) {
+          return Container(
+              height: 135.0, child: Center(child: CircularProgressIndicator()));
+        }
+
+        return CarouselSlider(
+            options: CarouselOptions(
+                enableInfiniteScroll: false,
+                viewportFraction: 0.27,
+                height: 135.0,
+                disableCenter: true),
+            items: snapshot.data?.map<Widget>((Product product) {
+              return Builder(builder: (BuildContext context) {
+                return itemSHOP(product);
+              });
+            })?.toList());
+      });
 
   Widget itemSHOP(Product product) => Container(
       width: ((MediaQuery.of(context).size.width - 80) / 4),

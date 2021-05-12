@@ -1,9 +1,12 @@
 import 'package:TropiGo/src/Modules/Shop/Bloc/ShopCylinderBloc.dart';
+import 'package:TropiGo/src/Modules/Shop/UI/HomeShop.dart';
 import 'package:TropiGo/src/Modules/Shop/Widget/ShopCylinder/ConfirmationModal/PayButton.dart';
 import 'package:TropiGo/src/Modules/Shop/Widget/ShopCylinder/ConfirmationModal/TableProducts.dart';
 import 'package:TropiGo/src/Multimedia/Images.dart';
 import 'package:TropiGo/src/Multimedia/TropiColors.dart';
+import 'package:TropiGo/src/Services/LoadingService.dart';
 import 'package:TropiGo/src/Services/ShopService.dart';
+import 'package:TropiGo/src/Services/UtilsService.dart';
 import 'package:TropiGo/src/Widgets/ButtonLargeSubmit.dart';
 import 'package:TropiGo/src/Widgets/ButtonRoundBorder.dart';
 import 'package:TropiGo/src/Widgets/InputTextbox.dart';
@@ -12,7 +15,14 @@ import 'package:flutter/material.dart';
 class ModalConfirmation {
   Future<void> confirmationOrder(BuildContext context) async {
     _crearOrden() async {
+      loadingBloc.setIsLoading(true);
       await ShopService().createOrder(context);
+      final String getAddress = shopCylinderBlocInstance.getAddress();
+      if (getAddress != null && getAddress.isNotEmpty) {
+        UtilsService().saveAddress(getAddress);
+      }
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => HomeShop()));
     }
 
     await showDialog(
@@ -36,6 +46,8 @@ class ModalConfirmation {
                   SizedBox(height: 10),
                   InputTextbox(
                       title: "Direccion",
+                      controller: TextEditingController(
+                          text: shopCylinderBlocInstance.getAddress()),
                       stream: shopCylinderBlocInstance.address,
                       onChange: shopCylinderBlocInstance.changeAddress,
                       hintText:
@@ -45,7 +57,7 @@ class ModalConfirmation {
                   Container(height: 200, child: tableProduct()),
                   ButtonLargeSubmit(
                       stream: shopCylinderBlocInstance.submitValidOrder,
-                      text: "ACEPTAR",
+                      text: "Aceptar",
                       nullText: "Ingrese su dirección",
                       callback: _crearOrden,
                       backgroundColor: TropiColors.orangeButons,

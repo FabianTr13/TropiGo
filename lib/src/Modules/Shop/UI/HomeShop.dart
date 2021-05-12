@@ -30,7 +30,7 @@ class _HomeShopState extends State<HomeShop> {
         CachedNetworkImage(
             imageUrl: imageBackground,
             placeholder: (context, url) => CircularProgressIndicator(),
-            errorWidget: (context, url, error) => Icon(Icons.error)),
+            errorWidget: (context, url, error) => Container()),
         menuStores(context: context)
       ]));
 }

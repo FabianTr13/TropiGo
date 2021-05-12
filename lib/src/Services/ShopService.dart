@@ -42,6 +42,13 @@ class ShopService {
     return products;
   }
 
+  validateIfOrderExist() async {
+    UserProfile user = await AuthService().getCurrentUser();
+
+    // final order =
+    //     databaseReference.child("OrdersLoc").child(user.uid).onValue();
+  }
+
   createOrder(BuildContext context) async {
     try {
       String uriOrder = OrdersUrl().getOrder();
@@ -124,10 +131,12 @@ class ShopService {
       var orderRef = databaseReference.child("Orders").push();
       orderRef.set(OrdersUrl().orderToFirebase(codOrder: codOrder));
 
+      print("UserId: ${user.uid}");
+
       //InsertOrderLoc
       databaseReference
           .child("OrdersLoc")
-          .child(orderRef.key)
+          .child(user.uid)
           .set(OrdersUrl().orderLocToFirebase());
 
       showToast("Tu orden fue enviada!",

@@ -9,7 +9,6 @@ import 'package:TropiGo/src/Services/UtilsService.dart';
 import 'package:TropiGo/src/Widgets/AppBar/NavBar.dart';
 import 'package:TropiGo/src/Widgets/AppBar/SideMenu.dart';
 import 'package:TropiGo/src/Widgets/ButtonLargeSubmit.dart';
-import 'package:TropiGo/src/Widgets/run-loading.dart';
 import 'package:flutter/material.dart';
 
 class ShopCylinderScreen extends StatefulWidget {
@@ -21,14 +20,14 @@ class _ShopCylinderScreen extends State<ShopCylinderScreen> {
   @override
   void initState() {
     super.initState();
-    loadingBloc.setIsLoading(false);
   }
 
   doBuy() async {
-    String getAddress = await UtilsService().getAddress();
+    final String getAddress = await UtilsService().getAddress();
     if (getAddress != null && getAddress.isNotEmpty) {
       shopCylinderBlocInstance.changeAddress(getAddress);
     }
+    loadingBloc.setIsLoading(false);
     Navigator.pop(context);
     ModalConfirmation().confirmationOrder(context);
   }
@@ -37,8 +36,7 @@ class _ShopCylinderScreen extends State<ShopCylinderScreen> {
   Widget build(BuildContext context) => Scaffold(
       appBar: navBar(),
       drawer: sideMenu(context),
-      body:
-          SafeArea(child: Stack(children: [_buildUI(context), RunLoading()])));
+      body: SafeArea(child: _buildUI(context)));
 
   Widget _buildUI(BuildContext context) => Stack(children: [
         ViewMapShop(),

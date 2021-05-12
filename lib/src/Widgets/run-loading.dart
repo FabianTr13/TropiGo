@@ -1,6 +1,5 @@
 import 'package:TropiGo/src/Services/LoadingService.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class RunLoading extends StatelessWidget {
   const RunLoading({Key key}) : super(key: key);
@@ -14,8 +13,7 @@ class RunLoading extends StatelessWidget {
             ? Container(
                 color: Colors.transparent,
                 height: MediaQuery.of(context).size.height,
-                child:
-                    Center(child: SpinKitCircle(color: Colors.blue, size: 65)))
+                child: Center(child: CircularProgressIndicator()))
             : Container();
       });
 }

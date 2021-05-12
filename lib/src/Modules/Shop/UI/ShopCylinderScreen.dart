@@ -63,7 +63,7 @@ class _ShopCylinderScreen extends State<ShopCylinderScreen> {
                                     color: Colors.white, size: 30)),
                             onTap: () => cancelOrder()))))
             : Container(),
-        SizedBox(height: 120)
+        SizedBox(height: 145)
       ]));
 
   Widget _buildUI(BuildContext context) => Stack(children: [

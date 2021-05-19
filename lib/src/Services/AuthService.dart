@@ -4,7 +4,7 @@ import 'package:TropiGo/src/Modules/Auth/Models/AuthRequest.dart';
 import 'package:TropiGo/src/Modules/Auth/Models/Login.dart';
 import 'package:TropiGo/src/Modules/Auth/Models/Signup.dart';
 import 'package:TropiGo/src/Modules/Auth/Models/UserProfile.dart';
-import 'package:TropiGo/src/Services/ShopService.dart';
+import 'package:TropiGo/src/Services/OrderService.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/cupertino.dart';
@@ -17,8 +17,8 @@ class AuthService {
   Future<AuthRequest> createUser() async {
     AuthRequest authRequest = AuthRequest();
 
-    final String cityId = await ShopService().getCityId();
-    final String cityName = await ShopService().getCityName();
+    final String cityId = await orderBloc.getCityId();
+    final String cityName = await orderBloc.getCityName();
 
     Signup signupData = signupBlocInstance.getSignup(cityId, cityName);
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -74,8 +74,8 @@ class AuthService {
   }
 
   void updateUser() async {
-    final String cityId = await ShopService().getCityId();
-    final String cityName = await ShopService().getCityName();
+    final String cityId = await orderBloc.getCityId();
+    final String cityName = await orderBloc.getCityName();
 
     Signup userUpdate = signupBlocInstance.getSignup(cityId, cityName);
     databaseReference

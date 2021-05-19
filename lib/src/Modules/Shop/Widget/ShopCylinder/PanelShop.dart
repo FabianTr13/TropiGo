@@ -36,7 +36,7 @@ Widget panelProducts(BuildContext context) {
       child: ListView(children: [
         Container(height: 55),
         Counter(),
-        CarouselShop(),
+        Container(alignment: Alignment.centerLeft, child: CarouselShop()),
         ButtonLargeSubmit(
             text: "PEDIR",
             callback: doBuy,

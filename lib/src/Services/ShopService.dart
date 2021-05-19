@@ -5,6 +5,7 @@ import 'package:TropiGo/src/Modules/Shop/Bloc/ModelsBloc/OrdersUrl.dart';
 import 'package:TropiGo/src/Modules/Shop/Bloc/ModelsBloc/Product.dart';
 import 'package:TropiGo/src/Modules/Shop/Bloc/ShopCylinderBloc.dart';
 import 'package:TropiGo/src/Services/AuthService.dart';
+import 'package:TropiGo/src/Services/OrderService.dart';
 import 'package:TropiGo/src/Services/UtilsService.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
@@ -12,14 +13,13 @@ import 'package:flutter_styled_toast/flutter_styled_toast.dart';
 import 'package:http/http.dart' as http;
 import 'package:location/location.dart';
 import 'dart:convert';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart';
 
 class ShopService {
   final databaseReference = FirebaseDatabase.instance.reference();
 
   Future<List<Product>> getProducts() async {
-    final String cityId = await getCityId() ?? "1";
+    final String cityId = await orderBloc.getCityId() ?? "1";
 
     final Response response = await http.post(
         "https://tropigohn.com/api/public/api/app/productos",
@@ -42,21 +42,42 @@ class ShopService {
     return products;
   }
 
-  Future<bool> thisUserHasAPendingOrder() async {
+  Future<Map> thisUserHasAPendingOrder() async {
+    Map result = {"orderPending": false, "withoutDriver": false};
+
     UserProfile user = await AuthService().getCurrentUser();
+    final String orderId = await orderBloc.getOrderId() ?? "";
 
     final getOrderFromFirebase =
         databaseReference.child("OrdersLoc").child(user.uid);
 
     final orderValue = await getOrderFromFirebase.onValue.first;
     final order = orderValue.snapshot.value;
-    print("Order null: ${orderValue.snapshot.value}");
-    return (order == null) ? false : true;
+
+    final orderDriver = databaseReference.child("Orders");
+    final orderValueDriver = await orderDriver.onValue.first;
+    final orderriver = orderValueDriver.snapshot.value;
+
+    Map orderFromDatabase;
+    for (var item in orderriver.values) {
+      if (item["numOrden"] == orderId) {
+        orderFromDatabase = item;
+        break;
+      }
+    }
+
+    result["orderPending"] = (order == null) ? false : true;
+    result["withoutDriver"] = (order == null)
+        ? false
+        : (orderFromDatabase == null)
+            ? true
+            : orderFromDatabase["driver"].isEmpty;
+    return result;
   }
 
   cancelOrder(BuildContext context) async {
     try {
-      final String orderId = await UtilsService().getOrderId() ?? "";
+      final String orderId = await orderBloc.getOrderId() ?? "";
       final UserProfile user = await AuthService().getCurrentUser();
       final String uriOrder = OrdersUrl().cancelOrder();
 
@@ -119,7 +140,7 @@ class ShopService {
         throw Exception("Creando orden");
       }
 
-      UtilsService().saveOrderId(codOrder);
+      orderBloc.saveOrderId(codOrder);
 
       //insert del detalle
       List<Product> products = shopCylinderBlocInstance.getProductsSelect();
@@ -214,31 +235,10 @@ class ShopService {
     if (getCities.isNotEmpty) {
       final List<dynamic> cityList = json.decode(getCities);
 
-      cities = cityList.map(
-          (city) => City(codCiudad: city['codCiudad'], nombre: city['nombre']));
+      for (var city in cityList) {
+        cities.add(City(codCiudad: city['codCiudad'], nombre: city['nombre']));
+      }
     }
     return cities;
-  }
-
-  saveCityId(String cityId) async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setString('cityId', cityId);
-  }
-
-  Future<String> getCityId() async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    final String getCityId = prefs.getString("cityId");
-    return getCityId;
-  }
-
-  saveCityName(String cityName) async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setString('cityName', cityName);
-  }
-
-  Future<String> getCityName() async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    final String getCityName = prefs.getString("cityName");
-    return getCityName;
   }
 }

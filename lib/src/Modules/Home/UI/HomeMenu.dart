@@ -6,7 +6,7 @@ import 'package:TropiGo/src/Modules/Tips/UI/TipsScreen.dart';
 import 'package:TropiGo/src/Multimedia/Images.dart';
 import 'package:TropiGo/src/Multimedia/tropi_icons_icons.dart';
 import 'package:TropiGo/src/Services/AuthService.dart';
-import 'package:TropiGo/src/Services/ShopService.dart';
+import 'package:TropiGo/src/Services/OrderService.dart';
 import 'package:TropiGo/src/Utils/BoxGradient.dart';
 import 'package:TropiGo/src/Widgets/ButtonRoundBorder.dart';
 import 'package:TropiGo/src/Widgets/ImageHeader.dart';
@@ -66,7 +66,7 @@ class HomeMenu extends StatelessWidget {
   }
 
   void goToProfileScreen(BuildContext context) async {
-    String getCityName = await ShopService().getCityName();
+    String getCityName = await orderBloc.getCityName();
 
     Navigator.push(
         context,

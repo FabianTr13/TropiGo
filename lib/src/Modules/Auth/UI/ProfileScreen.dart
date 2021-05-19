@@ -4,6 +4,7 @@ import 'package:TropiGo/src/Modules/Auth/Models/City.dart';
 import 'package:TropiGo/src/Multimedia/Images.dart';
 import 'package:TropiGo/src/Multimedia/TropiColors.dart';
 import 'package:TropiGo/src/Services/AuthService.dart';
+import 'package:TropiGo/src/Services/OrderService.dart';
 import 'package:TropiGo/src/Services/ShopService.dart';
 import 'package:TropiGo/src/Utils/BoxGradient.dart';
 import 'package:TropiGo/src/Utils/CalendarPicker.dart';
@@ -246,8 +247,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
             setState(() {
               cityId = cities[index].codCiudad;
               cityName = cities[index].nombre;
-              ShopService().saveCityId(cities[index].codCiudad);
-              ShopService().saveCityName(cities[index].nombre);
+              orderBloc.saveCityId(cities[index].codCiudad);
+              orderBloc.saveCityName(cities[index].nombre);
             });
           },
           child: _buildCityButton(cities[index])));

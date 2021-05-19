@@ -56,7 +56,7 @@ Widget menuStores({BuildContext context}) {
       ]));
 }
 
-FutureBuilder<bool> thisUserHasAPendingOrder() => FutureBuilder<bool>(
+FutureBuilder<Map> thisUserHasAPendingOrder() => FutureBuilder<Map>(
     future: ShopService().thisUserHasAPendingOrder(),
     builder: (context, snapshot) {
       if (!snapshot.hasData) {
@@ -66,5 +66,5 @@ FutureBuilder<bool> thisUserHasAPendingOrder() => FutureBuilder<bool>(
             body: SafeArea(child: Container()));
       }
 
-      return ShopCylinderScreen(orderPending: snapshot.data ?? false);
+      return ShopCylinderScreen(order: snapshot.data);
     });

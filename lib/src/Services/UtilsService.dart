@@ -21,15 +21,4 @@ class UtilsService {
     final String getAddress = prefs.getString("address");
     return getAddress;
   }
-
-  saveOrderId(String orderId) async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setString('orderId', orderId);
-  }
-
-  Future<String> getOrderId() async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    final String getOrderId = prefs.getString("orderId");
-    return getOrderId;
-  }
 }

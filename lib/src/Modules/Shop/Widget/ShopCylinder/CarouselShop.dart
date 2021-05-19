@@ -23,6 +23,7 @@ class _CarouselShopState extends State<CarouselShop> {
         return CarouselSlider(
             options: CarouselOptions(
                 enableInfiniteScroll: false,
+                initialPage: 1,
                 viewportFraction: 0.27,
                 height: 135.0,
                 disableCenter: true),
@@ -34,7 +35,6 @@ class _CarouselShopState extends State<CarouselShop> {
       });
 
   Widget itemSHOP(Product product) => Container(
-      width: ((MediaQuery.of(context).size.width - 80) / 4),
       child: Card(
           color: product.isSelect == null || !product.isSelect
               ? Colors.white
